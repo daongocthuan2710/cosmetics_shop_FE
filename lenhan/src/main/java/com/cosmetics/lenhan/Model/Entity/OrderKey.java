@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,6 +15,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode
 @Embeddable
 public class OrderKey implements Serializable {
 
@@ -22,8 +24,8 @@ public class OrderKey implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	@Column(name = "id_cart")
-    private Integer idCart;
+	@Column(name = "id_orders")
+    private Integer idOrder;
 
     @Column(name = "id_product")
     private Integer idProduct;

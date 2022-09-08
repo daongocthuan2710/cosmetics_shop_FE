@@ -2,11 +2,14 @@ package com.cosmetics.lenhan.Model.Entity;
 
 import java.sql.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
@@ -51,4 +54,7 @@ public class Vourcher {
 	@Column(name = "percentage")
     @NotEmpty(message = "cannot generate percentage")
     private Integer percentage;
+	
+	@OneToOne(mappedBy = "vourcher", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private Order order;
 }
