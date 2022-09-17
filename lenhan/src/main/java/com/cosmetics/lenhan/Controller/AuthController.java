@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cosmetics.lenhan.Model.DTO.Request.LoginRequest;
+import com.cosmetics.lenhan.Model.DTO.Request.SignupRequest;
 import com.cosmetics.lenhan.Service.AuthService;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -26,5 +27,10 @@ public class AuthController {
 	@PostMapping("/login")
 	public ResponseEntity<?> Login(@Valid @RequestBody LoginRequest loginRequest) {
 		return authService.login(loginRequest);
+	}
+	
+	@PostMapping("/signup")
+	public ResponseEntity<?> signup(@RequestBody SignupRequest signupRequest){
+		return authService.signup(signupRequest);
 	}
 }

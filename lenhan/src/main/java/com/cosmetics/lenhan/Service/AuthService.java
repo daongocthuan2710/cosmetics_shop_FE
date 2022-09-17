@@ -8,7 +8,7 @@ import com.cosmetics.lenhan.Model.DTO.Response.LoginResponse;
 
 public interface AuthService {
 
-	ResponseEntity<LoginResponse> signup(SignupRequest dto);
+	ResponseEntity<?> signup(SignupRequest dto);
 	
 	ResponseEntity<LoginResponse> login(LoginRequest dto);
 }
