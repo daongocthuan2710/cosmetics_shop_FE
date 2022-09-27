@@ -35,7 +35,7 @@ public class Cart {
     private Integer id;
 	
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_role", referencedColumnName = "id")
+    @JoinColumn(name = "id_account", referencedColumnName = "id")
 	@JsonIgnore
 	private Account account;
 	

@@ -57,6 +57,18 @@ public class Vourcher {
     @NotEmpty(message = "cannot generate percentage")
     private Integer percentage;
 	
+	@Column(name = "quantity")
+    @NotEmpty(message = "cannot generate quantity")
+	private Integer quantity;
+	
+	@Column(name = "status")
+    @NotEmpty(message = "cannot generate status")
+	private boolean status;
+	
+	@Column(name = "condition")
+    @NotEmpty(message = "cannot generate condition")
+	private Integer condition;
+	
 	@OneToOne(mappedBy = "vourcher", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private Order order;
 	

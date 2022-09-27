@@ -6,9 +6,7 @@ import com.cosmetics.lenhan.Model.Entity.Brand;
 
 public interface BrandService {
 
-	ResponseEntity<Brand> createBrand(Brand dto);  
+	ResponseEntity<Brand> createBrand(String brandName);  
 	
-	ResponseEntity<Brand> editBrand(Integer id); 
-	
-	ResponseEntity<Brand> deleteBrand(Integer id); 
+	ResponseEntity<?> deleteBrand(Integer id); 
 }
