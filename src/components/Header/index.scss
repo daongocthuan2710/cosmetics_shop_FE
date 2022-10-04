@@ -20,10 +20,10 @@
         $icon_size: 30px;
     }
 
-    &__Bars-icon{
+    &__bars-icon{
         display: none;
         color: #000;
-        margin: 0 10px 0 10px;
+        margin: 0 10px 0 30px;
         font-size: calc($icon_size - 5px);
 
         @media screen and (max-width: 768px){

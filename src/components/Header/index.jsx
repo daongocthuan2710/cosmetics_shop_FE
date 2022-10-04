@@ -5,8 +5,8 @@ import {FaBars} from 'react-icons/fa';
 import Navbar from "./components/Navbar/index.js";
 import logo from "../../assets/images/logo.png";
 import shopping_bag from "../../assets/images/cart.gif";
-import phone_call from "../../assets/images/phone_call.gif";
 import './index.scss';
+import phone_call from "../../assets/images/phone_call.gif";
 
 function Header() {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -23,7 +23,7 @@ function Header() {
     <div className="header">
         <FaBars 
           aria-hidden="true"
-          className="header__Bars-icon"
+          className="header__bars-icon"
           onClick={openNav}
           />
         <div to="/" className="header__logo">

@@ -1,22 +1,60 @@
 import React from "react";
 import './index.scss';
+import {Navigation} from 'react-minimal-side-navigation';
+import 'react-minimal-side-navigation/lib/ReactMinimalSideNavigation.css';
 
 function SideNav(props) {
 
   
   return (
   <>
-        <div id="mySidenav" className={`sidenav ${props.isExpanded ? "is-expanded" : ""}`}>
-            <a href="#" 
-            onClick={props.closeNav}
-            className="closebtn"
-            >&times;</a>
-            <a href="#">About</a>
-            <a href="#">Services</a>
-            <a href="#">Clients</a>
-            <a href="#">Contact</a>
-        </div>
-        <div className={`overlay ${props.isExpanded ? "visible" : ""}`}></div>
+    <div id="mySidenav" className={`sidenav ${props.isExpanded ? "is-expanded" : ""}`}>
+        <div
+          onClick={props.closeNav}
+          className="closebtn"
+        >&times;</div>
+        <Navigation
+          activeItemId="/management/members"
+          onSelect={({itemId}) => {
+            // maybe push to the route
+          }}
+          items={[
+            {
+              title: 'Dashboard',
+              itemId: '/dashboard',
+              // you can use your own custom Icon component as well
+              // icon is optional
+              // elemBefore: () => <Icon name="inbox" />,
+            },
+            {
+              title: 'Management',
+              itemId: '/management',
+              // elemBefore: () => <Icon name="users" />,
+              subNav: [
+                {
+                  title: 'Projects',
+                  itemId: '/management/projects',
+                },
+                {
+                  title: 'Members',
+                  itemId: '/management/members',
+                },
+              ],
+            },
+            {
+              title: 'Another Item',
+              itemId: '/another',
+              subNav: [
+                {
+                  title: 'Teams',
+                  itemId: '/management/teams',
+                },
+              ],
+            },
+          ]}
+        />
+    </div>
+    <div className={`overlay ${props.isExpanded ? "visible" : ""}`}></div>
   </>
   );
 }
