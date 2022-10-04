@@ -1,0 +1,200 @@
+// html {
+//     font-size: 62.5%;
+// }
+
+.is-expanded {
+    width: 250px !important;
+  }
+ 
+.header{
+    background: #fff;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem calc((100vw - 1200px) / 2);
+    z-index: 10;    
+    $icon_size: 40px;
+
+    @media screen and (max-width: 768px){
+        $icon_size: 30px;
+    }
+
+    &__Bars-icon{
+        display: none;
+        color: #000;
+        margin: 0 10px 0 10px;
+        font-size: calc($icon_size - 5px);
+
+        @media screen and (max-width: 768px){
+            display: block;
+            cursor: pointer;
+        }
+    }
+
+    &__logo{
+        color: #000;
+        align-items: center;
+        text-decoration: none;
+        padding: 0 1rem;
+        cursor: pointer;
+
+        &:active {
+            color: #15cdfc;
+        }
+
+        &:hover {
+            color: #e66d27;
+        }
+        
+        img{
+            height: 100%;
+            width: 100%;
+        }
+
+        @media screen and (max-width: 768px){
+            width: 25vw;
+            text-align: center;
+        }
+        @media screen and (min-width: 768px){
+            width: 150px;
+        }
+    }
+
+    &__search{
+        position: relative;
+        text-align: center;
+
+        input{
+            padding: 15px 40px 15px 15px;
+            width: 350px;
+            border-radius: 5px;
+        }
+
+        &__icon{
+            position: absolute;
+            color: #000;
+            height: 100%;
+            width: 30px;
+            right: 10px;
+            cursor: pointer;
+
+            &:hover{
+                color:#a39084
+            }
+        }
+
+        @media screen and (max-width: 768px){
+            display: none;
+        }
+    }
+
+    &__user{
+        color: rgb(131, 127, 127);
+        font-style: italic;
+        font-weight: 500;
+        cursor: pointer;
+
+        @media screen and (max-width: 768px){
+            display: none;
+        }
+
+        hr {
+            display: none;
+        }
+        &:hover > hr{
+            display: block;
+            animation-name: hr;
+            font-weight: 500;
+            animation-duration: 0.5s;
+            animation-fill-mode: ease-in-out;
+
+            @keyframes hr {
+                from {width: 0;}
+                to {width: 100%;}
+              }
+        }
+    }
+
+    &__cart{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+        border-left: rgb(109, 106, 106) .3px solid;
+        border-right: rgb(109, 106, 106) .3px solid;
+        padding: 0 25px 0 25px;
+
+        @media screen and (max-width: 768px){
+            border: none;
+        }
+
+        &__icon{
+            position: relative;
+
+            img{
+                width: $icon_size;
+                height: $icon_size;
+            }
+    
+            &__count{
+                $size: 20px;
+                $background-color: #cd6c34;
+                position: absolute;
+                color: #000000;
+                background-color: $background-color;
+                border: $background-color 2px solid;
+                border-radius: 100%;
+                text-align: center;
+                font-size: 14px;
+                width: $size;
+                height: $size;
+                bottom: 0;
+                right: 0;
+            }
+
+            &__lable{
+                margin-left: 5px;
+
+                @media screen and (max-width: 768px){
+                    display: none;
+                }
+
+                &__total{
+                    font-weight: 300;
+                    color: rgb(131, 127, 127);
+                }
+
+                &__cart{
+                    font-weight: 700;
+                }
+            }
+        }    
+
+    }
+
+    &__hotline{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: fit-content;
+
+        @media screen and (max-width: 768px){
+            display: none;
+        }
+
+        img{
+            width: $icon_size;
+            height: $icon_size;
+        }
+
+        div{
+            margin-left: 5px;
+        }
+
+    }
+}
+
+
+
+
