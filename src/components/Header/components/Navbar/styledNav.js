@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { NavLink as Link} from 'react-router-dom';
-import {FaBars} from 'react-icons/fa';
 
 export const Nav = styled.nav`
     background: #BE8C63;
@@ -36,10 +35,6 @@ export const NavLink = styled(Link)`
     padding: 0 10px;
     height: 50px;
     line-height: 50px;
-
-    /* &.active {
-        background-color: #EEAF7C;
-    } */
 
     &:hover {
         background-color: #EEAF7C;

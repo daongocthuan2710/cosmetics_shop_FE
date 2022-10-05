@@ -8,35 +8,81 @@
     background-color: rgb(255, 255, 255);
     overflow-x: hidden;
     transition: 0.5s;
-    padding-top: 60px;
+    font-size: 1em;
 
     a {
-        padding: 8px 8px 8px 32px;
         text-decoration: none;
-        font-size: 25px;
-        color: #818181;
-        display: block;
-        transition: 0.3s;
+        color: black;
       }
 
-    a:hover {
-        color: #f1f1f1;
-    }
-    
-    .closebtn {
-        opacity: 0.7;
-        position: absolute;
-        top: 0;
-        right: 10px;
-        font-size: 36px;
+      &__search{
+        position: relative;
+        text-align: center;
+        background-color: #000;
+        padding: 10px;
+        width: 100%;
+
+        input{
+            padding: 15px 40px 15px 15px;
+            width: 100%;
+            border-radius: 5px;
+        }
+
+        &__icon{
+            position: absolute;
+            margin-top: -10px;
+            color: rgb(131, 130, 130);
+            height: 100%;
+            width: 30px;
+            right: 20px;
+            cursor: pointer;
+        }
+      }
+
+      &__matches{
+        width: 100%;
+        border-bottom: rgb(228, 226, 226) .3px solid;
+
+        &__search-wrapper{
+          padding: 2px 15px;
+          border-bottom: rgb(181, 178, 178) 1px solid;
+
+          &__cat-item-search{
+            padding: 5px 0;
+            color: #000;
+
+            a{
+              color: #ed1c24;
+              font-size: 1em;
+              font-weight: bold;
+            }
+          }
+        }
+
+        &__autocomplete-suggestion{
+          // padding: 5px 15px 10px 15px;
+          font-size: 1em !important;
+
+          img{
+            width: 100%;
+            height: 100%;
+          }
+          &__suggestion-thumb{
+            width: 100%;
+            height: auto;
+          }
+
+          &__suggestion-title{
+            
+
+          }
+
+          &__suggestion-price{
+          }
+        }
       }
   }
   
-  @media screen and (max-height: 450px) {
-    .sidenav {padding-top: 15px;}
-    .sidenav a {font-size: 18px;}
-  }
-
   .overlay {
     position: fixed;
     top: 0;
@@ -51,3 +97,4 @@
         transition: opacity 0.4s;
     }
 }
+

@@ -1,8 +1,10 @@
 import React  from 'react';
 import { useEffect, useState } from 'react';
 import productApi from './api/productApi';
-import './App.css';
 import User_Routes from './routes/user_routes/index.js';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css';
+
 function App() {
   // demo API Modules
   const [productList, setProductList] = useState([]);

@@ -1,9 +1,16 @@
-// html {
-//     font-size: 62.5%;
-// }
+html {
+    font-size: 14px;
+    // font-size: 62.5%;
+}
+
+body{
+    font-family: inherit, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    margin: 0;
+    box-sizing: border-box;
+}
 
 .is-expanded {
-    width: 250px !important;
+    width: 300px !important;
   }
  
 .header{
