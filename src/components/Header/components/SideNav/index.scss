@@ -9,6 +9,7 @@
     overflow-x: hidden;
     transition: 0.5s;
     font-size: 1em;
+    margin: 0;
 
     a {
         text-decoration: none;
@@ -60,8 +61,10 @@
         }
 
         &__autocomplete-suggestion{
-          // padding: 5px 15px 10px 15px;
+          width: 100%;
+          margin: 5px 0 !important;
           font-size: 1em !important;
+          
 
           img{
             width: 100%;

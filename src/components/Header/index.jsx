@@ -3,7 +3,7 @@ import SideNav from "./components/SideNav/index.js";
 import { GoSearch } from 'react-icons/go';
 import {FaBars} from 'react-icons/fa';
 import Navbar from "./components/Navbar/index.js";
-import logo from "../../assets/images/header/logo.png";
+import logo from "../../assets/images/header/logo_header.png";
 import shopping_bag from "../../assets/images/header/cart.gif";
 import phone_call from "../../assets/images/header/phone_call.gif";
 import './index.scss';

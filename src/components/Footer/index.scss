@@ -1,0 +1,91 @@
+.footer{
+
+    .footer-wrap{
+        
+        .delivery-section{
+
+            .feature-box{
+                padding: 0 15px;
+                height: 260px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                .feature-box__inner{
+                    height: 100%;
+                    width: 100%;
+                    background: #eacda8;
+
+                    .feature-box__icon{
+                        font-size: 50px;
+                        text-align: center;
+                    }
+
+                    .feature-box__content{
+                        text-align: center;
+
+                        .sun-delivery-title{
+                            text-transform: uppercase;
+                        }
+                    }
+                }
+            }
+            
+        }
+
+        .footer-content{
+            background-image: url(../../assets/images/backgrounds/background_footer.jpg);
+            background-size: cover;
+            background-repeat: no-repeat;
+            margin-top: 30px;
+            padding: 0 20%;
+
+            .suntory-footer-1wrap{
+                text-align: center;
+                display: flex;
+                justify-content: center;
+                text-transform: uppercase;
+                color: white;
+                font-size: 50px;
+                
+                img{
+                    width: 300px;
+                }
+            }
+
+            .intro-cosmetic{
+                margin: auto;
+                text-align: center;
+                font-weight: 500;
+            }
+
+            .center-menu{
+                margin-top: 15px;
+                line-height: 1;
+                text-align: center;
+
+                .menu-info{
+                    text-transform: uppercase;
+                    list-style: none;
+                    
+                    li{
+                        display: inline-block;
+                        border-right: 1px solid rgb(53, 52, 52);
+                        padding: 0 2%;
+
+                        a{
+                            font-weight: 500;
+                            color: black;
+                            cursor: pointer;
+                        }
+                        a:hover{
+                            opacity: 0.7;
+                        }
+                    }
+                }
+            }
+                
+            
+        }
+    }
+}
