@@ -1,7 +1,7 @@
 import React, { Suspense } from "react";
 
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-// import Home from "../../features/user/Home/index.js";
+// import Home from "../../features/user/Home/index.jsx";
 import About from "../../features/user/About/index.js";
 import Shop from "../../features/user/Shop/index.js";
 import Cart from "../../features/user/Cart/index.js";
@@ -19,8 +19,8 @@ function User_Routes(){
                 <BrowserRouter>
                 <Header/>
                 <Routes>  
-                    <Route path="/" component={Home}></Route>
-                    <Route path="/home" component={Home}></Route>
+                    <Route path="/" element={<Home/>}></Route>
+                    <Route path="/home" element={<Home/>}></Route>
                     <Route path="/shop" component={Shop}></Route>
                     <Route path="/cart" component={Cart}></Route>
                     <Route path="/product/:id" component={Product}></Route>

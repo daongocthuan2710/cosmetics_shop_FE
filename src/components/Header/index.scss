@@ -131,6 +131,12 @@ body{
         border-left: rgb(109, 106, 106) .3px solid;
         border-right: rgb(109, 106, 106) .3px solid;
         padding: 0 25px 0 25px;
+        text-decoration: none;
+        color: #000;
+
+        &:hover{
+            color:#cd6c34;
+        }
 
         @media screen and (max-width: 768px){
             border: none;

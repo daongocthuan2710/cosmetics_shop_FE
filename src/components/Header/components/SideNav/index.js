@@ -27,8 +27,6 @@ function SideNav(props) {
             <Scrollbars 
               autoHeight
               autoHeightMax={"50vh"}
-              // autoHide
-              // thumbMinSize={30}
             >
               <div className="sidenav__matches__search-wrapper">
                 <div className="sidenav__matches__search-wrapper__cat-item-search">

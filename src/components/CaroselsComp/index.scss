@@ -1,0 +1,45 @@
+
+.swiper-slide{
+    margin-top: 0 !important;
+    // height: fit-content !important;
+}
+
+// .swiper-wrapper{
+//     height: fit-content !important;
+// }
+
+.swiper-wrapper{
+    height: fit-content !important;
+}
+
+.suntory-recent-products{
+    background-image: url('../../assets/images/backgrounds/background-content.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    padding: 15px 5%;    
+
+    .hometitle-wrapper{
+        padding: 10px 0;
+        text-align: center;
+
+        .home-title{
+            color: rgb(255, 255, 255);
+            font-family: Monospace !important;
+            font-style: italic;
+            font-size: 40px;
+            font-weight: bold;
+            text-shadow: 0 0 10px rgb(185, 120, 54);
+        }
+
+        .home-effect{
+            height: fit-content;
+            margin-top: -25px;
+            z-index: 10;
+
+            img{
+                height: 50px;
+            }
+        }
+    }
+}

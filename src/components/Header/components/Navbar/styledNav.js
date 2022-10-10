@@ -37,34 +37,9 @@ export const NavLink = styled(Link)`
     line-height: 50px;
 
     &:hover {
+        color: black;
         background-color: #EEAF7C;
     }
 `;
 
-export const NavBtn = styled.nav`
-    display: flex;
-    align-items: center;
-    margin-right: 24px;
-
-    @media screen and (max-width: 768px){
-        display: none;
-    }
-`;
-
-export const NavBtnLink = styled(Link)`
-    border-radius: 4px;
-    background: #256ce1;
-    padding: 10px;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    transition: all 0.2s ease-in-out;
-    text-decoration: none;
-
-    &.hover{
-        transition: all 0.2s ease-in-out;
-        background: #fff;
-        color: #010606;
-    }
-`;
 
