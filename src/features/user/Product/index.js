@@ -9,6 +9,7 @@ import "./index.scss";
 import Product_Description from "./components/Description";
 import Delivery from "./components/Delivery";
 import Review from "./components/Review";
+import ProductDetail from "./components/Product_detail";
 
 function Product() {
   let productId = Number.parseInt(window.location.href.split("/").at(-1));
@@ -43,7 +44,7 @@ function Product() {
                       <Product_Description/>
                     </Tab>
                     <Tab eventKey="detail" title="Detail">
-                      <Product_Description/>
+                      <ProductDetail/>
                     </Tab>
                     <Tab eventKey="review" title="Review (12)">
                       <Review
