@@ -56,7 +56,7 @@ function Header() {
               <img src={phone_call} alt="hotline" />
             <div>
               <p>Hotline</p>
-              <p>1900 675 695</p>
+              <p className="fw-bold">1900 675 695</p>
             </div>
         </div>
     </div>

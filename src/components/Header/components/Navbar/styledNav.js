@@ -37,7 +37,7 @@ export const NavLink = styled(Link)`
     line-height: 50px;
 
     &:hover {
-        color: black;
+        color: #fff;
         background-color: #EEAF7C;
     }
 `;
