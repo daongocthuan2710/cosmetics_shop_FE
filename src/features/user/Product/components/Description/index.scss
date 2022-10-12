@@ -1,0 +1,56 @@
+@mixin center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.panel{
+    $font-size-title: 18pt;
+    $font-size-content: 14pt;
+    font-size: $font-size-content;
+    text-align: justify;
+
+    @media only screen and (min-width: 300px){
+        $font-size-title: 16px;
+        $font-size-content: 12px;
+    }
+    @media only screen and (min-width: 768px) {
+        $font-size-title: 18pt;
+        $font-size-content: 14pt;
+      }
+
+    &__title{
+        @include center;
+        font-size: $font-size-title;
+        text-transform: uppercase;
+        font-weight: bold;
+        text-align: left;
+    }
+
+    &__intro{
+        @include center;
+        color: rgb(104, 102, 102);
+        font-size: $font-size-content;
+    }
+
+    &__banner{
+        width: 100%;
+
+        img{
+            width: 100%;
+            object-fit: cover;
+        }
+    }
+
+    &__advantage{
+        float: left;
+        font-weight: bold;
+        font-size: $font-size-title;
+        margin-top: 20px !important;
+    }
+    
+    &__advantage-content{
+        line-height: 2em;
+        font-size: $font-size-content; 
+    }
+}

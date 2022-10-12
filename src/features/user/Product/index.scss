@@ -1,0 +1,22 @@
+.product-item{
+    background-image: url('../../../assets/images/backgrounds/background-content.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+
+    &__content{
+        background-color: white;
+    }
+
+    .tabs-title{
+
+        li{
+            button{
+                color:black;
+                background-color: rgb(250, 179, 108);
+                font-weight: bold;
+                font-size: 18px;
+            }           
+        }
+    }
+}

@@ -4,6 +4,10 @@
         
         .delivery-section{
 
+            @media only screen and (max-width: 768px) {
+                display: none;
+            }
+
             .feature-box{
                 padding: 0 15px;
                 height: 260px;
@@ -37,8 +41,12 @@
             background-image: url(../../assets/images/backgrounds/background_footer.jpg);
             background-size: cover;
             background-repeat: no-repeat;
-            margin-top: 30px;
+            margin-top: 15px;
             padding: 0 20%;
+
+            @media only screen and (max-width: 768px) {
+                padding: 0 5%;
+            }
 
             .suntory-footer-1wrap{
                 text-align: center;
@@ -49,7 +57,11 @@
                 font-size: 50px;
                 
                 img{
-                    width: 300px;
+                    width: 250px;
+
+                    @media only screen and (max-width: 768px) {
+                        width: 200px;
+                    }
                 }
             }
 
@@ -57,6 +69,11 @@
                 margin: auto;
                 text-align: center;
                 font-weight: 500;
+                margin-top: -50px;
+
+                @media only screen and (max-width: 768px) {
+                    margin-top: -30px;
+                }
             }
 
             .center-menu{
@@ -73,8 +90,14 @@
                         border-right: 1px solid rgb(53, 52, 52);
                         padding: 0 2%;
 
+                        @media only screen and (max-width: 768px) {
+                            display: block;
+                            margin-top: 10px;
+                            border-right: none;
+                        }
+
                         a{
-                            font-weight: 500;
+                            font-weight: 700;
                             color: black;
                             cursor: pointer;
                         }

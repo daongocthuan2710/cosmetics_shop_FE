@@ -48,10 +48,10 @@ function ProductCarousel(props) {
                                 },
                         }}
                         navigation
-                        autoplay={{
-                            delay: props.delay,
-                            disableOnInteraction: false,
-                        }}
+                        // autoplay={{ 
+                        //     delay: props.delay,
+                        //     disableOnInteraction: false,
+                        // }}
                     >
                         <Row>
                             <Col md={12}>
