@@ -9,23 +9,29 @@ import Product from "../../features/user/Product/index.js";
 import Header from "../../components/Header/index.jsx";
 import Footer from "../../components/Footer/index.jsx";
 import NotFound from "../../components/NotFound/index.jsx";
-
+import { Loading } from "notiflix/build/notiflix-loading-aio";
 // Lazy load - Code splitting 
 const Home = React.lazy(() => import('../../features/user/Home/index.jsx'));
 
 function User_Routes(){
         return (
-            <Suspense fallback={<div>Loading...</div>}>               
+            <Suspense fallback={Loading.dots({
+                clickToClose: true,
+                svgSize: "50px",
+                svgColor: "rgb(220, 176, 93)",
+                backgroundColor: "rgba(255, 255, 255, 0.44)"
+              })}>    
+              {Loading.remove()}           
                 <BrowserRouter>
                 <Header/>
                 <Routes>  
                     <Route path="/" element={<Home/>}></Route>
                     <Route path="/home" element={<Home/>}></Route>
-                    <Route path="/shop" component={Shop}></Route>
-                    <Route path="/cart" component={Cart}></Route>
-                    <Route path="/product/:id" component={Product}></Route>
-                    <Route path="/about" component={About}></Route>
-                    <Route component={NotFound}></Route>
+                    <Route path="/shop" element={<Shop/>}></Route>
+                    <Route path="/cart" element={<Cart/>}></Route>
+                    <Route path="/product/:id" element={<Product/>}></Route>
+                    <Route path="/about" element={<About/>}></Route>
+                    <Route element={<NotFound/>}></Route>
                     {/* <Route path="/login" element={<Login/>}></Route> */}
                 </Routes> 
                 <Footer/>

@@ -1,0 +1,137 @@
+
+@mixin center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card{
+    width: 100%;
+    height: auto;
+    padding: 0;
+    border: none !important;
+    border-radius: 0px !important;
+
+
+    &__img{
+        position: relative;
+        width: 100%;
+        text-align: center;
+
+        img{
+            width: 80%;
+            height: auto;
+        }
+    
+        .promotion{
+            background-color: rgb(220, 176, 93);
+            padding: 3px 7px;
+            width: fit-content;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: white;
+            font-weight: bold;
+        }
+    }
+
+    &__body{
+
+        &__info{
+            border-radius: 0px !important;
+            $font-size-name: 18px;
+
+            @media only screen and (max-width: 768px) {
+                $font-size-name: 16px;
+            }
+
+            @media only screen and (max-width: 768px) {
+                $font-size-name: 18px;
+            }
+
+            .product-title{
+                font-size: $font-size-name;
+            }
+    
+            .price{
+    
+                .origin-price{
+                    text-decoration: line-through;
+                }
+    
+                .promotion-price{
+                    font-size: 20px;
+                }
+    
+                .label-deal{
+                    background-color: orange;
+                    padding: 3px 5px;
+                    color: white;
+                    text-transform: uppercase;
+                    font-weight: 500;
+                }
+            }
+
+            .attribute_pa_tone-mau{
+                width: 260px;
+                padding: 5px 15px;
+                border: 1px rgb(116, 113, 113) solid;
+                color: grey;
+            }
+
+            &__cart{
+                width: 100% !important;
+                margin-top: 20px;
+
+                .quantity{
+                    @include center;
+                    padding-left: 3px;
+                    height: 100%;
+                }
+
+                .inventory{
+                    @include center;
+                    color: grey;
+                    font-weight: 500;
+                    justify-content: start !important;
+                }
+    
+                .add-to-cart{
+                    @include center;
+                    $color:orangered;
+                    width: fit-content;
+                    float: left;
+                    padding: 5px 15px;
+                    height: 100%;
+                    color: $color;
+                    border: .5px $color solid;
+                    background-color: rgb(255, 232, 215);
+
+                    &:hover{
+                        opacity: 0.7;
+                    }
+                }
+
+                .buy-now{
+                    @include center;
+                    width: fit-content;
+                    float: left;
+                    background-color: orangered;
+                    color: white;
+                    padding: 5px 15px;
+                    height: 100%;
+
+                    &:hover{
+                        opacity: 0.7;
+                    }
+                }
+            }
+
+        }
+
+        .call-order{
+            color: rgb(81, 69, 69);
+        }
+    }
+
+}

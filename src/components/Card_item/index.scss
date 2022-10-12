@@ -3,48 +3,65 @@
     position: relative;    
 
     img{
-        height: 15rem;
         object-fit: cover;
         z-index: 15;
     }
 
     .card-body{
-        font-size: 14px !important;
+        $font-size-cart-title: 16px;
+        $font-size-cart: 14px;
+        font-size: $font-size-cart;
         font-weight: 700;
         margin-bottom: 20px;
         overflow: hidden;
 
-        .card-body__price{
+        @media only screen and (max-width: 768px) {
+            $font-size-cart-title: 14px;
+            $font-size-cart: 12px;
+        }
+
+        @media only screen and (min-width: 769px) {
+            $font-size-cart-title: 16px;
+            $font-size-cart: 14px
+        }
+
+        &__title{
+            font-size: $font-size-cart-title;
+        }
+
+        &__price{
             transition-property: font-size;
-            transition-duration: 0.3s;
+            transition-duration: 0.2s;
             transition-timing-function: ease-in-out;
             position: absolute;
             z-index: 10;
             margin-bottom: 20px;
-            right: 40px;
+            width: 100%;
+            left: 0;
+            font-size: $font-size-cart;
         }
 
-            .card-body-cart{
-                font-weight: bold;
-                transition-property: font-size;
-                transition-duration: 0.3s;
-                transition-timing-function: ease-in-out;
-                position: absolute;
-                width: 100%;
-                text-align: center;
-                left: 0;
-                font-size: 0px !important;
-            }
+        &__cart{
+            font-weight: bold;
+            transition-property: font-size;
+            transition-duration: 0.2s;
+            transition-timing-function: ease-in-out;
+            position: absolute;
+            width: 100%;
+            text-align: center;
+            left: 0;
+            font-size: 0px;
+        }
 
     }
 
     &:hover{
         .card-body__price{
-            font-size: 0px !important;
+            font-size: 0px;
         }
 
-        .card-body-cart{
-            font-size: 14px !important;
+        .card-body__cart{
+            font-size: 14px;
         }
     }
 }

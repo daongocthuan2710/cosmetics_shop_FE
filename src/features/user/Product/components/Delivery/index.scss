@@ -1,0 +1,39 @@
+.delivery{
+    border: .5px rgb(217, 213, 213) solid;
+    border-top: 5px orange solid;
+    margin-top: 30px;
+    padding: 0 !important;
+    margin-bottom: 30px;
+
+    .benifit-icon{
+        list-style-type: none;
+        padding-left: 15px !important;
+
+        a{
+            text-decoration: none;
+            color: black;
+        }
+
+        .icon_list_item{
+
+            .icon_custom{
+                font-size: 50px !important;
+                color: rgb(230, 133, 36);
+            }
+
+            .icon_description_text{
+                margin-top: 10px;
+                padding-left:30px;
+                padding-right:-60px;
+
+                .delivery-tilte{
+                    font-weight: 700;
+                }
+
+                .delivery-desc{
+                    font-size: 12px;
+                }
+            }
+        }
+    }
+}

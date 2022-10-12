@@ -18,6 +18,11 @@
     background-size: cover;
     background-attachment: fixed;
     padding: 15px 5%;    
+    $font-size-title: 40px;
+
+    @media only screen and (max-width: 768px) {
+        $font-size-title: 20px;
+      }
 
     .hometitle-wrapper{
         padding: 10px 0;
@@ -27,7 +32,7 @@
             color: rgb(255, 255, 255);
             font-family: Monospace !important;
             font-style: italic;
-            font-size: 40px;
+            font-size: $font-size-title !important;
             font-weight: bold;
             text-shadow: 0 0 10px rgb(185, 120, 54);
         }
@@ -39,6 +44,11 @@
 
             img{
                 height: 50px;
+
+                @media only screen and (max-width: 768px) {
+                    height: 30px;
+                    margin-top: 10px;
+                  }
             }
         }
     }

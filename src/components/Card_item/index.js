@@ -8,7 +8,7 @@ function CardItem() {
     return (
             <Card className="text-center">
                 <Link
-                    to={`/productPage/1`}
+                    to={`/product/1`}
                     className="nav-link"
                 >
                     <Card.Img
@@ -17,7 +17,7 @@ function CardItem() {
                     />
                 </Link>
                 <Card.Body className="card-body">
-                    <Card.Title className="text-center text-truncate">
+                    <Card.Title className="text-center text-truncate card-body__title">
                             Son SonSonSon SonS onSonSonSonSo nSonSo nSonSonSonSonS onSonSonS nSonS onSonSon
                     </Card.Title>
                     <Card.Text>
@@ -29,7 +29,7 @@ function CardItem() {
                             &nbsp; &nbsp;
                             <span className="text-danger fw-bold">87,000đ</span>
                         </Card.Text>
-                        <NavLink to="/shop" className="card-body-cart">
+                        <NavLink to="/shop" className="card-body__cart">
                             <Card.Text className="bg-transparent fw-bold">
                                 <span>
                                     <MdOutlineAddShoppingCart/>
@@ -39,7 +39,6 @@ function CardItem() {
                             </Card.Text>
                         </NavLink>
                     </div>
-
                 </Card.Body>
             </Card>
     );
