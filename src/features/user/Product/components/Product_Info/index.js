@@ -21,7 +21,7 @@ function ProductInfo(props) {
                 <div className="col-md-6 col-xs-12 card__body">
                     <div className="card-body basel-scroll-content card__body__info">
                         <h1 className="product-title">
-                            Phấn Nước Aprilskin Hero Cushion SPF50+/PA++++ (12g X 2) – Kèm Lõi Refill
+                            Son Shu Uemura Rouge Unlimited Matte Lipstick Rouge À Lèvres M OR 570 (3g)
                         </h1>
                         <p className="price">
                             <span className="origin-price">550,000đ</span>

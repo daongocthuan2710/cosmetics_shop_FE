@@ -10,6 +10,7 @@ import Product_Description from "./components/Description";
 import Delivery from "./components/Delivery";
 import Review from "./components/Review";
 import ProductDetail from "./components/Product_detail";
+import Breadcrumb from "../../../components/Breadcrumb";
 
 function Product() {
   let productId = Number.parseInt(window.location.href.split("/").at(-1));
@@ -27,6 +28,11 @@ function Product() {
     <>
     <div className="product-item">  
         <Container className="product-item__content">
+          <Row className="breadcrumb-wrap">
+            <Col>
+              <Breadcrumb/>
+            </Col>            
+          </Row>
           <Row>
             <Col md={9} className="bg-light">
               <ProductInfo 
