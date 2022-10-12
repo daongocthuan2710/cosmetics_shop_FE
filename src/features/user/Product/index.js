@@ -11,9 +11,7 @@ import Delivery from "./components/Delivery";
 import Review from "./components/Review";
 
 function Product() {
-  let ProductId = Number.parseInt(window.location.href.split("/").at(-1));
-  console.log("ProductId", ProductId);
-  console.log(window.location);
+  let productId = Number.parseInt(window.location.href.split("/").at(-1));
   // const [productInfo, setProductInfo] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -30,7 +28,10 @@ function Product() {
         <Container className="product-item__content">
           <Row>
             <Col md={9} className="bg-light">
-              <ProductInfo productInfo={productInfo} product_id={ProductId} />
+              <ProductInfo 
+                productInfo={productInfo} 
+                product_id={productId} 
+              />
               <Row>
                 <Col md={12} xs={12}> 
                   <Tabs
@@ -41,8 +42,13 @@ function Product() {
                     <Tab eventKey="description" title="Description">
                       <Product_Description/>
                     </Tab>
-                    <Tab eventKey="review" title="Review">
-                      <Review/>
+                    <Tab eventKey="detail" title="Detail">
+                      <Product_Description/>
+                    </Tab>
+                    <Tab eventKey="review" title="Review (12)">
+                      <Review
+                        product_id={productId}
+                      />
                     </Tab>
                   </Tabs>
                 </Col>
