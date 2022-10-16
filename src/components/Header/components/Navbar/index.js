@@ -1,7 +1,11 @@
+import { Loading } from "notiflix";
 import React from "react";
 import { Nav, NavMenu, NavLink } from './styledNav.js';
 function Navbar(props){
 
+    Loading
+    //get data
+    Loading.remove()
     return(
         <>
             <Nav>
@@ -15,7 +19,7 @@ function Navbar(props){
                     <NavLink to="/Cart" activestyle = "true">
                         Cart
                     </NavLink>
-                    <NavLink to="/product" activestyle = "true">
+                    <NavLink to="/product/1" activestyle = "true">
                         Product
                     </NavLink>
                     <NavLink to="/home" activestyle = "true">

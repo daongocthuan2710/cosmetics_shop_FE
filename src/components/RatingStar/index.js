@@ -7,7 +7,6 @@ export default function TextRating(props) {
     return (
             <Box
                 sx={{
-                    width: 200,
                     display: "flex",
                     alignItems: "center",
                 }}
@@ -24,6 +23,7 @@ export default function TextRating(props) {
                         />
                     }
                 />
+                {props.text? "trở lên" : ""}
             </Box>
     );
 }

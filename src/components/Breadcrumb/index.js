@@ -21,7 +21,7 @@ export default function Breadcrumb() {
             Son môi
         </Link>
         <Typography key="3" color="grey" className="breadcrumb__active">
-            Son Shu Uemura Rouge Unlimited Matte Lipstick Rouge À Lèvres M OR 570 (3g)
+            Son Shu Uemura Rouge Unlimited Matte 
         </Typography>
     </Breadcrumbs>
   );
