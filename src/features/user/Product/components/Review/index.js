@@ -10,14 +10,14 @@ import Pagination from '@mui/material/Pagination';
 import "./index.scss";
 
 export default function Review(props) {
-  const [isActive, setIsActive] = useState(false);
 
-  const handleClick = (event) => {
+  const activeFilter = (event) => {
     document.querySelectorAll("#star-filter li").forEach((e) => {
       e.classList.remove("active");
     });
     event.currentTarget.classList.toggle("active");    
   };
+  
   const [reviews, setReviews] = useState({
     review_title: "Fiat",
     review_details: "500",
@@ -43,12 +43,12 @@ export default function Review(props) {
           </Col>
           <Col md={12} sm={12} xs={12} id="star-filter" className="review__head__filter-star">
             <ul>
-              <li onClick={handleClick}>All (16)</li>
-              <li onClick={handleClick}>5 star (3)</li>
-              <li onClick={handleClick}>4 star (4)</li>
-              <li onClick={handleClick}>3 star (3)</li>
-              <li onClick={handleClick}>2 star (4)</li>
-              <li onClick={handleClick}>1 star (3)</li>
+              <li onClick={activeFilter}>All (16)</li>
+              <li onClick={activeFilter}>5 star (3)</li>
+              <li onClick={activeFilter}>4 star (4)</li>
+              <li onClick={activeFilter}>3 star (3)</li>
+              <li onClick={activeFilter}>2 star (4)</li>
+              <li onClick={activeFilter}>1 star (3)</li>
             </ul>
           </Col>
           <Row className="review__head__show-select">

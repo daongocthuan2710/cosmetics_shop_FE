@@ -17,8 +17,8 @@ function CardItem() {
                     />
                 </Link>
                 <Card.Body className="card-body">
-                    <Card.Title className="text-center text-truncate card-body__title">
-                            Son SonSonSon SonS onSonSonSonSo nSonSo nSonSonSonSonS onSonSonS nSonS onSonSon
+                    <Card.Title className="text-center multiLineLabel card-body__title">
+                            <span className="textMaxLine">Son SonSonSon SonS onSonSonSonSo nSonSo nSonSonSonSonS onSonSonS nSonS onSonSon</span>
                     </Card.Title>
                     <Card.Text>
                         son môi

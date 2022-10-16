@@ -1,0 +1,65 @@
+.sidebar{
+    margin-top: 30px;
+    width: 100%;
+    padding: 0 15px !important;
+
+    .sidebar-wrapper{
+    
+        &__title{
+            margin: 0 !important;
+            background-color: #BE8C63;
+            color: white;
+            text-align: center;
+            font-size: 18px;
+            text-transform: uppercase;
+            padding: 10px 0;
+        }
+    
+        &__navigation{
+            margin: 0 !important;
+            border: .1px rgb(233, 227, 227) solid;
+            
+            nav{
+                padding: 0 !important;
+            }
+        }
+
+        &__rating-star{
+            margin: 50px 0 !important;
+            border-top: 3px #BE8C63 solid !important;
+            border: .1px rgb(233, 227, 227) solid;
+
+            &__title{
+                margin: 0 !important;
+                background-color: rgb(247, 235, 214);
+                color: black;
+                text-align: center;
+                font-size: 16px;
+                padding: 10px 0;
+            }
+        }
+
+        &__price, &__brand, &__delivery, &__origin{
+            margin: 50px 0 !important;
+            border: .1px rgb(233, 227, 227) solid;
+
+            &__title{
+                margin: 0 !important;
+                background-color: rgb(247, 235, 214);
+                color: black;
+                text-align: center;
+                font-size: 16px;
+                padding: 10px 0;
+            }
+        }
+
+        &__price{
+
+            &__range{
+                text-align: center;
+            }
+        }
+
+    }
+}
+

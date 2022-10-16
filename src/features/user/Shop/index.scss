@@ -1,0 +1,15 @@
+.shop{
+    height: auto;
+    margin-bottom: 50px;
+    &__sidebar{
+        padding: 0 !important;
+    }
+
+    &__wrapper{
+        // background-color: rgb(233, 233, 233);
+        padding-bottom: 15px;
+        height: auto;
+        width: 100%;
+        margin-top: 15px !important;
+    }
+}
