@@ -1,0 +1,79 @@
+.userSidebar{
+    margin-top: 30px;
+    width: 100%;
+    border-top: 3px #BE8C63 solid !important;
+    border: .1px rgb(233, 227, 227) solid;
+    margin-bottom: 50px;
+
+    .userSidebar-wrapper{
+        padding: 0 !important;
+
+        &__info{
+            margin: 0 !important;
+            text-align: center;
+            padding: 10px 0 !important;
+            border-bottom: .3px rgb(222, 221, 221) solid;
+
+            &__avatar{
+                width: fit-content !important;
+                padding: 0 10px !important;
+    
+                img{
+                    width: 40px;
+                    height: auto;
+    
+                    @media only screen and (max-width: 767px){
+                        width: 30px;
+                    }
+                }
+            }
+
+            &__content{
+                padding: 0 !important;
+
+                &__userName{
+                    font-weight: bold;
+                }
+
+                &__editProfile{
+                    margin-top: 5px;
+                    a{
+                        color: grey;
+                        text-decoration: none;
+                        font-weight: 600;
+
+                        svg{
+                            font-size: 20px;
+                        }
+                    }
+                    
+                }
+            }
+        }
+
+        &__navigation{
+            margin: 0 !important;
+
+            nav{
+                padding: 0 !important;
+
+                ul{
+                    span{
+                        svg{
+                            font-size: 20px;
+                        }
+    
+                        span{
+                            color: black;
+                        }
+                    }                   
+                }
+
+            }
+        }
+    }
+}
+
+// .active{
+//     color:#ea802a !important;               
+//     }

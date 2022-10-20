@@ -1,0 +1,31 @@
+.edit-profile{
+
+    &__top{
+        border-bottom: .3px rgb(220, 211, 211) solid;
+
+        &__title{
+            font-size: 18px;
+        }
+
+        &__text{
+            font-size: 13px;
+            opacity: 0.9;
+            margin-top: -15px;
+        }
+    }
+
+    &__form{
+        margin-top: 15px !important;
+
+        &__content{
+
+        }
+
+        &__avatar{
+            display: flex;
+            justify-content: center;
+            align-items: start;
+            margin-top: 30px !important;
+        }
+    }
+}

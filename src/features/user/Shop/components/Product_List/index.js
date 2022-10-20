@@ -14,7 +14,7 @@ export default function ProductList() {
                     md={4}
                     xl={3}
                     className="mt-4"
-                    key={1}
+                    key={item}
                 >
                     <CardItem/>
                 </Col>

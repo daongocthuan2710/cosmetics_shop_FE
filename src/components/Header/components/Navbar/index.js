@@ -1,11 +1,7 @@
-import { Loading } from "notiflix";
 import React from "react";
 import { Nav, NavMenu, NavLink } from './styledNav.js';
 function Navbar(props){
 
-    Loading
-    //get data
-    Loading.remove()
     return(
         <>
             <Nav>

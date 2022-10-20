@@ -1,0 +1,22 @@
+.profileEditForm{
+
+    label{
+        opacity: 0.5;
+        text-align: end;
+    }
+
+    .save-form{
+        
+        button{
+            padding: 10px 20px;
+            background-color: #BE8C63;
+            border: none;
+            border-radius: 0;
+        }
+    }
+
+    .text-userName{
+        display: flex;
+        align-items: center;
+    }
+}

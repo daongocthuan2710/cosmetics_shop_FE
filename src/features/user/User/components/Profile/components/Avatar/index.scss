@@ -1,0 +1,20 @@
+.upload-avt-form{
+    margin: 0 !important;
+    border-left: .3px rgb(220, 211, 211) solid;
+
+    .avatar{
+        text-align: center;
+        font-weight: 300;
+
+        img{
+            width: 100px;
+            opacity: 0.5;
+        }
+    }
+
+    .text-file,.upload{
+        text-align: center;
+        margin-top: 10px;
+        opacity: 0.5;
+    }
+}
