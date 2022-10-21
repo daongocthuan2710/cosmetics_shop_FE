@@ -96,7 +96,7 @@ body{
         }
     }
 
-    &__user{
+    &__guest{
         color: rgb(131, 127, 127);
         font-style: italic;
         font-weight: 500;
@@ -120,6 +120,51 @@ body{
                 from {width: 0;}
                 to {width: 100%;}
               }
+        }
+    }
+
+    &__user{
+        color: rgb(131, 127, 127);
+        font-style: italic;
+        font-weight: 500;
+        cursor: pointer;
+        position: relative;
+
+        @media screen and (max-width: 768px){
+            display: none;
+        }
+
+        &__info {
+            display: none;
+            position: absolute;
+            background: rgba(228, 222, 222, .9);
+            list-style: none;
+            width: 200px;
+            text-align: center;
+            padding: 10px 10px;
+            border-radius: 15px;
+            transform: translateX(-40%);
+            animation-name: info;
+            animation-duration: 0.3s;
+            animation-fill-mode: ease-in-out;
+            top: 20px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+            @keyframes info {
+                from {top: 100px;}
+                to {top: 20px;}
+              }
+
+            li {
+                text-decoration: none;
+            }
+
+            li:hover {
+                text-decoration: underline;
+              }
+        }   
+        &:hover > &__info{
+            display: block;
         }
     }
 

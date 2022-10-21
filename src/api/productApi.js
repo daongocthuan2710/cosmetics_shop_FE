@@ -1,5 +1,3 @@
-
-
 // GET /products
 // GET /products?categoryId=123&page=1
 // GET /products/:productId

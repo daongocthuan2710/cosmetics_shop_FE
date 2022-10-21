@@ -6,12 +6,12 @@ const authApi = {
     register: (body) => {
         const url = `${prefix}/register`;
         return axiosClient.post(url, body);
-    },
+    }, 
 
     login: (body) => {
         const url = `${prefix}/login`;
         return axiosClient.post(url, body);
-    },
+    }, 
 
     logout: (token) => {
         const header = {
@@ -23,7 +23,7 @@ const authApi = {
         const url = "user/logout";
         return axiosClient.post(url, null, header);
     },
-
+ 
     userInformation: (token) => {
         const header = {
             headers: {

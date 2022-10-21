@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useEffect } from "react";
 
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 // import Home from "../../features/user/Home/index.jsx";
@@ -17,34 +17,38 @@ import ChangePassword from "../../features/user/User/components/Profile/componen
 const Home = React.lazy(() => import('../../features/user/Home/index.jsx'));
 
 function User_Routes(){
-        return (
-            <Suspense fallback={Loading.dots({
-                clickToClose: true,
-                svgSize: "50px",
-                svgColor: "rgb(220, 176, 93)",
-                backgroundColor: "rgba(255, 255, 255, 0.44)"
-              })}>    
-              {Loading.remove()}           
-                <BrowserRouter>
-                <Header/>
-                <Routes>  
-                    <Route path="/" element={<Home/>}></Route>
-                    <Route path="home" element={<Home/>}></Route>
-                    <Route path="shop" element={<Shop/>}></Route>
-                    <Route path="cart" element={<Cart/>}></Route>
-                    <Route path="product/:id" element={<Product/>}></Route>
-                    <Route path="about" element={<About/>}></Route>
+    const token = localStorage.getItem('token')
+    return (
+        <Suspense fallback={Loading.dots({
+            clickToClose: true,
+            svgSize: "50px",
+            svgColor: "rgb(0, 0, 0)",
+            backgroundColor: "rgb(255, 255, 255)"
+            })}>    
+            <BrowserRouter>
+            <Header/>
+            <Routes>  
+                <Route path="/" element={<Home/>}></Route>
+                <Route path="home" element={<Home/>}></Route>
+                <Route path="shop" element={<Shop/>}></Route>
+                <Route path="cart" element={<Cart/>}></Route>
+                <Route path="product/:id" element={<Product/>}></Route>
+                <Route path="about" element={<About/>}></Route>
+                {token ? 
                     <Route path="user" element={<User/>}>
                         <Route path="account/profile" element={<UserProfile/>}></Route>
                         <Route path="account/password" element={<ChangePassword/>}></Route>
-                    </Route>
-                    <Route path="*" element={<NotFound/>}></Route>
-                    {/* <Route path="/login" element={<Login/>}></Route> */}
-                </Routes> 
-                <Footer/>
-            </BrowserRouter>
-            </Suspense>
-        );
+                    </Route> 
+                    : <Route path="*" element={<NotFound/>}></Route>
+                }               
+                <Route path="/danh-muc/*" element={<Shop/>}></Route>
+                <Route path="*" element={<NotFound/>}></Route>
+                {/* <Route path="/login" element={<Login/>}></Route> */}
+            </Routes> 
+            <Footer/>
+        </BrowserRouter>
+        </Suspense>
+    );
 }
 
 export default User_Routes;
