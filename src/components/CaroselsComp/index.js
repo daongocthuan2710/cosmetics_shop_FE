@@ -24,7 +24,7 @@ function ProductCarousel(props) {
                             {props.name}
                         </h3>
                         <div className="home-effect">
-                            <img src={effect}/>
+                            <img src={effect} alt=""/>
                         </div>
                     </div>
                     <Swiper
@@ -48,10 +48,10 @@ function ProductCarousel(props) {
                                 },
                         }}
                         navigation
-                        // autoplay={{ 
-                        //     delay: props.delay,
-                        //     disableOnInteraction: false,
-                        // }}
+                        autoplay={{ 
+                            delay: props.delay,
+                            disableOnInteraction: false,
+                        }}
                     >
                         <Row>
                             <Col md={12}>
