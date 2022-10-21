@@ -19,23 +19,16 @@ export default function Login(props) {
           localStorage.setItem("token", response.data.token);
           const action = loginAction(response.data);
           dispatch(action);
-          navigate("/");
-          console.log('action',action);
         } catch(error) {
           console.log("Fail to fetch login", error);
         }
       }
       const loginSubmit = (e) => {
-        // const body = {
-        //     "username": "lenhan",
-        //     "password": "Test123@"
-        //    }
         const body = {
             "username": username,
             "password": password
            }
         e.preventDefault();
-        // handleValidation();
         fetchLogin(body);
         props.closeLoginForm();
       };

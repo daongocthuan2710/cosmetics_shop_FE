@@ -23,7 +23,8 @@ export default function Header() {
   const token = localStorage.getItem('token');
   const userInfo = useSelector(state => state.auths);
   const dispatch = useDispatch();
-  
+  const navigate = useNavigate();
+
   const handleNav = () => {
     setIsExpanded(!isExpanded);
   }
@@ -32,24 +33,14 @@ export default function Header() {
     setLogin(!login);
   }
 
-
   const handleLogout = async () => {
     localStorage.clear();
-    window.location.reload();
+    // window.location.reload();
+    navigate("/")
     const action = loginAction([]);
     dispatch(action);
-  //   try {
-  //     const token = localStorage.getItem('token')
-  //     const response = await authApi.logout(token);
-  //     localStorage.clear()
-  //     window.location.reload()
-  // } catch (e) {
-  //     const error = new Error("Something went wrong");
-  //     throw error;
-  // }
   }
 
-  const navigate = useNavigate();
   const handleProfile = () => {
     if(token) navigate("/user/account/profile")
   }

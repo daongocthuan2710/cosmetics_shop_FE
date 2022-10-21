@@ -13,11 +13,12 @@ import { Loading } from "notiflix/build/notiflix-loading-aio";
 import User from "../../features/user/User/index.js";
 import UserProfile from "../../features/user/User/components/Profile/index.js";
 import ChangePassword from "../../features/user/User/components/Profile/components/Change_Password/index.js";
+import { useSelector } from "react-redux";
 // Lazy load - Code splitting 
 const Home = React.lazy(() => import('../../features/user/Home/index.jsx'));
 
 function User_Routes(){
-    const token = localStorage.getItem('token')
+    const token = useSelector(state => state.auths).token;
     return (
         <Suspense fallback={Loading.dots({
             clickToClose: true,
@@ -43,7 +44,6 @@ function User_Routes(){
                 }               
                 <Route path="/danh-muc/*" element={<Shop/>}></Route>
                 <Route path="*" element={<NotFound/>}></Route>
-                {/* <Route path="/login" element={<Login/>}></Route> */}
             </Routes> 
             <Footer/>
         </BrowserRouter>
