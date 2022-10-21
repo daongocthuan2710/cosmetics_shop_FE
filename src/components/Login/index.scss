@@ -1,0 +1,41 @@
+.login {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 20;
+    top: 0;
+    right: 0;
+    background-color: rgb(255, 255, 255);
+    overflow-x: hidden;
+    transition: 0.5s;
+    font-size: 1em;
+    margin: 0;
+
+    a {
+        text-decoration: none;
+        color: black;
+      }
+
+  }
+
+  .is-login{
+    display: block;
+    width: 300px !important;
+  }
+
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    z-index: 19;
+
+    &.visible {
+        right: 0;
+        bottom: 0;
+        opacity: 1;
+        transition: opacity 0.4s;
+    }
+}
+

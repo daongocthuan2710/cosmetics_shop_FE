@@ -30,6 +30,7 @@
     &__intro{
         @include center;
         color: rgb(104, 102, 102);
+        text-align: start;
     }
 
     &__banner{

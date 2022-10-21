@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import './index.scss';
 import {Navigation} from 'react-minimal-side-navigation';
 import 'react-minimal-side-navigation/lib/ReactMinimalSideNavigation.css';
@@ -9,9 +9,30 @@ import { lipstick } from "../../../../assets/images/datas/lipstick";
 import { Col, Container, Row } from "react-bootstrap";
 
 function SideNav(props) {
-  
+  const cates = [{
+    title: 'Thương hiệu',
+    itemId: '/thuong-hieu',
+  }];
+  props.categoryList.map((item) => (
+    cates.push(
+      {
+        title: item.name,
+        itemId: `/danh-muc/${item.name.split(" ").join("-")}`,
+        subNav: [
+          {
+            title: 'Face Makeup',
+            itemId: `/danh-muc/${item.name.split(" ").join("-")}/face-makeup`,
+          },
+          {
+            title: 'Eyes Makeup',
+            itemId: `/danh-muc/${item.name.split(" ").join("-")}/eyes-makeup`,
+          },
+        ],
+        })
+  ))
+
   return (
-  <>
+  <> 
     <div id="mySidenav" className={`sidenav ${props.isExpanded ? "is-expanded" : ""}`}>
       <Scrollbars 
         autoHeight
@@ -27,7 +48,7 @@ function SideNav(props) {
             <Scrollbars 
               autoHeight
               autoHeightMax={"50vh"}
-            >
+            > 
               <div className="sidenav__matches__search-wrapper">
                 <div className="sidenav__matches__search-wrapper__cat-item-search">
                     hoa trong &nbsp; 
@@ -68,94 +89,14 @@ function SideNav(props) {
             activeItemId="/thuong-hieu"
             onSelect={({itemId}) => {
               // maybe push to the route
-              console.log(itemId);
             }}
-            items={[
-              {
-                title: 'Thương hiệu',
-                itemId: '/thuong-hieu',
-                // you can use your own custom Icon component as well
-                // icon is optional
-                // elemBefore: () => <Icon name="inbox" />,
-              },
-              {
-                title: 'Trang điểm',
-                itemId: '/trang-diem',
-                // elemBefore: () => <Icon name="users" />,
-                subNav: [
-                  {
-                    title: 'Face Makeup',
-                    itemId: '/trang-diem/face-makeup',
-                  },
-                  {
-                    title: 'Eyes Makeup',
-                    itemId: '/trang-diem/eyes-makeup',
-                  },
-                ],
-              },
-              {
-                title: 'Chăm sóc da',
-                itemId: '/cham-soc-da1',
-                subNav: [
-                  {
-                    title: 'Kem dưỡng da',
-                    itemId: '/cham-soc-da1/kem-duong-da',
-                  },
-                  {
-                    title: 'Mặt na',
-                    itemId: '/cham-soc-da1/mat-na',
-                  }
-                ],
-              },
-              {
-                title: 'Chăm sóc da',
-                itemId: '/cham-soc-da2',
-                subNav: [
-                  {
-                    title: 'Kem dưỡng da',
-                    itemId: '/cham-soc-da2/kem-duong-da',
-                  },
-                  {
-                    title: 'Mặt na',
-                    itemId: '/cham-soc-da2/mat-na',
-                  }
-                ],
-              },
-              {
-                title: 'Chăm sóc da',
-                itemId: '/cham-soc-da3',
-                subNav: [
-                  {
-                    title: 'Kem dưỡng da',
-                    itemId: '/cham-soc-da3/kem-duong-da',
-                  },
-                  {
-                    title: 'Mặt na',
-                    itemId: '/cham-soc-da3/mat-na',
-                  }
-                ],
-              },
-              {
-                title: 'Chăm sóc da',
-                itemId: '/cham-soc-da4',
-                subNav: [
-                  {
-                    title: 'Kem dưỡng da',
-                    itemId: '/cham-soc-da4/kem-duong-da',
-                  },
-                  {
-                    title: 'Mặt na',
-                    itemId: '/cham-soc-da4/mat-na',
-                  }
-                ],
-              }
-            ]}
+            items = {cates}
           />
       </Scrollbars>
     </div>
     <div 
       className={`overlay ${props.isExpanded ? "visible" : ""}`}
-      onClick={props.closeNav}
+      onClick={props.handleNav}
     ></div>
   </>
   );
