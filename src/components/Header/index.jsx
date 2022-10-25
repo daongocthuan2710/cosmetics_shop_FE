@@ -7,7 +7,6 @@ import logo from "../../assets/images/header/logo_header.png";
 import shopping_bag from "../../assets/images/header/cart.gif";
 import phone_call from "../../assets/images/header/phone_call.gif";
 import { Link, useNavigate } from "react-router-dom";
-import authApi from "../../api/authApi.js";
 import { useDispatch, useSelector} from "react-redux";
 import {loginAction } from "../../reduxToolKit/user/authSlice.js";
 import cateApi from "../../api/cateApi.js";
@@ -20,6 +19,7 @@ export default function Header() {
   const [isExpanded, setIsExpanded] = useState(false);
   const [login, setLogin] = useState(false);
   const [cates, setCates] = useState([]);
+  const [offset, setOffset] = useState(0);
   const token = localStorage.getItem('token');
   const userInfo = useSelector(state => state.auths);
   const dispatch = useDispatch();
@@ -35,14 +35,13 @@ export default function Header() {
 
   const handleLogout = async () => {
     localStorage.clear();
-    // window.location.reload();
     navigate("/")
     const action = loginAction([]);
     dispatch(action);
   }
 
   const handleProfile = () => {
-    if(token) navigate("/user/account/profile")
+    if(token) navigate("/user/account/profile");
   }
 
   const fetchCategory =  async () => {
@@ -58,11 +57,55 @@ export default function Header() {
 
   useEffect(() =>{
     fetchCategory();
+
+    const onScroll = () => setOffset(window.pageYOffset);
+    // clean up code
+    window.removeEventListener('scroll', onScroll);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
   return (
   <>
-    <div className="header">
+    {
+      offset > 180 ?
+      <div className="header is-sroll" style={{position:'fixed'}}>
+      <FaBars 
+        aria-hidden="true"
+        className="header__bars-icon"
+        onClick={handleNav}
+        />
+      <Link to="/" className="header__logo" style={{width:'100px'}}>
+          <img src={logo} alt="Cosmetic Shop" />
+      </Link>
+      <div className="header__search">
+          <input type="text" placeholder="Tìm sản phẩm..."/>
+          <Link to="/shop">
+            <GoSearch className="header__search__icon"/>
+          </Link>
+      </div>
+      <Link to="/cart" className="header__cart" style={{border:'none'}}>
+          <div className="header__cart__icon">
+            <img src={shopping_bag} alt="shopping_bag" />
+            <div className="header__cart__icon__count">
+              <p>3</p>
+            </div>
+          </div>
+          <div className="header__cart__icon__lable">
+              <p className="header__cart__icon__lable__total">0đ</p>
+              <p className="header__cart__icon__lable__cart">Giỏ hàng</p>
+            </div>
+        </Link>
+      <div className="header__hotline">
+            <img src={phone_call} alt="hotline" />
+          <div>
+            <p>Hotline</p>
+            <p className="fw-bold">1900 675 695</p>
+          </div>
+      </div>
+    </div>
+      :
+      <div className="header">
         <FaBars 
           aria-hidden="true"
           className="header__bars-icon"
@@ -116,7 +159,9 @@ export default function Header() {
               <p className="fw-bold">1900 675 695</p>
             </div>
         </div>
-    </div>
+      </div>
+    }
+
 
     <Navbar 
       isExpanded = {isExpanded}

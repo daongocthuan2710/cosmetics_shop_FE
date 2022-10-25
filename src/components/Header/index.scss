@@ -12,8 +12,19 @@ body{
 .is-expanded {
     width: 300px !important;
 }
- 
+
+.is-sroll{
+    animation-name: scroll-header;
+    animation-duration: .2s;
+}
+
+@keyframes scroll-header {
+    from {height: 0;}
+    to {height: auto;}
+  }
+
 .header{
+    width: 100%;
     background: #fff;
     height: auto;
     display: flex;
