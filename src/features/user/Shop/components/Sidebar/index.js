@@ -4,12 +4,62 @@ import {Navigation} from 'react-minimal-side-navigation';
 import 'react-minimal-side-navigation/lib/ReactMinimalSideNavigation.css';
 import { Col, Container, Row } from "react-bootstrap";
 import RatingStarCheckbox from "../RatingStarCheckBox";
-import ProductOrigin from "../Product_Origin";
-import Delivery from "../Delivery";
+// import ProductOrigin from "../Product_Origin";
+// import Delivery from "../Delivery";
 import Brand from "../Brand";
 import PriceRange from "../Price_Range";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { breadcrumbList } from "../../../../../Store/user/breadcrumbSlice";
 
 export default function Sidebar(props) {
+    const navigate = useNavigate();
+    const cates = [];
+    for (var key in props.categoryList) {
+        var item = props.categoryList[key];
+        const subNavTmp = [];
+        item.types.forEach((item_subNav) => {
+            subNavTmp.push({
+                title: item_subNav.name,
+                itemId: `/danh-muc/${item.name}/${item_subNav.name}`,
+            })
+        }); 
+        cates.push({
+            title: item.name,
+            itemId: `/danh-muc/${item.name}`,
+            subNav: subNavTmp,
+        })
+     }
+
+    function removeAccents(str) {
+    var AccentsMap = [
+        "aàảãáạăằẳẵắặâầẩẫấậ",
+        "AÀẢÃÁẠĂẰẲẴẮẶÂẦẨẪẤẬ",
+        "dđ", "DĐ",
+        "eèẻẽéẹêềểễếệ",
+        "EÈẺẼÉẸÊỀỂỄẾỆ",
+        "iìỉĩíị",
+        "IÌỈĨÍỊ",
+        "oòỏõóọôồổỗốộơờởỡớợ",
+        "OÒỎÕÓỌÔỒỔỖỐỘƠỜỞỠỚỢ",
+        "uùủũúụưừửữứự",
+        "UÙỦŨÚỤƯỪỬỮỨỰ",
+        "yỳỷỹýỵ",
+        "YỲỶỸÝỴ"    
+    ];
+    for (var i=0; i<AccentsMap.length; i++) {
+        var re = new RegExp('[' + AccentsMap[i].substr(1) + ']', 'g');
+        var char = AccentsMap[i][0];
+        str = str.replace(re, char);
+    }
+    return str;
+    }
+
+    const dispatch = useDispatch();
+    const handleBreadcrumb = (breadcrumb) => {
+      const action = breadcrumbList(breadcrumb);
+      dispatch(action);
+    }
 
   return (
   <>
@@ -24,88 +74,12 @@ export default function Sidebar(props) {
             <Navigation
             activeItemId="/thuong-hieu"
             onSelect={({itemId}) => {
-            // maybe push to the route
+                let url = removeAccents(itemId).split(" ").join("-");
+                let breadcrumbList = itemId.split("/").slice(2);
+                handleBreadcrumb(breadcrumbList);
+                navigate(url);
             }}
-            items={[
-            {
-                title: 'Thương hiệu',
-                itemId: '/thuong-hieu',
-                // you can use your own custom Icon component as well
-                // icon is optional
-                // elemBefore: () => <Icon name="inbox" />,
-            },
-            {
-                title: 'Trang điểm',
-                itemId: '/trang-diem',
-                // elemBefore: () => <Icon name="users" />,
-                subNav: [
-                {
-                    title: 'Face Makeup',
-                    itemId: '/trang-diem/face-makeup',
-                },
-                {
-                    title: 'Eyes Makeup',
-                    itemId: '/trang-diem/eyes-makeup',
-                },
-                ],
-            },
-            {
-                title: 'Chăm sóc da',
-                itemId: '/cham-soc-da1',
-                subNav: [
-                {
-                    title: 'Kem dưỡng da',
-                    itemId: '/cham-soc-da1/kem-duong-da',
-                },
-                {
-                    title: 'Mặt na',
-                    itemId: '/cham-soc-da1/mat-na',
-                }
-                ],
-            },
-            {
-                title: 'Chăm sóc da',
-                itemId: '/cham-soc-da2',
-                subNav: [
-                {
-                    title: 'Kem dưỡng da',
-                    itemId: '/cham-soc-da2/kem-duong-da',
-                },
-                {
-                    title: 'Mặt na',
-                    itemId: '/cham-soc-da2/mat-na',
-                }
-                ],
-            },
-            {
-                title: 'Chăm sóc da',
-                itemId: '/cham-soc-da3',
-                subNav: [
-                {
-                    title: 'Kem dưỡng da',
-                    itemId: '/cham-soc-da3/kem-duong-da',
-                },
-                {
-                    title: 'Mặt na',
-                    itemId: '/cham-soc-da3/mat-na',
-                }
-                ],
-            },
-            {
-                title: 'Chăm sóc da',
-                itemId: '/cham-soc-da4',
-                subNav: [
-                {
-                    title: 'Kem dưỡng da',
-                    itemId: '/cham-soc-da4/kem-duong-da',
-                },
-                {
-                    title: 'Mặt na',
-                    itemId: '/cham-soc-da4/mat-na',
-                }
-                ],
-            }
-            ]}
+            items={cates}
         />
         </Row>
         <Row className="sidebar-wrapper__price">
@@ -150,10 +124,6 @@ export default function Sidebar(props) {
         </Row>
         </Container>
     </div>
-    <div 
-      className={`overlay ${props.isExpanded ? "visible" : ""}`}
-      onClick={props.closeNav}
-    ></div>
   </>
   );
 }

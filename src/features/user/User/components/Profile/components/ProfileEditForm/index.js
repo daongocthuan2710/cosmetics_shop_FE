@@ -1,21 +1,48 @@
-import React, {useState} from "react";
-import {Button, Col, Form, Row, Container } from 'react-bootstrap';
-import DatePicker from "react-datepicker";
+import React, {useEffect, useState} from "react";
+import {Button, Col, Form, Row } from 'react-bootstrap';
 import "react-datepicker/dist/react-datepicker.css";
 import "./index.scss";
 
-export default function ProfileEditForm() {
-  const [startDate, setStartDate] = useState(new Date());
+export default function ProfileEditForm(props) {
+  const [dateOfBirth, setDateOfBirth] = useState(new Date().toISOString().slice(0, 10));
+  const [dateOfBirthError, setDateOfBirthError] = useState({error: false, message: ""})
+  const [disableSave, setDisableSave] = useState(true)
+  const [select, setSelect] = useState(false);
+
+
+  const handleDateOfBirthCheck = (DOB) => {
+    setDateOfBirth(DOB);
+    if (new Date(DOB).getFullYear() > (new Date().getFullYear()-16)) {
+      setDateOfBirthError({
+          error: true,
+          message: "Người dùng phải trên 16 tuổi."
+      })
+      // setDisableSubmit(true)
+  }
+  else {
+      setDateOfBirthError({error:false,message:""});
+        // if(dateOfBirthError.error === false)  setDisableSubmit(false)
+    }
+  }
+
+  useEffect(() => {
+    setDisableSave(true);
+    if ((dateOfBirth >= new Date().toISOString().slice(0, 10) )
+    && select == true)
+        setDisableSave(false);
+    }, [dateOfBirth, select]);
 
     return (
       <>
-        <Form className="profileEditForm">
+        <Form 
+          className="profileEditForm"
+        >
           <Form.Group as={Row} className="mb-3" controlId="formHorizontaluserName">
             <Form.Label column sm={3}>
               Tên đăng nhập
             </Form.Label>
             <Col sm={9} className="text-userName">
-              daothuan2710
+              {props.userInfo.username}
             </Col>
           </Form.Group>
           <Form.Group as={Row} className="mb-3" controlId="formHorizontalName">
@@ -76,17 +103,25 @@ export default function ProfileEditForm() {
               Ngày sinh
             </Form.Label>
             <Col sm={9}>
-            <DatePicker 
-              selected={startDate} 
-              // onSelect={handleDateSelect} //when day is clicked
-              // onChange={(date:Date) => setStartDate(date)} 
-            />
+              <Form.Control
+                  type="date"
+                  value={dateOfBirth}
+                  required
+                  className="fs-5"
+                  max={new Date().toISOString().slice(0, 10)}
+                  onChange = {(e) => {handleDateOfBirthCheck(e.target.value)}}
+                  isInvalid = {dateOfBirthError.error}
+              />
+              <Form.Control.Feedback type="invalid">{dateOfBirthError.message}</Form.Control.Feedback>
             </Col>
           </Form.Group>
 
           <Form.Group as={Row} className="mb-3 save-form">
             <Col sm={{ span: 10, offset: 3 }}>
-              <Button type="submit">Lưu</Button>
+              <Button 
+                // onClick={handleUpdateUserInfo}
+                disabled={disableSave}
+              >Lưu</Button>
             </Col>
           </Form.Group>
         </Form>

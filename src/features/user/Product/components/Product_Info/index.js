@@ -1,18 +1,23 @@
 import React from "react";
-import {lipstick as product} from "../../../../../assets/images/datas/lipstick.js";
 import InputSpinner from "react-bootstrap-input-spinner";
-import "./index.scss";
 import { Container, Row, Col } from "react-bootstrap";
+import { useState } from "react";
+import {errors} from "../../../../../assets/images/datas/errors";
+import {products} from "../../../../../assets/images/datas/products";
+import "./index.scss";
 
 function ProductInfo(props) {
-    return (
-        <div className="card mb-3">
-            <div className="row g-0">
+    const [imgSrc, setImgSrc] = useState(null);
+
+    return ( 
+        <div className="card">
+            <div className="row">
                 <div className="col-md-6 col-xs-12 card__img">
                     <img
-                        src={product[props.productInfo.product_photo]}
+                        src={imgSrc ? imgSrc : products[props.productInfo.image]} 
+                        onError={() => (setImgSrc(errors['no_image.jpg']))}
                         className="img-fluid rounded-start"
-                        alt="..."
+                        alt={props.productInfo}
                     />
                     <div className="promotion">
                         -23%
@@ -21,11 +26,13 @@ function ProductInfo(props) {
                 <div className="col-md-6 col-xs-12 card__body">
                     <div className="card-body basel-scroll-content card__body__info">
                         <h1 className="product-title">
-                            Son Shu Uemura Rouge Unlimited Matte Lipstick Rouge À Lèvres M OR 570 (3g)
+                            {props.productInfo.name}
                         </h1>
                         <p className="price">
                             <span className="origin-price">550,000đ</span>
-                            <span className="promotion-price text-danger">&nbsp; 425,000đ &nbsp;</span>
+                            <span className="promotion-price text-danger">
+                                &nbsp; {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(props.productInfo.price)} &nbsp;                
+                            </span>
                             <span className="label-deal">Hot deal</span>
                         </p>
                         <div className="value">
@@ -38,7 +45,7 @@ function ProductInfo(props) {
                         </div>
                         <Container className="card__body__info__cart" style={{padding:'0'}}>
                             <Row style={{margin:'0'}}>
-                                <Col md={3} xs={4} className="quantity">
+                                <Col md={4} xs={4} className="quantity">
                                     <InputSpinner
                                         editable={true}
                                         type={"real"}
@@ -52,7 +59,7 @@ function ProductInfo(props) {
                                         size=""
                                     />
                                 </Col>
-                                <Col md={9} xs={8} className="inventory">
+                                <Col md={8} xs={8} className="inventory">
                                     <div> Còn lại 112 sản phẩm</div>
                                 </Col>
                             </Row>

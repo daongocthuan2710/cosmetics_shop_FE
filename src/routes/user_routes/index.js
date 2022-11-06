@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect } from "react";
+import React, { Suspense } from "react";
 
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 // import Home from "../../features/user/Home/index.jsx";
@@ -14,6 +14,13 @@ import User from "../../features/user/User/index.js";
 import UserProfile from "../../features/user/User/components/Profile/index.js";
 import ChangePassword from "../../features/user/User/components/Profile/components/Change_Password/index.js";
 import { useSelector } from "react-redux";
+import UserPurchase from "../../features/user/User/components/Purchase/index.js";
+import AllType from "../../features/user/User/components/Purchase/conponents/AllType/index.js";
+import WaitForConfirmation from "../../features/user/User/components/Purchase/conponents/WaitForConfirmation/index.js";
+import WaitingForTaking from "../../features/user/User/components/Purchase/conponents/WaitingForTaking/index.js";
+import Delivering from "../../features/user/User/components/Purchase/conponents/Delivering/index.js";
+import Delivered from "../../features/user/User/components/Purchase/conponents/Delivered/index.js";
+import Cancelled from "../../features/user/User/components/Purchase/conponents/Cancelled/index.js";
 // Lazy load - Code splitting 
 const Home = React.lazy(() => import('../../features/user/Home/index.jsx'));
 
@@ -39,6 +46,14 @@ function User_Routes(){
                     <Route path="user" element={<User/>}>
                         <Route path="account/profile" element={<UserProfile/>}></Route>
                         <Route path="account/password" element={<ChangePassword/>}></Route>
+                        <Route path="purchase" element={<UserPurchase/>}>
+                            <Route path="type=1" element={<AllType/>}></Route>
+                            <Route path="type=2" element={<WaitForConfirmation/>}></Route>
+                            <Route path="type=3" element={<WaitingForTaking/>}></Route>
+                            <Route path="type=4" element={<Delivering/>}></Route>
+                            <Route path="type=5" element={<Delivered/>}></Route>
+                            <Route path="type=6" element={<Cancelled/>}></Route>
+                        </Route>
                     </Route> 
                     : <Route path="*" element={<NotFound/>}></Route>
                 }               

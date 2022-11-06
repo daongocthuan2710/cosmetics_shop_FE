@@ -6,8 +6,8 @@ import "./index.scss";
 
 
 export default function User() {
-  
-    return (
+
+  return (
       <>
       <Container>
         <Row>

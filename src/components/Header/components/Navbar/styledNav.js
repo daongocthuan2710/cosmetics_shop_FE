@@ -32,9 +32,6 @@ export const NavLink = styled(Link)`
     text-decoration: none;
     cursor: pointer;
     text-transform: uppercase;
-    padding: 0 10px;
-    height: 50px;
-    line-height: 50px;
 
     &:hover {
         color: #fff;

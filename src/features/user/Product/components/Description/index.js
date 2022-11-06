@@ -1,9 +1,13 @@
 import React from "react";
-import "./index.scss";
 import { Container, Row, Col } from "react-bootstrap";
-import { slider } from "../../../../../components/Slider/datas.js";
+import { useState } from "react";
+import {sliders} from "../../../../../assets/images/datas/sliders";
+import {errors} from "../../../../../assets/images/datas/errors";
+import "./index.scss";
 
 function Product_Description() {
+  const [imgSrc, setImgSrc] = useState(null);
+    
   return (
     <>
       <Container fluid className="panel">
@@ -26,7 +30,10 @@ function Product_Description() {
         </Row>
         <Row>
           <Col className="panel__banner">
-            <img src={slider["slide1"]} />
+            <img 
+              src={imgSrc ? imgSrc : sliders["slide1.jpg"]} 
+              onError={() => (setImgSrc(errors['no_image.jpg']))}
+            />
           </Col>
         </Row>
         <Row>
@@ -41,7 +48,10 @@ function Product_Description() {
         </Row>
         <Row>
           <Col className="panel__banner">
-            <img src={slider["slide2"]} />
+            <img 
+              src={imgSrc ? imgSrc : sliders["slide2.jpg"]} 
+              onError={() => (setImgSrc(errors['no_image.jpg']))}
+            />
           </Col>
         </Row>
         <Row>

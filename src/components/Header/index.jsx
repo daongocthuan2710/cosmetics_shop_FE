@@ -2,18 +2,17 @@ import React, { useEffect, useState } from "react";
 import SideNav from "./components/SideNav/index.js";
 import { GoSearch } from 'react-icons/go';
 import {FaBars} from 'react-icons/fa';
+import {BiUpArrow} from 'react-icons/bi';
 import Navbar from "./components/Navbar/index.js";
-import logo from "../../assets/images/header/logo_header.png";
-import shopping_bag from "../../assets/images/header/cart.gif";
-import phone_call from "../../assets/images/header/phone_call.gif";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector} from "react-redux";
-import {loginAction } from "../../reduxToolKit/user/authSlice.js";
+import {loginAction } from "../../Store/user/authSlice.js";
 import cateApi from "../../api/cateApi.js";
-import { cateListAction } from "../../reduxToolKit/user/cateSlice.js";
-import './index.scss';
+import { cateListAction } from "../../Store/user/cateSlice.js";
 import { Loading } from "notiflix";
 import Login from "../Login/index.js";
+import {headers} from "../../assets/images/datas/headers";
+import './index.scss';
 
 export default function Header() {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -28,6 +27,13 @@ export default function Header() {
   const handleNav = () => {
     setIsExpanded(!isExpanded);
   }
+  const handleScrollToTop = () => {
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "smooth"
+      });
+  }
 
   const handleLoginForm = () => {
     setLogin(!login);
@@ -35,7 +41,7 @@ export default function Header() {
 
   const handleLogout = async () => {
     localStorage.clear();
-    navigate("/")
+    navigate("/");
     const action = loginAction([]);
     dispatch(action);
   }
@@ -44,6 +50,10 @@ export default function Header() {
     if(token) navigate("/user/account/profile");
   }
 
+  const handlePurchase = () => {
+    if(token) navigate("/user/purchase");
+  }
+  
   const fetchCategory =  async () => {
     try{
       const response = await cateApi.getAll();
@@ -65,6 +75,9 @@ export default function Header() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  if(cates.length > 0){
+    Loading.remove();
+  }
   return (
   <>
     {
@@ -74,9 +87,9 @@ export default function Header() {
         aria-hidden="true"
         className="header__bars-icon"
         onClick={handleNav}
-        />
+        /> 
       <Link to="/" className="header__logo" style={{width:'100px'}}>
-          <img src={logo} alt="Cosmetic Shop" />
+          <img src={headers["logo_header.png"]} alt="Cosmetic Shop" />
       </Link>
       <div className="header__search">
           <input type="text" placeholder="Tìm sản phẩm..."/>
@@ -86,7 +99,7 @@ export default function Header() {
       </div>
       <Link to="/cart" className="header__cart" style={{border:'none'}}>
           <div className="header__cart__icon">
-            <img src={shopping_bag} alt="shopping_bag" />
+            <img src={headers["cart.gif"]} alt="shopping_bag" />
             <div className="header__cart__icon__count">
               <p>3</p>
             </div>
@@ -97,13 +110,19 @@ export default function Header() {
             </div>
         </Link>
       <div className="header__hotline">
-            <img src={phone_call} alt="hotline" />
+            <img src={headers["phone_call.gif"]} alt="hotline" />
           <div>
             <p>Hotline</p>
             <p className="fw-bold">1900 675 695</p>
           </div>
       </div>
-    </div>
+      <div 
+        className="sroll-top"
+        onClick={handleScrollToTop}
+      >
+        <BiUpArrow/>
+      </div>
+      </div>
       :
       <div className="header">
         <FaBars 
@@ -112,7 +131,7 @@ export default function Header() {
           onClick={handleNav}
           />
         <Link to="/" className="header__logo">
-            <img src={logo} alt="Cosmetic Shop" />
+            <img src={headers["logo_header.png"]} alt="Cosmetic Shop" />
         </Link>
         <div className="header__search">
             <input type="text" placeholder="Tìm sản phẩm..."/>
@@ -124,9 +143,9 @@ export default function Header() {
           token ?
           <div className="header__user">
             {userInfo.username}
-            {Loading.remove()}   
             <ul className="header__user__info">
               <li onClick={handleProfile}>Tài khoản của tôi</li>
+              <li onClick={handlePurchase}>Đơn mua</li>
               <li onClick={handleLogout} >Đăng xuất</li>
             </ul>
           </div>
@@ -135,14 +154,13 @@ export default function Header() {
             className="header__guest"
             onClick={handleLoginForm}
           >
-            {Loading.remove()}
             Đăng nhập / Đăng ký
             <hr></hr>
           </div>
         }
         <Link to="/cart" className="header__cart">
           <div className="header__cart__icon">
-            <img src={shopping_bag} alt="shopping_bag" />
+            <img src={headers["cart.gif"]} alt="shopping_bag" />
             <div className="header__cart__icon__count">
               <p>3</p>
             </div>
@@ -153,7 +171,7 @@ export default function Header() {
             </div>
         </Link>
         <div className="header__hotline">
-              <img src={phone_call} alt="hotline" />
+              <img src={headers["phone_call.gif"]} alt="hotline" />
             <div>
               <p>Hotline</p>
               <p className="fw-bold">1900 675 695</p>

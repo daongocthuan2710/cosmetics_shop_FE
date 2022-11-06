@@ -10,7 +10,6 @@ export default function RatingStarCheckbox(props) {
         document.querySelectorAll(".star-list .rating").forEach((e) => {
             e.classList.remove("active");
           });
-        //   event.currentTarget.classList.toggle("active");
           setValue(i);
       };
 

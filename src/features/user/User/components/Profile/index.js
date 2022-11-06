@@ -1,11 +1,12 @@
 import React from "react";
 import { Col, Row, Container } from 'react-bootstrap';
+import { useSelector } from "react-redux";
 import Avatar from "./components/Avatar";
 import ProfileEditForm from "./components/ProfileEditForm";
 import "./index.scss";
 
 export default function UserProfile() {
-
+  const userInfo = useSelector(state => state.auths);
 
     return (
       <>
@@ -18,10 +19,10 @@ export default function UserProfile() {
             <Col md={12} className="edit-profile__form">
               <Row>
                 <Col md={8} className="edit-profile__form__content">
-                  <ProfileEditForm/>
+                  <ProfileEditForm userInfo={userInfo}/>
                 </Col>
                 <Col md={4} className="edit-profile__form__avatar">
-                  <Avatar/>
+                  <Avatar userInfo={userInfo}/>
                 </Col>
               </Row>
             </Col>
