@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import authApi from "../../api/authApi";
 import { loginAction } from "../../reduxToolKit/user/authSlice";
 import './index.scss';
+import defaultAvatar from "../../assets/images/avatars/default-avatar.png";
 
 export default function Login(props) {
     const [username, setUsername] = useState("");
@@ -33,21 +34,20 @@ export default function Login(props) {
         props.closeLoginForm();
       };
   return (
-  <> 
+  <>
     <div id="login" className={`login ${props.login? "is-login" : ""}`}>
         <div className="container">
         <div className="row d-flex justify-content-center">
-          <div className="col-md-4">
+            <div id="title"><h3>ĐĂNG NHẬP</h3></div>
             <form id="loginform" onSubmit={loginSubmit}>
               <div className="form-group">
-                <label>User Name</label>
+                <label>Tên đăng nhập hoặc email <font color="red">*</font></label>
                 <input
                   type="text"
-                  className="form-control"
+                  className="form-control inputText"
                   id="TextInput"
                   name="TextInput"
                   aria-describedby="usernameHelp"
-                  placeholder="Enter username"
                   onChange={(event) => setUsername(event.target.value)}
                 />
                 <small id="emailHelp" className="text-danger form-text">
@@ -55,31 +55,37 @@ export default function Login(props) {
                 </small>
               </div>
               <div className="form-group">
-                <label>Password</label>
+                <label>Mật khẩu <font color="red">*</font></label>
                 <input
                   type="password"
-                  className="form-control"
+                  className="form-control inputText"
                   id="exampleInputPassword1"
-                  placeholder="Password"
                   onChange={(event) => setPassword(event.target.value)}
                 />
                 <small id="passworderror" className="text-danger form-text">
                   {passwordError}
                 </small>
               </div>
-              <div className="form-group form-check">
-                <input
-                  type="checkbox"
-                  className="form-check-input"
-                  id="exampleCheck1"
-                />
-                <label className="form-check-label">Check me out</label>
-              </div>
-              <button type="submit" className="btn btn-primary">
-                Submit
+              <button type="submit" className="btn-submit">
+                ĐĂNG NHẬP
               </button>
             </form>
-          </div>
+            <div>
+                <div className="form-group form-check">
+                  <input
+                    type="checkbox"
+                    className="form-check-input"
+                    id="exampleCheck1"
+                  />
+                  <label className="form-check-label"> Nhớ mật khẩu</label>
+                </div>
+                <div id="forget-password"><a href="#">&#9737; Quên mật khẩu</a></div>
+            </div>
+            <div id="register-question">
+              <img id="img-avatar" src={defaultAvatar} alt="default-avatar"></img>
+              <span id="create-account-text">Bạn chưa có tài khoản ? </span>
+              <a id="btn-register" href="#">Tạo Tài Khoản</a>
+            </div>
         </div>
       </div>
     </div>

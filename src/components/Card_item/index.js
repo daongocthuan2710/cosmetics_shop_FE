@@ -1,3 +1,4 @@
+import React from "react";
 import {Card, NavLink } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { lipstick } from "../../assets/images/datas/lipstick.js";
