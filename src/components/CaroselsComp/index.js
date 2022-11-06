@@ -2,17 +2,20 @@ import React from "react";
 import { Navigation, Pagination, Autoplay } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import CardItem from "../Card_item";
-import effect from "../../assets/images/effects/menu_effect.png";
+import { Col, Row, Container } from "react-bootstrap";
+import {effects} from "../../assets/images/datas/effects";
+import {errors} from "../../assets/images/datas/errors";
+import { useState } from "react";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import "swiper/css/autoplay";
-import { Col, Row, Container } from "react-bootstrap";
 import "./index.scss";
 
 function ProductCarousel(props) {
+    const [imgSrc, setImgSrc] = useState(null);
 
     return (
         <>
@@ -24,7 +27,10 @@ function ProductCarousel(props) {
                             {props.name}
                         </h3>
                         <div className="home-effect">
-                            <img src={effect} alt=""/>
+                            <img 
+                                src={effects['menu_effect.png']} alt=""
+                                onError={() => (setImgSrc(errors['no_image.jpg']))}
+                            />
                         </div>
                     </div>
                     <Swiper
@@ -55,72 +61,16 @@ function ProductCarousel(props) {
                     >
                         <Row>
                             <Col md={12}>
+                            {props.productList?
+                            props.productList.map((item) => (
                                 <SwiperSlide
-                                    key={1}
+                                    key={item.id}
                                     className="swiper-slide"
                                 >
-                                    <CardItem/>
+                                    <CardItem productInfo={item}/>
                                 </SwiperSlide>
-                                <SwiperSlide
-                                    key={2}
-                                    className="swiper-slide"
-                                >
-                                    <CardItem/>
-                                </SwiperSlide>
-                                <SwiperSlide
-                                    key={3}
-                                    className="swiper-slide"
-                                >
-                                    <CardItem/>
-                                </SwiperSlide>
-                                <SwiperSlide
-                                    key={4}
-                                    className="swiper-slide"
-                                >
-                                    <CardItem/>
-                                </SwiperSlide>
-                                <SwiperSlide
-                                    key={5}
-                                    className="swiper-slide"
-                                >
-                                    <CardItem/>
-                                </SwiperSlide>
-                                <SwiperSlide
-                                    key={6}
-                                    className="swiper-slide"
-                                >
-                                    <CardItem/>
-                                </SwiperSlide>
-                                <SwiperSlide
-                                    key={7}
-                                    className="swiper-slide"
-                                >
-                                    <CardItem/>
-                                </SwiperSlide>
-                                <SwiperSlide
-                                    key={8}
-                                    className="swiper-slide"
-                                >
-                                    <CardItem/>
-                                </SwiperSlide>
-                                <SwiperSlide
-                                    key={9}
-                                    className="swiper-slide"
-                                >
-                                    <CardItem/>
-                                </SwiperSlide>
-                                <SwiperSlide
-                                    key={10}
-                                    className="swiper-slide"
-                                >
-                                    <CardItem/>
-                                </SwiperSlide>
-                                <SwiperSlide
-                                    key={11}
-                                    className="swiper-slide"
-                                >
-                                    <CardItem/>
-                                </SwiperSlide>
+                            )) : ""
+                            }
                             </Col>
                         </Row>
                     </Swiper>

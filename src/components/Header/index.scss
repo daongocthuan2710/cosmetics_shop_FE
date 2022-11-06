@@ -12,16 +12,29 @@ body{
 .is-expanded {
     width: 300px !important;
 }
- 
+
+.is-sroll{
+    animation-name: scroll-header;
+    animation-duration: .3s;
+}
+
+@keyframes scroll-header {
+    from {height: 0;}
+    to {height: auto;}
+  }
+
 .header{
+    width: 100%;
     background: #fff;
     height: auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0.5rem calc((100vw - 1200px) / 2);
-    z-index: 10;    
+    z-index: 15;    
     $icon_size: 40px;
+    position: relative;
+    background-color: #fff;
 
     @media screen and (max-width: 768px){
         $icon_size: 30px;
@@ -250,6 +263,25 @@ body{
             margin-left: 5px;
         }
 
+    }
+}
+
+.sroll-top{
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    background-color: #fff;
+    right: 2vw;
+    top: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+    svg{
+        color: #da8642;
     }
 }
 

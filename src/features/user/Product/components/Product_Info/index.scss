@@ -8,18 +8,17 @@
 .card{
     width: 100%;
     height: auto;
-    padding: 0;
     border: none !important;
     border-radius: 0px !important;
-
+    margin-bottom: 30px;
 
     &__img{
+        @include center;
         position: relative;
         width: 100%;
-        text-align: center;
 
         img{
-            width: 80%;
+            width: 100% !important;
             height: auto;
         }
     

@@ -1,11 +1,12 @@
 import React from "react";
-import './index.scss';
 import {Navigation} from 'react-minimal-side-navigation';
-import 'react-minimal-side-navigation/lib/ReactMinimalSideNavigation.css';
 import { GoSearch } from 'react-icons/go';
 import {Scrollbars} from 'react-custom-scrollbars-2';
 import { NavLink } from "react-router-dom";
 import { Col, Container, Row } from "react-bootstrap";
+import {products} from "../../assets/images/datas/products";
+import 'react-minimal-side-navigation/lib/ReactMinimalSideNavigation.css';
+import './index.scss';
 
 export default function SidebarResponsive(props) {
 
@@ -44,7 +45,7 @@ export default function SidebarResponsive(props) {
               <Row className="sidenav__matches__autocomplete-suggestion">
                 <Col xs={3} sm={3} className="sidenav__matches__autocomplete-suggestion__suggestion-thumb">
                   <NavLink to="/about">
-                    {/* <img src={lipstick["lipstick1"]} className="img-fluid rounded-top" alt="lipstick_1" /> */}
+                    <img src={products["lipstick_1.jpg"]} className="img-fluid rounded-top" alt="lipstick_1" />
                   </NavLink>
                 </Col>
                 <Col xs={9} sm={9}>
@@ -67,7 +68,6 @@ export default function SidebarResponsive(props) {
             activeItemId="/thuong-hieu"
             onSelect={({itemId}) => {
               // maybe push to the route
-              console.log(itemId);
             }}
             items={[
               {

@@ -2,10 +2,9 @@ import React, { useState, useEffect } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import axios from "axios";
 import Form from "react-bootstrap/Form";
-import { BiUserCircle } from "react-icons/bi";
 import TextRating from "../../../../../components/RatingStar";
-import { avatars } from "../../../../../assets/images/datas/avt";
 import Pagination from '@mui/material/Pagination';
+import {avatars} from "../../../../../assets/images/datas/avatars";
 import "./index.scss";
 
 export default function Review(props) {
@@ -85,7 +84,7 @@ export default function Review(props) {
           <Row>
             <hr></hr>
             <Col xs={1} sm={1} md={2} lg={2} className="review__body__avatar">
-              <img src={avatars['man_avt']} alt="Thuận Đào"/>
+              <img src={avatars["man_avt.png"]} alt="Thuận Đào"/>
             </Col>
             <Col xs={11} sm={11} md={10} lg={10} className="review__body__content">
               <Row>
@@ -107,7 +106,7 @@ export default function Review(props) {
           <Row>
             <hr></hr>
             <Col xs={1} sm={1} md={2} className="review__body__avatar">
-              <img src={avatars['woman_avt']} alt="Ngọc Trâm"/>
+              <img src={avatars["woman_avt.png"]} alt="Ngọc Trâm"/>
             </Col>
             <Col xs={11} sm={11} md={10} className="review__body__content">
               <Row>

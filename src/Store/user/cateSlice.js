@@ -5,8 +5,7 @@ const cate = createSlice({
     initialState: [],
     reducers: {
         cateListAction: (state, action) =>{
-            return {...action.payload };
-            
+            return {...action.payload };           
         }
     }
 })

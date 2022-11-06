@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import 'react-minimal-side-navigation/lib/ReactMinimalSideNavigation.css';
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import authApi from "../../api/authApi";
-import { loginAction } from "../../reduxToolKit/user/authSlice";
+import { loginAction } from "../../Store/user/authSlice";
 import './index.scss';
 
 export default function Login(props) {
@@ -12,7 +11,6 @@ export default function Login(props) {
     const [passwordError, setpasswordError] = useState("");
     const [emailError, setemailError] = useState("");
     const dispatch = useDispatch();
-    const navigate = useNavigate();
       const fetchLogin =  async (body) => {
         try{
           const response = await authApi.login(body);

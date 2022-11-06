@@ -6,10 +6,10 @@
 // DELETE /products/:productId
 import axiosClient from "./axiosClient.js";
 
-const prefix = "/books";
+const prefix = "/product";
 
 const productApi = {
-    getBooks: ({
+    getProducts: ({
         page = undefined,
         perPage = undefined,
         category = undefined,
@@ -66,7 +66,11 @@ const productApi = {
 
         return axiosClient.get(url);
     },
-    getBookById: (id) => {
+    getAll: () => {
+        const url = `${prefix}`;
+        return axiosClient.get(url);
+    },
+    getProductById: (id) => {
         const url = `${prefix}/${id}`;
         return axiosClient.get(url);
     },

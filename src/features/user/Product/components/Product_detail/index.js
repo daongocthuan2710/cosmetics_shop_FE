@@ -1,5 +1,4 @@
 import React from "react";
-import {lipstick as product} from "../../../../../assets/images/datas/lipstick.js";
 import InputSpinner from "react-bootstrap-input-spinner";
 import "./index.scss";
 import { Container, Row, Col } from "react-bootstrap";

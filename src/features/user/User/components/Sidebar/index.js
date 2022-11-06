@@ -1,13 +1,13 @@
 import React from "react";
 import { useNavigate } from 'react-router-dom';
 import { Container, Row, Col } from "react-bootstrap";
-import avatar from "../../../../../assets/images/avatars/man_avt.png";
 import {Link} from "react-router-dom";
 import {MdOutlineModeEditOutline} from "react-icons/md";
 import {BiUser} from "react-icons/bi";
 import {TbNotes} from "react-icons/tb";
 import {RiGift2Line} from "react-icons/ri";
 import {Navigation} from 'react-minimal-side-navigation';
+import {avatars} from "../../../../../assets/images/datas/avatars";
 import "./index.scss";
 
 
@@ -21,7 +21,7 @@ export default function UserSidebar() {
             <Container fluid className="userSidebar-wrapper">
                 <Row className="userSidebar-wrapper__info"> 
                     <Col md={4} className="userSidebar-wrapper__info__avatar">
-                        <img src={avatar} alt="Thuận Đào"/>                       
+                        <img src={avatars["man_avt.png"]} alt="Thuận Đào"/>                       
                     </Col>
                     <Col md={8} className="userSidebar-wrapper__info__content">
                         <Row>
@@ -45,32 +45,32 @@ export default function UserSidebar() {
                         }}
                         items={[
                         {
-                            title: 'My Account',
+                            title: 'Tài khoản của tôi',
                             itemId:`${match}/account/profile`,
                             elemBefore: () => <BiUser />,
                             subNav: [
                             {
-                                title: 'Profile',
+                                title: 'Hồ sơ',
                                 itemId: `${match}/account/profile`,
                             },
                             {
-                                title: 'Address',
+                                title: 'Địa chỉ',
                                 itemId: `${match}/account/address`,
                             },
                             {
-                                title: 'Change Password',
+                                title: 'Đổi mật khẩu',
                                 itemId: `${match}/account/password`,
                             }
                             ],
                         },
                         {
-                            title: 'Purchase',
-                            itemId: '/purchase',
+                            title: 'Đơn mua',
+                            itemId: `${match}/purchase`,
                             elemBefore: () => <TbNotes />,
                         },
                         {
                             title: 'Voucher',
-                            itemId: '/voucher-wallet',
+                            itemId: `${match}/voucher-wallet`,
                             elemBefore: () => <RiGift2Line/>,
                         }
                         ]}
