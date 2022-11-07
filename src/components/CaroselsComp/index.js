@@ -16,7 +16,7 @@ import "./index.scss";
 
 function ProductCarousel(props) {
     const [imgSrc, setImgSrc] = useState(null);
-
+ 
     return (
         <>
             <div className="suntory-recent-products">
@@ -28,7 +28,8 @@ function ProductCarousel(props) {
                         </h3>
                         <div className="home-effect">
                             <img 
-                                src={effects['menu_effect.png']} alt=""
+                                src={ imgSrc? imgSrc : effects['menu_effect.png']} 
+                                alt=""
                                 onError={() => (setImgSrc(errors['no_image.jpg']))}
                             />
                         </div>

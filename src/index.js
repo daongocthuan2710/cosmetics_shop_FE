@@ -5,14 +5,18 @@ import store, {persistor} from './Store/store';
 import reportWebVitals from './reportWebVitals';
 import { PersistGate } from 'redux-persist/integration/react';
 import App from './App';
+import ScrollToTop from './components/ScrollToTop';
 import './index.css';
+import { useLocation } from 'react-router-dom';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Provider store = {store}>
     <PersistGate loading={null} persistor={persistor}>
       <React.StrictMode>
-        <App />
+          <ScrollToTop/>
+          <App />
       </React.StrictMode>
     </PersistGate>
   </Provider>
