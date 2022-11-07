@@ -26,8 +26,6 @@ const Home = React.lazy(() => import('../../features/user/Home/index.jsx'));
 
 function User_Routes(){
     const token = useSelector(state => state.auths).token;
-    let auth = useAuth();
-    console.log(auth);
     return (
         <Suspense fallback={Loading.dots({
             clickToClose: true,

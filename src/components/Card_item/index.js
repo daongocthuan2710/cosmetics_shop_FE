@@ -1,12 +1,12 @@
+import React from "react";
 import {Card, NavLink } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import {MdOutlineAddShoppingCart} from "react-icons/md";
 import TextRating from "../RatingStar/index.js";
 import {products} from "../../assets/images/datas/products";
 import {errors} from "../../assets/images/datas/errors";
-import "./index.scss";
-import React from "react";
 import { useState } from "react";
+import "./index.scss";
 
 function CardItem(props) {
     const [imgSrc, setImgSrc] = useState(null);
