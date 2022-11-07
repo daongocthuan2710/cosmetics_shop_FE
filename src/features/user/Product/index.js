@@ -16,6 +16,8 @@ import { breadcrumbList } from "../../../Store/user/breadcrumbSlice";
 import { useDispatch } from "react-redux";
 
 function Product() {
+  const [productList, setProductList] = useState([]);
+
   let productId = Number.parseInt(window.location.href.split("/").at(-1));
   const [productInfo, setProductInfo] = useState([]);
 
@@ -34,10 +36,26 @@ function Product() {
     }
     Loading.remove();
   }
+  const fetchProducts =  async () => {
+    Loading.hourglass({
+      clickToClose: true,
+      svgSize: "50px",
+      svgColor: "rgb(223, 139, 42)",
+      backgroundColor: "rgb(255, 255, 255)"
+      })
+    try{
+      const response = await productApi.getAll();
+      setProductList(response.data.content);
+    } catch(error) {
+      console.log("Fail to fetch category", error);
+    }
+    Loading.remove();
+  }
 
   useEffect(() =>{
     fetchProductById();
     handleBreadcrumb();
+    fetchProducts();
   }, []);
 
   const dispatch = useDispatch();
@@ -87,7 +105,11 @@ function Product() {
             </Col>
           </Row>
         </Container>
-        <ProductCarousel name={"Sản phẩm tương tự"} delay={4000} />
+        <ProductCarousel 
+          name={"Sản phẩm tương tự"} 
+          delay={4000} 
+          productList={productList}
+        />
       </div>
     </>
   );

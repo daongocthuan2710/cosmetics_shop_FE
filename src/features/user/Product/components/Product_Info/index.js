@@ -5,7 +5,7 @@ import { useState } from "react";
 import {errors} from "../../../../../assets/images/datas/errors";
 import {products} from "../../../../../assets/images/datas/products";
 import "./index.scss";
-
+import { useLocation } from "react-router-dom"
 function ProductInfo(props) {
     const [imgSrc, setImgSrc] = useState(null);
 
