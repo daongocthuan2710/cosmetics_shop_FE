@@ -5,8 +5,8 @@ import "./index.scss";
 
 export default function ProfileEditForm(props) {
   const [dateOfBirth, setDateOfBirth] = useState(new Date().toISOString().slice(0, 10));
-  const [dateOfBirthError, setDateOfBirthError] = useState({error: false, message: ""})
-  const [disableSave, setDisableSave] = useState(true)
+  const [dateOfBirthError, setDateOfBirthError] = useState({error: false, message: ""});
+  const [disableSave, setDisableSave] = useState(true);
   const [select, setSelect] = useState(false);
 
 
