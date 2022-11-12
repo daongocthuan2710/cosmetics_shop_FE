@@ -5,11 +5,13 @@ import { loginAction } from "../../Store/user/authSlice";
 import {avatars} from "../../assets/images/datas/avatars";
 import 'react-minimal-side-navigation/lib/ReactMinimalSideNavigation.css';
 import './index.scss';
+import { PropaneSharp } from "@mui/icons-material";
 
 export default function Login(props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [messError, setMessError] = useState("");
+
 
   const dispatch = useDispatch();
     const fetchLogin =  async (body) => {
@@ -38,12 +40,14 @@ export default function Login(props) {
       fetchLogin(body);
     };
 
+    
+
   return (
   <>
     <div id="login" className={`login ${props.login? "is-login" : ""}`}>
         <div className="container">
         <div className="row d-flex justify-content-center">
-            <div id="title"><h3>ĐĂNG NHẬP</h3></div>
+            <div className="title"><h3>ĐĂNG NHẬP</h3></div>
             <form id="loginform" onSubmit={loginSubmit}>
               <div className="form-group">
                 <label>Tên đăng nhập hoặc email <font color="red">*</font></label>
@@ -84,13 +88,13 @@ export default function Login(props) {
             <div id="register-question">
               <img id="img-avatar" src={avatars['default-avatar.png']} alt="default-avatar"></img>
               <span id="create-account-text">Bạn chưa có tài khoản ? </span>
-              <a id="btn-register" href="#">Tạo Tài Khoản</a>
+              <a id="btn-register" onClick={() => {props.closeLoginForm(); props.handleRegisterForm()}}>Tạo Tài Khoản</a>
             </div>
         </div>
       </div>
     </div>
-    <div 
-      className={`overlay ${props.login ? "visible" : ""}`}
+    <div
+      className={`overlay ${props.register ? "visible" : (props.login ? "visible" : "")}`}
       onClick={props.closeLoginForm}
     ></div>
   </>
