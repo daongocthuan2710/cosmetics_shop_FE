@@ -20,12 +20,12 @@ export default function Login(props) {
         dispatch(action);
         props.closeLoginForm();
       } catch(error) {
-        console.log("Fail to fetch login");
+        console.log("Fail to fetch login",error);
         if (username === "" || password === ""){
           setMessError("Vui lòng nhập đầy đủ tên tài khoản và mật khẩu.");
         }
         else{
-          setMessError(error.response.data.message);
+          setMessError(error.message || error.response.data.message);
         }       
       }
     }

@@ -27,26 +27,28 @@ const Home = React.lazy(() => import('../../features/user/Home/index.jsx'));
 function User_Routes(){
     const token = useSelector(state => state.auths).token;
     return (
-        <Suspense fallback={Loading.dots({
-            clickToClose: true,
-            svgSize: "50px",
-            svgColor: "rgb(0, 0, 0)",
-            backgroundColor: "rgb(255, 255, 255)"
-        })}>    
+        <Suspense fallback={
+                Loading.hourglass({
+                clickToClose: true,
+                svgSize: "50px",
+                svgColor: "rgb(223, 139, 42)",
+                backgroundColor: "rgb(255, 255, 255)"
+        })}> 
+        {Loading.remove()}   
             <BrowserRouter>
                 <Header/>
                 <Routes>  
                     <Route path="/" element={<Home/>}></Route>
-                    <Route path="home" element={<Home/>}></Route>
-                    <Route path="shop" element={<Shop/>}></Route>
-                    <Route path="cart" element={<Cart/>}></Route>
+                    <Route path="./home" element={<Home/>}></Route>
+                    <Route path="./shop" element={<Shop/>}></Route>
+                    <Route path="./cart" element={<Cart/>}></Route>
                     <Route path="product/:id" element={<Product/>}></Route>
-                    <Route path="about" element={<About/>}></Route>
+                    <Route path="./about" element={<About/>}></Route>
                     {token ? 
-                        <Route path="user" element={<User/>}>
-                            <Route path="account/profile" element={<UserProfile/>}></Route>
-                            <Route path="account/password" element={<ChangePassword/>}></Route>
-                            <Route path="purchase" element={<UserPurchase/>}>
+                        <Route path="./user" element={<User/>}>
+                            <Route path="./account/profile" element={<UserProfile/>}></Route>
+                            <Route path="./account/password" element={<ChangePassword/>}></Route>
+                            <Route path="./purchase" element={<UserPurchase/>}>
                                 <Route path="type=1" element={<AllType/>}></Route>
                                 <Route path="type=2" element={<WaitForConfirmation/>}></Route>
                                 <Route path="type=3" element={<WaitingForTaking/>}></Route>

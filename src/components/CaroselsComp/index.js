@@ -6,6 +6,8 @@ import { Col, Row, Container } from "react-bootstrap";
 import {effects} from "../../assets/images/datas/effects";
 import {errors} from "../../assets/images/datas/errors";
 import { useState } from "react";
+import Carousel_Skeleton from "../Skeleton/Carosel_Skeleton/index.js";
+
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
@@ -16,10 +18,10 @@ import "./index.scss";
 
 function ProductCarousel(props) {
     const [imgSrc, setImgSrc] = useState(null);
- 
     return (
         <>
-            <div className="suntory-recent-products">
+        {props.productList.length > 0
+         ?  <div className="suntory-recent-products">
                 <Container fluid>
                 <Row>
                     <div className="hometitle-wrapper">
@@ -62,22 +64,22 @@ function ProductCarousel(props) {
                     >
                         <Row>
                             <Col md={12}>
-                            {props.productList?
-                            props.productList.map((item) => (
+                            {props.productList.map((item) => (
                                 <SwiperSlide
                                     key={item.id}
                                     className="swiper-slide"
                                 >
                                     <CardItem productInfo={item}/>
                                 </SwiperSlide>
-                            )) : ""
-                            }
+                            ))}
                             </Col>
                         </Row>
                     </Swiper>
                 </Row>
                 </Container>
             </div>
+        : <Carousel_Skeleton title={true}/>
+        }
         </>
     );
 }

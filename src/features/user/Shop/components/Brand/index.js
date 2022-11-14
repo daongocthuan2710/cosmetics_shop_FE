@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import { Col, Row } from "react-bootstrap";
 import "./index.scss";
 
 export default function Brand(props) {
@@ -20,20 +21,24 @@ export default function Brand(props) {
     return (
         <>
             <div className="origin-list">
-                {brands.map((item) => (
-                    <div className="form-check" key={item.id}>
-                        <input
-                            className="form-check-input"
-                            type="checkbox"
-                            value={item.id}
-                            id="flexCheckDefault"
-                            // onChange = {props.onChangeCategory}
-                        />
-                        <label className="form-check-label" htmlFor="flexCheckDefault">
-                            {item.name}
-                        </label>
-                    </div>
-                ))}
+                <Row>
+                    {brands.map((item) => (
+                        <Col md={12} className="origin-check" key={`brand${item.id}`}>
+                            <div className="form-check">
+                                <input
+                                    className="form-check-input"
+                                    type="checkbox"
+                                    value={item.id}
+                                    id={item.id}
+                                    // onChange = {props.onChangeCategory}
+                                />
+                                <label className="form-check-label" htmlFor={item.id}>
+                                    {item.name}
+                                </label>    
+                            </div>
+                        </Col>
+                    ))}
+                </Row>
             </div>
         </>
     );

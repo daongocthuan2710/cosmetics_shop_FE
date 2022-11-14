@@ -19,19 +19,12 @@ export default function Shop() {
   }
   
   const fetchProducts =  async () => {
-    Loading.hourglass({
-      clickToClose: true,
-      svgSize: "50px",
-      svgColor: "rgb(223, 139, 42)",
-      backgroundColor: "rgb(255, 255, 255)"
-      })
     try{
       const response = await productApi.getAll();
       setProductList(response.data.content);
     } catch(error) {
       console.log("Fail to fetch category", error);
     }
-    Loading.remove();
   }
 
   useEffect(() =>{

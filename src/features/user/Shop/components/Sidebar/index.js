@@ -111,7 +111,7 @@ export default function Sidebar(props) {
                 Thương hiệu
             </Col>
             <Col md={12} className="sidebar-wrapper__brand__list">
-            <Brand/>
+                <Brand/>
             </Col>
         </Row>
         <Row className="sidebar-wrapper__rating-star">
