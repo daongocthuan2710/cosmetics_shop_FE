@@ -1,0 +1,22 @@
+.origin-check{
+    padding: 5px 15px !important;
+    
+    .form-check{
+        
+        input{
+            cursor: pointer;
+            
+            &:checked{
+                $color: #f1c572;
+                background-color: $color;
+                border-color: $color;
+            }
+        }
+
+        label{
+            cursor: pointer;
+        }
+
+          
+    }
+}

@@ -27,12 +27,14 @@ const Home = React.lazy(() => import('../../features/user/Home/index.jsx'));
 function User_Routes(){
     const token = useSelector(state => state.auths).token;
     return (
-        <Suspense fallback={Loading.hourglass({
-            clickToClose: true,
-            svgSize: "50px",
-            svgColor: "rgb(223, 139, 42)",
-            backgroundColor: "rgb(255, 255, 255)"
-            })}>    
+        <Suspense fallback={
+                Loading.hourglass({
+                clickToClose: true,
+                svgSize: "50px",
+                svgColor: "rgb(223, 139, 42)",
+                backgroundColor: "rgb(255, 255, 255)"
+        })}> 
+        {Loading.remove()}   
             <BrowserRouter>
                 <Header/>
                 <Routes>  

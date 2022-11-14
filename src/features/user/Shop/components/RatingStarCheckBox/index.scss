@@ -1,6 +1,11 @@
 .star-list{
-    text-align: center !important;
     padding: 0 !important;
+
+    .rating-container{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
 
     .rating{
         padding: 5px 10px;            
@@ -11,7 +16,7 @@
     
         &.active, &:hover{
             $color: rgb(247, 235, 214);
-            border: 0.1px $color solid;
+            border: none;
             background-color: $color;
         }   
     }

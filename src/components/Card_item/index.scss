@@ -4,6 +4,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    padding-bottom: 10px;
 
     img{
         object-fit: cover;
@@ -25,8 +26,8 @@
         $font-size-cart: 14px;
         font-size: $font-size-cart;
         font-weight: 700;
-        margin-bottom: 20px;
         overflow: hidden;
+        width: 100%;
 
         @media only screen and (max-width: 768px) {
             $font-size-cart-title: 14px;
@@ -39,8 +40,11 @@
         }
 
         &__title{
+            width: 100%;
             font-size: $font-size-cart-title;
             text-transform: capitalize;
+            display: flex;
+            justify-content: center;
         }
 
         .Rating{
@@ -99,4 +103,11 @@
         -webkit-line-clamp: 2;
         overflow: hidden;
       }
-  }
+}
+
+.Skeleton{
+
+    img{
+        width: 100%;
+    }
+}

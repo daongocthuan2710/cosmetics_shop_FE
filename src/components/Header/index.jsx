@@ -12,6 +12,7 @@ import { cateListAction } from "../../Store/user/cateSlice.js";
 import { Loading } from "notiflix";
 import Login from "../Login/index.js";
 import {headers} from "../../assets/images/datas/headers";
+import Skeleton from '@mui/material/Skeleton';
 import './index.scss';
 
 export default function Header() {
@@ -180,11 +181,19 @@ export default function Header() {
       </div>
     }
 
+    {cates.length > 0
+    ?
+      <Navbar 
+        isExpanded = {isExpanded}
+        caterogyList = {cates}
+      />
+    :<Skeleton 
+      variant="text" 
+      width="100%"
+      height={100}
+      animation={'pulse'}
+    />}
 
-    <Navbar 
-      isExpanded = {isExpanded}
-      caterogyList = {cates}
-    />
     <SideNav 
         isExpanded = {isExpanded}
         handleNav = {handleNav}
