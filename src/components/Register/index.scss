@@ -1,0 +1,70 @@
+.register {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 20;
+    top: 0;
+    right: 0;
+    background-color: white;
+    overflow-x: hidden;
+    transition: 0.3s;
+    font-size: 1em;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+
+    a {
+        text-decoration: none;
+        color: black;
+      }
+
+  }
+
+  .is-register{
+    display: block;
+    width: 340px !important;
+  }
+
+  .overlay1 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    z-index: 19;
+
+    &.visible {
+        right: 0;
+        bottom: 0;
+        opacity: 0;
+        transition: opacity 0s;
+    }
+}
+
+  #registerform{
+    padding: 25px 20px 0 20px;
+  }
+
+  #btn-login-wrapper{
+    clear: both;
+    width: 90%;
+    height: 200px;
+    border-top: 1px solid #E2E2E2;
+    padding-top: 20px;
+    text-align: center;
+  }
+
+  #btn-login{
+    width: 128px;
+    height: 40px;
+    background-color: black;
+    color: white;
+    margin-top: 20px;
+  }
+
+  #btn-login:hover{
+    opacity: 90%;
+    transition: 0.5s;
+  }
+
+
+

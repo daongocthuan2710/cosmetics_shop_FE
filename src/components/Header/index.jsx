@@ -11,6 +11,7 @@ import cateApi from "../../api/cateApi.js";
 import { cateListAction } from "../../Store/user/cateSlice.js";
 import { Loading } from "notiflix";
 import Login from "../Login/index.js";
+import Register from "../Register/index.js";
 import {headers} from "../../assets/images/datas/headers";
 import Skeleton from '@mui/material/Skeleton';
 import './index.scss';
@@ -18,6 +19,7 @@ import './index.scss';
 export default function Header() {
   const [isExpanded, setIsExpanded] = useState(false);
   const [login, setLogin] = useState(false);
+  const [register, setRegister] = useState(false);
   const [cates, setCates] = useState([]);
   const [offset, setOffset] = useState(0);
   const token = localStorage.getItem('token');
@@ -38,6 +40,10 @@ export default function Header() {
 
   const handleLoginForm = () => {
     setLogin(!login);
+  }
+
+  const handleRegisterForm = () => {
+    setRegister(!register);
   }
 
   const handleLogout = async () => {
@@ -153,6 +159,7 @@ export default function Header() {
           :
           <div 
             className="header__guest"
+            id="login-register"
             onClick={handleLoginForm}
           >
             Đăng nhập / Đăng ký
@@ -201,7 +208,15 @@ export default function Header() {
     />
     <Login 
       login={login} 
-      closeLoginForm = {handleLoginForm} 
+      closeLoginForm = {handleLoginForm}
+      register={register}
+      handleRegisterForm = {handleRegisterForm} 
+    />
+    <Register  
+      register = {register} 
+      closeRegisterForm = {handleRegisterForm}
+      login={login}
+      handleLoginForm = {handleLoginForm}
     />
   </> 
   );
