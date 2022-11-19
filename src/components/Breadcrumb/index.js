@@ -1,11 +1,11 @@
 import * as React from 'react';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Typography from '@mui/material/Typography';
-import "./index.scss";
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import "./index.scss";
 
-export default function Breadcrumb() {
+function Breadcrumb() {
     const breadcrumbList = useSelector(state => state.breadcrumb);
     var lastKey = Object.keys(breadcrumbList).pop();
     var obj = Object.keys(breadcrumbList)[Object.keys(breadcrumbList).length - 2] || [];
@@ -61,3 +61,5 @@ export default function Breadcrumb() {
     </Breadcrumbs>
   );
 }
+
+export default React.memo(Breadcrumb);

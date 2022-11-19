@@ -19,8 +19,7 @@ function Product() {
   const [productList, setProductList] = useState([]);
 
   let productId = Number.parseInt(window.location.href.split("/").at(-1));
-  const [productInfo, setProductInfo] = useState([]);
-
+  const [productInfo, setProductInfo] = useState({});
   const fetchProductById =  async () => {
     Loading.hourglass({
       clickToClose: true,
@@ -54,14 +53,23 @@ function Product() {
 
   useEffect(() =>{
     fetchProductById();
-    handleBreadcrumb();
     fetchProducts();
   }, []);
 
+  useEffect(() =>{
+    console.log('aaa',productInfo);
+    handleBreadcrumb(productInfo);
+  }, [productInfo]);
+
   const dispatch = useDispatch();
-  const handleBreadcrumb = () => {
-    // const action = breadcrumbList(breadcrumb);
-    // dispatch(action);
+  const handleBreadcrumb = (item) => {
+    if(item.id != undefined)
+    {
+      const breadcrumb = item != [] ? [item.category, item.type, item.name] : [];
+      const action = breadcrumbList(breadcrumb);
+      dispatch(action);
+    }
+
   }
 
   return (

@@ -8,7 +8,7 @@ import "./index.scss";
 
 export default function Avatar() {
 
-  const IMAGE_CLOUD = {
+  const IMAGE_CLOUD = { 
     CLOUD_NAME: 'djjcdcmxz',
     UPLOAD_PRESET: 'oisbbubp',
     API_URL:'https://api.cloudinary.com/v1_1',

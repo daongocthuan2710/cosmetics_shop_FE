@@ -10,14 +10,19 @@ import Skeleton from '@mui/material/Skeleton';
 import "./index.scss";
 
 function CardItem(props) {
-    const [imgSrc, setImgSrc] = useState(null);
+    const IMAGE_CLOUD = {
+        CLOUD_NAME: 'dwwuvc6qo',
+        GET_URL: 'https://res.cloudinary.com',
+        CATE: 'cosmetics/makeup/lipstick'
+    }
+    const [imgSrc, setImgSrc] = useState(`${IMAGE_CLOUD.GET_URL}/${IMAGE_CLOUD.CLOUD_NAME}/image/upload/${props.productInfo != undefined ? props.productInfo.image : ''}`);
     
     return (
             <Card className="text-center">
                     {props.productInfo != undefined
                     ? 
                     <Link
-                    to={`/product/1`}
+                    to={`/product/${props.productInfo.id}`}
                     className="nav-link"
                     >
                         <Card.Img
@@ -64,13 +69,23 @@ function CardItem(props) {
                         <>
                         <div className="card-footer bg-transparent">
                             <Card.Text className="card-body__price">
-                                <span className="text-decoration-line-through text-secondary ">
-                                    {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(129000)}
-                                </span>
-                                &nbsp; &nbsp;
+                                {props.productInfo.discount > 0
+                                ?
+                                    <>
+                                        <span className="text-decoration-line-through text-secondary ">
+                                            {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(props.productInfo.price)}
+                                        </span>
+                                        &nbsp; &nbsp;
+                                        <span className="text-danger fw-bold">
+                                            {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(props.productInfo.price*(1 - props.productInfo.discount/100))}
+                                        </span>
+                                    </>
+                                :
                                 <span className="text-danger fw-bold">
                                     {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(props.productInfo.price)}
                                 </span>
+                                }
+
                             </Card.Text>
                             <NavLink to="/shop" className="card-body__cart">
                                 <Card.Text className="bg-transparent fw-bold">

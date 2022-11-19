@@ -31,7 +31,7 @@ body{
     justify-content: space-between;
     align-items: center;
     padding: 0.5rem calc((100vw - 1200px) / 2);
-    z-index: 15;    
+    z-index: 5;    
     $icon_size: 40px;
     position: relative;
     background-color: #fff;
@@ -210,16 +210,17 @@ body{
     
             &__count{
                 $size: 20px;
-                $background-color: #cd6c34;
+                $background-color: #ebb249;
                 position: absolute;
-                color: #000000;
+                color: white;
                 background-color: $background-color;
-                border: $background-color 2px solid;
+                border: $background-color 1px solid;
                 border-radius: 100%;
                 text-align: center;
                 font-size: 14px;
                 width: $size;
                 height: $size;
+                line-height: $size;
                 bottom: -7px;
                 right: 0;
             }
@@ -240,7 +241,26 @@ body{
                     font-weight: 700;
                 }
             }
-        }    
+        }  
+
+        .shake {
+            animation: shakeCart .4s ease-in-out forwards;
+
+            @keyframes shakeCart {
+                25% {
+                  transform:translateX(6px)
+                }
+                50% {
+                  transform:translateX(-4px);
+                }
+                75% {
+                  transform:translateX(2px);
+                }
+                100% {
+                  transform:translateX(0);
+                }
+            }
+        }  
 
     }
 

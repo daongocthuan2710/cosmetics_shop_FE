@@ -1,0 +1,223 @@
+@mixin center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cart{
+    width: 100%;
+    margin-top: 30px;
+    position: relative;
+    $color:#ebb249;
+
+    .cart-breadcrumb{
+        margin: 15px 0;
+    }
+
+    .cart-checkbox{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        input{
+            cursor: pointer;
+            width: 20px;
+            height: 20px;
+
+            &:checked{
+                background-color: $color;
+                border-color: $color;
+            }
+        }
+    }
+    
+    .cart-nav{
+        color:#888;
+        font-size: 14px;
+        box-shadow: 0 2px 2px 0 rgb(0 0 0 / 20%), 0 3px 10px 0 rgb(0 0 0 / 19%);
+        padding: 20px 0;
+        margin: 0 !important;
+
+        .cart-nav-detail{
+            text-align: center;
+        }
+    }
+
+    .cart-content{
+        margin: 30px 0 !important;
+        width: 100%;
+
+        .cart-item{
+            margin: 0 !important;
+            padding: 15px 0 !important;
+            box-shadow: 1px 1px 1px 1px rgb(0 0 0 / 20%), 1px 1px 1px 1px rgb(0 0 0 / 19%);
+            margin-bottom: 30px !important;
+
+            .cart-item-detail{
+                text-align: center;
+                height: 100%;
+
+                .cart-item-price{
+                    @include center;
+                }
+    
+                .cart-item-quantity{
+                    @include center;
+                    padding-left: 0px;
+                    height: 100%;
+
+                    .input-group{
+                        width: 100px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: flex-start;
+
+                        input{
+                            width: 20px;
+                            border: none;
+                            font-size: 14px;
+                            text-align: center;
+                        }
+
+                        .input-group-prepend{
+                            display: inline;
+                            
+                            button{
+                                border: none;
+                                cursor: pointer;
+                                width: 28px;
+                                height: 28px;
+                                line-height: 28px;
+                                border-radius: 100%;
+                                background-color: $color;
+                                font-size: 16px;
+                                font-weight: 700;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                transition: 0.2s;
+                                -webkit-user-select: none;
+                                -moz-user-select: none;
+                                -ms-user-select: none;
+                                user-select: none;
+                            }
+                        }
+                        .input-group-append{
+                            display: inline;
+
+                            button{
+                                border: none;
+                                cursor: pointer;
+                                width: 28px;
+                                height: 28px;
+                                line-height: 28px;
+                                border-radius: 100%;
+                                background-color: $color;
+                                font-size: 16px;
+                                font-weight: 700;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                transition: 0.2s;
+                                -webkit-user-select: none;
+                                -moz-user-select: none;
+                                -ms-user-select: none;
+                                user-select: none;
+                            }
+                        }
+                    }
+                }
+    
+                .cart-item-total-price{
+                    @include center;
+                }
+    
+                .cart-item-handle{
+                    font-size: 30px;
+                    cursor: pointer;
+                    @include center;
+
+                    div{
+                        color: $color;
+                    }
+
+                    div:hover{
+                        color: rgb(224, 106, 106);
+                    }
+                }
+            }
+        }
+    }
+
+    .cart-footer{
+        width: 100%;
+        padding: 15px 0;
+        margin: 0 0 30px !important;
+        position: -webkit-sticky;
+        position: sticky;
+        z-index: 4;
+        bottom: 0;
+        right: auto;
+        left: auto;
+        background-color: white;
+        box-shadow: 0 2px 2px 4px rgb(0 0 0 / 20%), 2px 3px 10px 0 rgb(0 0 0 / 19%);
+
+        .cart-handle{
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+
+            .row{
+                width: 100%;
+            }
+
+            .cart-handle-removeAll{
+                // font-size: 24px;
+                cursor: pointer;
+
+                &:hover{
+                    color: orangered;
+                }
+            }
+        }
+
+        .cart-pay{
+            $color:orangered;
+
+            .cart-pay-total{
+
+                .cart-pay-total-price{
+                    color: $color;
+                    font-size: 24px;
+                }
+            }
+                button{  
+                    width: fit-content;
+                    float: left;
+                    padding: 10px 50px;
+                    height: 100%;
+                    border: 1px $color solid;
+                    color: white;
+                    border-radius: 0;
+                    background-color: $color;
+
+                    &:hover{
+                        opacity: 0.8;
+                    }
+                }
+        }
+
+    }
+}
+
+.cart-buy-now{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 30px 0;
+
+    img{
+        width: 300px;
+    }
+}
