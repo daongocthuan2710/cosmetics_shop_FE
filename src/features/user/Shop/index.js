@@ -14,7 +14,7 @@ export default function Shop() {
   const [isExpanded, setIsExpanded] = useState(false);
   const [productList, setProductList] = useState([]);
   const categoryList = useSelector(state => state.cates);
-  console.log('productList',productList);
+  
   const handleNav = () => {
     setIsExpanded(!isExpanded);
   }

@@ -3,7 +3,7 @@ import {Button, Col, Form, Row } from 'react-bootstrap';
 import "react-datepicker/dist/react-datepicker.css";
 import "./index.scss";
 
-export default function ProfileEditForm(props) {
+function ProfileEditForm(props) {
   const [dateOfBirth, setDateOfBirth] = useState(new Date().toISOString().slice(0, 10));
   const [dateOfBirthError, setDateOfBirthError] = useState({error: false, message: ""});
   const [disableSave, setDisableSave] = useState(true);
@@ -98,7 +98,7 @@ export default function ProfileEditForm(props) {
             </Form.Group>
           </fieldset>
 
-          <Form.Group as={Row} className="mb-3" controlId="formHorizontalPhoneNumber">
+          <Form.Group as={Row} className="mb-3" controlId="formHorizontalBirthDay">
             <Form.Label column sm={3}>
               Ngày sinh
             </Form.Label>
@@ -127,4 +127,6 @@ export default function ProfileEditForm(props) {
         </Form>
       </>
     );
-  }  
+}  
+
+export default React.memo(ProfileEditForm);

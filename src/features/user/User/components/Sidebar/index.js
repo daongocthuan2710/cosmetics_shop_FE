@@ -11,7 +11,7 @@ import {avatars} from "../../../../../assets/images/datas/avatars";
 import "./index.scss";
 
 
-export default function UserSidebar() {
+function UserSidebar() {
     const navigate = useNavigate();
     const match = '/user';
     
@@ -81,4 +81,6 @@ export default function UserSidebar() {
         </div>
       </>
     );
-  }  
+}  
+
+export default React.memo(UserSidebar);

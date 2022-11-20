@@ -156,15 +156,6 @@ const handleCheckbox = (e) => {
   }
 }
 
-
-// const totalPrice = useMemo(() => {
-//   const result = cartList.reduce((result, prod) =>{
-//     return result + prod.price
-//   }, 0)
-
-//   return result
-// }, [cartList])
-
   return (
     <>
     <Container className="cart">

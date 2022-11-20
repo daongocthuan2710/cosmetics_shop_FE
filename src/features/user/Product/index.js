@@ -57,7 +57,6 @@ function Product() {
   }, []);
 
   useEffect(() =>{
-    console.log('aaa',productInfo);
     handleBreadcrumb(productInfo);
   }, [productInfo]);
 

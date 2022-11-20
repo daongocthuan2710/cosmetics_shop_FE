@@ -12,8 +12,7 @@ import "./index.scss";
 function CardItem(props) {
     const IMAGE_CLOUD = {
         CLOUD_NAME: 'dwwuvc6qo',
-        GET_URL: 'https://res.cloudinary.com',
-        CATE: 'cosmetics/makeup/lipstick'
+        GET_URL: 'https://res.cloudinary.com'
     }
     const [imgSrc, setImgSrc] = useState(`${IMAGE_CLOUD.GET_URL}/${IMAGE_CLOUD.CLOUD_NAME}/image/upload/${props.productInfo != undefined ? props.productInfo.image : ''}`);
     

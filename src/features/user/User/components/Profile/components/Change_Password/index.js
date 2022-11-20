@@ -3,7 +3,7 @@ import {Button, Col, Form, Row} from 'react-bootstrap';
 import "react-datepicker/dist/react-datepicker.css";
 import "./index.scss";
 
-export default function ChangePassword() {
+function ChangePassword() {
 
     return (
       <>
@@ -58,4 +58,6 @@ export default function ChangePassword() {
       </div>
       </>
     );
-  }  
+} 
+
+export default React.memo(ChangePassword);

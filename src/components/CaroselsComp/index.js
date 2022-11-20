@@ -26,15 +26,15 @@ function ProductCarousel(props) {
                 <Row>
                     <div className="hometitle-wrapper">
                         <h3 className="home-title">
-                            {props.name}
+                            {props.name} 
                         </h3>
-                        <div className="home-effect">
+                        {/* <div className="home-effect">
                             <img 
                                 src={ imgSrc? imgSrc : effects['menu_effect.png']} 
                                 alt=""
                                 onError={() => (setImgSrc(errors['no_image.jpg']))}
                             />
-                        </div>
+                        </div> */}
                     </div>
                     <Swiper
                         className="border border-black mt-2 p-0 swiper-wrapper"

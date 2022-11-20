@@ -6,7 +6,7 @@ import axios from "axios";
 import Swal from 'sweetalert2';
 import "./index.scss";
 
-export default function Avatar() {
+function Avatar() {
 
   const IMAGE_CLOUD = { 
     CLOUD_NAME: 'djjcdcmxz',
@@ -128,3 +128,5 @@ export default function Avatar() {
       </>
     );
   }  
+
+  export default React.memo(Avatar);
