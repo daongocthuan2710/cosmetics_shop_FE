@@ -21,7 +21,7 @@ function ProductInfo(props) {
 
     const [imgSrc, setImgSrc] = useState(`${IMAGE_CLOUD.GET_URL}/${IMAGE_CLOUD.CLOUD_NAME}/image/upload/${props.productInfo != undefined ? props.productInfo.image : ''}`);
     const [quantity, setQuantity] = useState(1);
-    const auth = useSelector(state => state.auths);
+    const auth = useSelector(state => state.auths); 
     const dispatch = useDispatch();
     const navigate = useNavigate();
     
