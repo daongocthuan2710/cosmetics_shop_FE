@@ -1,18 +1,27 @@
 import * as React from "react";
-import { HashRouter, Route, Routes } from 'react-router-dom';
-import Home from "../pages/Home/Home.js.js";
+import {Route, Routes, useNavigate } from 'react-router-dom';
+import Admin_Home from "../../features/admin/Home/index.js";
+import Admin_Login from "../../features/admin/SignIn/index.js";
 
-function Admin_Router(){
+function Admin_Routes({auth}){
+    const navigate = useNavigate();
+
+    React.useEffect(() =>{
+        if(auth.token == undefined || auth.roles == "admin"){
+            navigate("/admin/login");
+        }
+      }, []);
+
+
+    
         return (
-            <HashRouter>
-            <Header/>
-            <Routes>
-                <Route path="/" element={<Home/>}></Route>
-                <Route path="/home" element={<Home/>}></Route>
-            </Routes> 
-        <Footer/>
-        </HashRouter>
+            <>
+                <Routes>
+                    <Route path="/" element={<Admin_Home/>}></Route>
+                    <Route path="login" element={<Admin_Login/>}></Route>
+                </Routes> 
+            </>
         );
 }
 
-export default Admin_Router;
+export default Admin_Routes;

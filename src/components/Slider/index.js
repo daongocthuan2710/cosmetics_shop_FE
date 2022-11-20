@@ -1,7 +1,9 @@
 import React from "react";
-import {slider} from "./datas.js";
 import { Navigation, Pagination, Autoplay } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { useState } from "react";
+import {sliders} from "../../assets/images/datas/sliders";
+import {errors} from "../../assets/images/datas/errors";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
@@ -12,7 +14,7 @@ import "./index.scss";
 
 
 function Slider() {
-
+    const [imgSrc, setImgSrc] = useState(null);
     return (
         <>
             <Swiper
@@ -30,13 +32,22 @@ function Slider() {
                 }}
             >
                 <SwiperSlide>
-                    <img src={slider['slide1']} />
+                    <img 
+                        src={imgSrc ? imgSrc : sliders["slide1.jpg"]}
+                        onError={() => (setImgSrc(errors['no_image.jpg']))}
+                    />
                 </SwiperSlide>
                 <SwiperSlide>
-                    <img src={slider['slide2']} />
+                    <img 
+                        src={imgSrc ? imgSrc : sliders["slide2.jpg"]} 
+                        onError={() => (setImgSrc(errors['no_image.jpg']))}
+                    />
                 </SwiperSlide>
                 <SwiperSlide>
-                    <img src={slider['slide3']} />
+                    <img 
+                        src={imgSrc ? imgSrc : sliders["slide3.jpg"]} 
+                        onError={() => (setImgSrc(errors['no_image.jpg']))}
+                    />
                 </SwiperSlide>
             </Swiper>
         </>

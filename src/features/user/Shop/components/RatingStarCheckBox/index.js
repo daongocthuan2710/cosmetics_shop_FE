@@ -10,18 +10,19 @@ export default function RatingStarCheckbox(props) {
         document.querySelectorAll(".star-list .rating").forEach((e) => {
             e.classList.remove("active");
           });
-        //   event.currentTarget.classList.toggle("active");
           setValue(i);
       };
 
     const ratingStarList = [];
     for (let i = 0; i < 6; i++) {
-        ratingStarList.push(            
-            <div className={`rating ${i === value ? "active" : ""}`}  
-                onClick={(e)=>handleChangeRatingStar(i,e)} 
-                key={i}
-            >
-                <TextRating value={i} text={i === 5? "" : "trở lên"}/>
+        ratingStarList.push(       
+            <div className="rating-container" key={i}>     
+                <div className={`rating ${i === value ? "active" : ""}`}  
+                    onClick={(e)=>handleChangeRatingStar(i,e)} 
+                    key={i}
+                >
+                    <TextRating value={i} text={i === 5? "" : "trở lên"}/>
+                </div>
             </div>
         );
         }

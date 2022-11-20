@@ -1,10 +1,9 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import logo from "../../assets/images/header/logo_footer.png";
-import check_info from "../../assets/images/header/check_info.png";
 import { BsAward } from "react-icons/bs";
 import { GoGift } from "react-icons/go";
 import { TbTruckDelivery } from "react-icons/tb";
+import {headers} from "../../assets/images/datas/headers";
 import "./index.scss";
 
 function Footer() {
@@ -71,7 +70,7 @@ function Footer() {
         </div>
         <Container fluid className="footer-content">
           <Row className="suntory-footer-1wrap">
-            <img src={logo} alt="cosmetic" />
+            <img src={headers['logo_footer.png']} alt="cosmetic" />
           </Row>
           <Row>
             <div className="intro-cosmetic">

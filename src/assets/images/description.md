@@ -1,1 +1,1 @@
-<!-- used to store image files -->
+## Used to store all assets in this project

@@ -1,28 +1,43 @@
-import React, { useState }  from "react";
+import React, { useEffect, useState }  from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import HeaderWrapper from "./components/Header__Wrapper";
 import ProductList from "./components/Product_List";
 import Sidebar from "./components/Sidebar";
 import Pagination from '@mui/material/Pagination';
-import "./index.scss";
 import Breadcrumb from "../../../components/Breadcrumb";
+import productApi from "../../../api/productApi";
+import { Loading } from "notiflix";
+import { useSelector } from "react-redux";
+import "./index.scss";
 
 export default function Shop() {
   const [isExpanded, setIsExpanded] = useState(false);
-
-  const openNav = () => {
+  const [productList, setProductList] = useState([]);
+  const categoryList = useSelector(state => state.cates);
+  
+  const handleNav = () => {
     setIsExpanded(!isExpanded);
   }
   
-  const closeNav = () => {
-    setIsExpanded(!isExpanded);
+  const fetchProducts =  async () => {
+    try{
+      const response = await productApi.getAll();
+      setProductList(response.data.content);
+    } catch(error) {
+      console.log("Fail to fetch products", error);
+    }
   }
+
+  useEffect(() =>{
+    fetchProducts();
+  }, []);
+
     return (
       <>
         <Container className="shop">
           <Row>
             <Col md={3} className="shop__sidebar">
-              <Sidebar/>
+              <Sidebar categoryList={categoryList}/>
             </Col>
             <Col md={9} className="shop__wrapper">
               <Row>
@@ -32,7 +47,7 @@ export default function Shop() {
                 <HeaderWrapper/>
               </Row>
               <Row>
-                <ProductList/>
+                <ProductList productList={productList}/>
               </Row>
               <Row>
                 <Col className="review__body__pagination">
@@ -52,8 +67,8 @@ export default function Shop() {
         </Container>
         {/* <Sidebar
           isExpanded = {isExpanded}
-          openNav = {openNav}
-          closeNav = {closeNav}
+          openNav = {handleNav}
+          closeNav = {handleNav}
         /> */}
       </>
     );
