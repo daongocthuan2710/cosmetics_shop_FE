@@ -11,6 +11,7 @@ import cateApi from "../../api/cateApi.js";
 import { cateListAction } from "../../Store/user/cateSlice.js";
 import { Loading } from "notiflix";
 import Login from "../Login/index.js";
+import Register from "../Register/index.js";
 import {headers} from "../../assets/images/datas/headers";
 import Skeleton from '@mui/material/Skeleton';
 import { loginNavigateAction } from "../../Store/user/loginSlice.js";
@@ -45,6 +46,10 @@ export default function Header() {
     const action = loginNavigateAction([!login]);
     dispatch(action);
     setLogin(!login);
+  }
+
+  const handleRegisterForm = () => {
+    setRegister(!register);
   }
 
   const handleLogout = async () => {
@@ -168,6 +173,7 @@ export default function Header() {
           :
           <div 
             className="header__guest"
+            id="login-register"
             onClick={handleLoginForm}
           >
             Đăng nhập / Đăng ký
@@ -216,7 +222,15 @@ export default function Header() {
     />
     <Login 
       login={login} 
-      closeLoginForm = {handleLoginForm} 
+      closeLoginForm = {handleLoginForm}
+      register={register}
+      handleRegisterForm = {handleRegisterForm} 
+    />
+    <Register  
+      register = {register} 
+      closeRegisterForm = {handleRegisterForm}
+      login={login}
+      handleLoginForm = {handleLoginForm}
     />
   </> 
   );
