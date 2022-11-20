@@ -70,7 +70,7 @@ const handleRemove = (item) => {
     let tmp = JSON.parse(localStorage.getItem('cart')) || [];
     const isRemoved = (element) => element.id == item.id;
     const getId = tmp.findIndex(isRemoved);
-    tmp.splice( getId, 1);
+    tmp.splice( getId, 1); 
     const cartTotal= cartTotalAction([tmp.length]);
     dispatch(cartTotal);      
 

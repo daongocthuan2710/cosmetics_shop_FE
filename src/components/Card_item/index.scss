@@ -4,7 +4,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-bottom: 10px;
+    padding: 0 !important;
+    padding-bottom: 10px !important;
 
     img{
         object-fit: cover;

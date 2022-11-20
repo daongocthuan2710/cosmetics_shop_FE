@@ -14,7 +14,7 @@ const authApi = {
     }, 
 
     logout: (token) => {
-        const header = {
+        const header = { 
             headers: {
                 Authorization: `Bearer ${token}`,
             },

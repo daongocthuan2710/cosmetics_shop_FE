@@ -21,15 +21,15 @@ function ProductInfo(props) {
 
     const [imgSrc, setImgSrc] = useState(`${IMAGE_CLOUD.GET_URL}/${IMAGE_CLOUD.CLOUD_NAME}/image/upload/${props.productInfo != undefined ? props.productInfo.image : ''}`);
     const [quantity, setQuantity] = useState(1);
-    const token = useSelector(state => state.auths).token;
+    const auth = useSelector(state => state.auths);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     
     const handleAddToCart = (item) => {
-        if(!token){
+        if(auth.token == undefined || auth.roles != "member"){
             const action = loginNavigateAction([true]);
             dispatch(action);
-            navigate("/");
+            navigate("/"); 
         }
         else{
             const isSelect = (element) => element.id == item.id;
@@ -62,7 +62,7 @@ function ProductInfo(props) {
 
     const handleByNow = (item) => {
 
-        if(!token){
+        if(auth.token == undefined || auth.roles != "member"){
             const action = loginNavigateAction(true);
             dispatch(action);
             navigate("/");

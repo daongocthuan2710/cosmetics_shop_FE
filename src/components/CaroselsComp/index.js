@@ -3,9 +3,6 @@ import { Navigation, Pagination, Autoplay } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import CardItem from "../Card_item";
 import { Col, Row, Container } from "react-bootstrap";
-import {effects} from "../../assets/images/datas/effects";
-import {errors} from "../../assets/images/datas/errors";
-import { useState } from "react";
 import Carousel_Skeleton from "../Skeleton/Carosel_Skeleton/index.js";
 
 // Import Swiper styles
@@ -17,7 +14,7 @@ import "swiper/css/autoplay";
 import "./index.scss";
 
 function ProductCarousel(props) {
-    const [imgSrc, setImgSrc] = useState(null);
+
     return (
         <>
         {props.productList.length > 0
@@ -28,13 +25,6 @@ function ProductCarousel(props) {
                         <h3 className="home-title">
                             {props.name} 
                         </h3>
-                        {/* <div className="home-effect">
-                            <img 
-                                src={ imgSrc? imgSrc : effects['menu_effect.png']} 
-                                alt=""
-                                onError={() => (setImgSrc(errors['no_image.jpg']))}
-                            />
-                        </div> */}
                     </div>
                     <Swiper
                         className="border border-black mt-2 p-0 swiper-wrapper"

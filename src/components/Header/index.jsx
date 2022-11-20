@@ -6,7 +6,7 @@ import {BiUpArrow} from 'react-icons/bi';
 import Navbar from "./components/Navbar/index.js";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector} from "react-redux";
-import {loginAction } from "../../Store/user/authSlice.js";
+import {loginAction } from "../../Store/authSlice.js";
 import cateApi from "../../api/cateApi.js";
 import { cateListAction } from "../../Store/user/cateSlice.js";
 import { Loading } from "notiflix";
@@ -15,6 +15,8 @@ import {headers} from "../../assets/images/datas/headers";
 import Skeleton from '@mui/material/Skeleton';
 import { loginNavigateAction } from "../../Store/user/loginSlice.js";
 import './index.scss';
+import { cartTotalAction } from "../../Store/user/cartSlice.js";
+import { cartListAction } from "../../Store/user/cartListSlice.js";
 
 export default function Header() {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -48,8 +50,13 @@ export default function Header() {
   const handleLogout = async () => {
     localStorage.clear();
     navigate("/");
-    const action = loginAction([]);
-    dispatch(action);
+
+    dispatch(loginAction([]));
+    dispatch(cartTotalAction([0]));      
+    dispatch(cartListAction([])); 
+    dispatch(loginAction([])); 
+
+    localStorage.setItem('cart', JSON.stringify([]));
   }
 
   const handleProfile = () => {

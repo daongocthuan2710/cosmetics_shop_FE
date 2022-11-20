@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import authApi from "../../api/authApi";
-import { loginAction } from "../../Store/user/authSlice";
+import { loginAction } from "../../Store/authSlice";
 import {avatars} from "../../assets/images/datas/avatars";
 import 'react-minimal-side-navigation/lib/ReactMinimalSideNavigation.css';
 import './index.scss';

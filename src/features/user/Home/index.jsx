@@ -19,7 +19,7 @@ function Home() {
       const response = await productApi.getAll();
       setProductList(response.data.content);
     } catch(error) {
-      console.log("Fail to fetch category", error);
+      console.log("Fail to fetch products", error);
     }
     Loading.remove();
   }
