@@ -16,7 +16,6 @@ function ProductInfo(props) {
     const IMAGE_CLOUD = {
         CLOUD_NAME: 'dwwuvc6qo',
         GET_URL: 'https://res.cloudinary.com',
-        CATE: 'cosmetics/makeup/lipstick'
     }
 
     const [imgSrc, setImgSrc] = useState(`${IMAGE_CLOUD.GET_URL}/${IMAGE_CLOUD.CLOUD_NAME}/image/upload/${props.productInfo != undefined ? props.productInfo.image : ''}`);
@@ -72,7 +71,6 @@ function ProductInfo(props) {
         <div className="card">
             <div 
                 className="row" 
-                // style={{width:"100%"}}
             >
                 <div className="col-md-6 col-xs-12 card__img">
                     <img
