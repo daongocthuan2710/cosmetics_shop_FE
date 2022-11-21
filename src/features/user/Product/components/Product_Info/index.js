@@ -3,7 +3,6 @@ import InputSpinner from "react-bootstrap-input-spinner";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { useState } from "react";
 import {errors} from "../../../../../assets/images/datas/errors";
-import {products} from "../../../../../assets/images/datas/products";
 import {useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux";
 import { loginNavigateAction } from "../../../../../Store/user/loginSlice";
@@ -18,12 +17,12 @@ function ProductInfo(props) {
         GET_URL: 'https://res.cloudinary.com',
     }
 
-    const [imgSrc, setImgSrc] = useState(`${IMAGE_CLOUD.GET_URL}/${IMAGE_CLOUD.CLOUD_NAME}/image/upload/${props.productInfo != undefined ? props.productInfo.image : ''}`);
+    const imgSrc = `${IMAGE_CLOUD.GET_URL}/${IMAGE_CLOUD.CLOUD_NAME}/image/upload/${props.productInfo != undefined ? props.productInfo.image: ''}`;
     const [quantity, setQuantity] = useState(1);
-    const auth = useSelector(state => state.auths);
+    const auth = useSelector(state => state.auths); 
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    
+
     const handleAddToCart = (item) => {
         if(auth.token == undefined || auth.roles != "member"){
             const action = loginNavigateAction([true]);
@@ -74,15 +73,15 @@ function ProductInfo(props) {
             >
                 <div className="col-md-6 col-xs-12 card__img">
                     <img
-                        src={imgSrc ? imgSrc : products[props.productInfo.image]} 
-                        onError={() => (setImgSrc(errors['no_image.jpg']))}
+                        src={imgSrc != '' ? imgSrc : errors['no_image.jpg']} 
+                        // onError={() => (setImgSrc(errors['no_image.jpg']))}
                         className="img-fluid rounded-start"
                         alt={props.productInfo.name}
                     />
                     {props.productInfo.discount > 0
                     ?
                     <div className="promotion">
-                        -23%
+                        {props.productInfo != undefined ? props.productInfo.discount : 0}%
                     </div>
                     :''}
                 </div>

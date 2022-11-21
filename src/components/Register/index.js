@@ -17,7 +17,7 @@ export default function Register(props) {
                 <input
                   type="text"
                   className="form-control inputText"
-                  id="TextInput"
+                  id="TextInputRegister"
                   name="TextInput"
                   aria-describedby="usernameHelp"
                   
@@ -28,7 +28,7 @@ export default function Register(props) {
                 <input
                   type="password"
                   className="form-control inputText"
-                  id="exampleInputPassword1"
+                  id="exampleInputPasswordRegister"
                   
                 />
               </div>

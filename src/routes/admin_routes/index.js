@@ -10,10 +10,7 @@ function Admin_Routes({auth}){
         if(auth.token == undefined || auth.roles == "admin"){
             navigate("/admin/login");
         }
-      }, []);
-
-
-    
+      }, []); 
         return (
             <>
                 <Routes>

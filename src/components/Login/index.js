@@ -1,46 +1,65 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import authApi from "../../api/authApi";
 import { loginAction } from "../../Store/authSlice";
 import {avatars} from "../../assets/images/datas/avatars";
 import 'react-minimal-side-navigation/lib/ReactMinimalSideNavigation.css';
 import './index.scss';
-import { PropaneSharp } from "@mui/icons-material";
+import { Button } from "react-bootstrap";
 
-export default function Login(props) {
+function Login(props) {
+  const [loading, setLoading] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [messError, setMessError] = useState("");
-
+  const [disableSubmit, setDisableSubmit] = useState(true);
 
   const dispatch = useDispatch();
     const fetchLogin =  async (body) => {
+      setLoading(true);
       try{
         const response = await authApi.login(body);
-        localStorage.setItem("token", response.data.token);
-        const action = loginAction(response.data);
-        dispatch(action);
-        props.closeLoginForm();
+        if(response.status == 200){
+          const auth = response.data;
+          if(auth.roles != "member"){
+            setMessError("Đây không phải tài khoản của người dùng");
+          }
+          else{
+            localStorage.setItem("token", response.data.token);
+            const action = loginAction(response.data);
+            dispatch(action);
+            props.closeLoginForm();
+          }
+        }
+
       } catch(error) {
         console.log("Fail to fetch login",error);
-        if (username === "" || password === ""){
-          setMessError("Vui lòng nhập đầy đủ tên tài khoản và mật khẩu.");
-        }
-        else{
-          setMessError(error.message || error.response.data.message);
-        }       
+        setMessError(error.response.data.message || error.message); 
       }
+      setLoading(false);
     }
-    const loginSubmit = (e) => {
-      const body = {
+
+    useEffect(() =>{ 
+      if (username === "" || password === ""){
+        setDisableSubmit(true);
+      }
+      else{
+        setDisableSubmit(false);
+      }
+    }, [username,password]);
+
+    const loginSubmit = () => {
+      if (username === "" || password === ""){
+        setMessError("Vui lòng nhập đầy đủ tên tài khoản và mật khẩu.");
+      }
+      else{
+        const body = {
           "username": username,
           "password": password
           }
-      e.preventDefault();
-      fetchLogin(body);
+        fetchLogin(body);
+      }    
     };
-
-    
 
   return (
   <>
@@ -48,13 +67,13 @@ export default function Login(props) {
         <div className="container">
         <div className="row d-flex justify-content-center">
             <div className="title"><h3>ĐĂNG NHẬP</h3></div>
-            <form id="loginform" onSubmit={loginSubmit}>
+            <form id="loginform">
               <div className="form-group">
                 <label>Tên đăng nhập hoặc email <font color="red">*</font></label>
                 <input
                   type="text"
                   className="form-control inputText"
-                  id="TextInput"
+                  id="TextInputLogin"
                   name="TextInput"
                   aria-describedby="usernameHelp"
                   onChange={(event) => setUsername(event.target.value)}
@@ -65,14 +84,23 @@ export default function Login(props) {
                 <input
                   type="password"
                   className="form-control inputText"
-                  id="exampleInputPassword1"
+                  id="exampleInputPasswordLogin"
                   onChange={(event) => setPassword(event.target.value)}
                 />
               </div>
               <p className="err-msg">{messError}</p>
-              <button type="submit" className="btn-submit">
+              <Button 
+                className="btn-submit" 
+                onClick={() => {loginSubmit()}}
+                disabled={disableSubmit}
+              >
+                {loading ? 
+                <>
+                  <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> &ensp; 
+                </>
+                : ''}
                 ĐĂNG NHẬP
-              </button>
+              </Button>
             </form>
             <div>
                 <div className="form-group form-check">
@@ -101,3 +129,4 @@ export default function Login(props) {
   );
 }
 
+export default React.memo(Login);

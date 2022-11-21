@@ -23,11 +23,12 @@ export default function Header() {
   const [isExpanded, setIsExpanded] = useState(false);
   const loginNavigate = Object.values(useSelector(state => state.login))[0];
   const cartTotal = Object.values(useSelector(state => state.cart))[0];
+  const cartTotalPrice = Object.values(useSelector(state => state.cartTotalPrice))[0] || 0;
   const [login, setLogin] = useState(loginNavigate || false);
+  const [register, setRegister] = useState(false);
   const [cates, setCates] = useState([]);
   const [offset, setOffset] = useState(0);
-  const token = localStorage.getItem('token');
-  const userInfo = useSelector(state => state.auths);
+  const auth = useSelector(state => state.auths);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -60,16 +61,25 @@ export default function Header() {
     dispatch(cartTotalAction([0]));      
     dispatch(cartListAction([])); 
     dispatch(loginAction([])); 
-
-    localStorage.setItem('cart', JSON.stringify([]));
   }
 
   const handleProfile = () => {
-    if(token) navigate("/user/account/profile");
+    if(auth.token != undefined && auth.roles == "member") navigate("/user/account/profile");
+  }
+
+  const handleCart = () => {
+    if(auth.token != undefined && auth.roles == "member"){
+      navigate("/cart");
+    }else{
+      const action = loginNavigateAction([true]);
+      dispatch(action);
+      navigate("/"); 
+    }
+     
   }
 
   const handlePurchase = () => {
-    if(token) navigate("/user/purchase");
+    if(auth.token != undefined && auth.roles == "member") navigate("/user/purchase");
   }
   
   const fetchCategory =  async () => {
@@ -118,7 +128,7 @@ export default function Header() {
           <GoSearch className="header__search__icon"/>
         </Link>
       </div>
-      <Link to="/cart" className="header__cart" style={{border:'none'}}>
+      <div className="header__cart" style={{border:'none'}} onClick={() => {handleCart()}}>
         <div className="shake header__cart__icon">
           <img src={headers["cart.gif"]} alt="shopping_bag" />
           <div className="header__cart__icon__count">
@@ -126,10 +136,12 @@ export default function Header() {
           </div>
         </div>
         <div className="header__cart__icon__lable">
-            <p className="header__cart__icon__lable__total">0đ</p>
-            <p className="header__cart__icon__lable__cart">Giỏ hàng</p>
+            <p className="header__cart__icon__lable__total">
+              {/* {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(cartTotalPrice)} */}
+            </p>
+            <p className="header__cart__icon__lable__cart">Giỏ hàng</p> 
         </div>
-      </Link>
+      </div>
       <div className="header__hotline">
         <img src={headers["phone_call.gif"]} alt="hotline" />
         <div>
@@ -161,9 +173,9 @@ export default function Header() {
             </Link>
         </div>
         {
-          token ?
+          (auth.token != undefined && auth.roles == "member") ?
           <div className="header__user">
-            {userInfo.username}
+            {auth.username}
             <ul className="header__user__info">
               <li onClick={handleProfile}>Tài khoản của tôi</li>
               <li onClick={handlePurchase}>Đơn mua</li>
@@ -180,7 +192,7 @@ export default function Header() {
             <hr></hr>
           </div>
         }
-        <Link to="/cart" className="header__cart">
+        <div to="/cart" className="header__cart" onClick={() => {handleCart()}}>
           <div id="cart-icon" className="header__cart__icon">
             <img src={headers["cart.gif"]} alt="shopping_bag" />
             <div className="header__cart__icon__count">
@@ -188,10 +200,12 @@ export default function Header() {
             </div>
           </div> 
           <div className="header__cart__icon__lable">
-              <p className="header__cart__icon__lable__total">0đ</p>
+              <p className="header__cart__icon__lable__total">
+                {/* {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(cartTotalPrice)} */}
+              </p>
               <p className="header__cart__icon__lable__cart">Giỏ hàng</p>
-            </div>
-        </Link>
+          </div>
+        </div>
         <div className="header__hotline">
               <img src={headers["phone_call.gif"]} alt="hotline" />
             <div>
