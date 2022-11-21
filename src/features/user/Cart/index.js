@@ -13,6 +13,7 @@ import { cartTotalAction } from "../../../Store/user/cartSlice";
 import { cartListAction } from "../../../Store/user/cartListSlice";
 import Swal from 'sweetalert2';
 import "./index.scss";
+import { cartTotalPriceAction } from "../../../Store/user/cartTotalPriceSlice";
 
 
 export default function Cart() {
@@ -49,6 +50,8 @@ export default function Cart() {
       setTotalItem(quantity);
     }
 
+    const action = cartTotalPriceAction([sum]);
+    dispatch(action);
     setTotalPrice(sum);
   }, [cartList]);
 

@@ -23,6 +23,7 @@ export default function Header() {
   const [isExpanded, setIsExpanded] = useState(false);
   const loginNavigate = Object.values(useSelector(state => state.login))[0];
   const cartTotal = Object.values(useSelector(state => state.cart))[0];
+  const cartTotalPrice = Object.values(useSelector(state => state.cartTotalPrice))[0] || 0;
   const [login, setLogin] = useState(loginNavigate || false);
   const [register, setRegister] = useState(false);
   const [cates, setCates] = useState([]);
@@ -135,7 +136,9 @@ export default function Header() {
           </div>
         </div>
         <div className="header__cart__icon__lable">
-            <p className="header__cart__icon__lable__total">0đ</p>
+            <p className="header__cart__icon__lable__total">
+              {/* {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(cartTotalPrice)} */}
+            </p>
             <p className="header__cart__icon__lable__cart">Giỏ hàng</p> 
         </div>
       </div>
@@ -197,7 +200,9 @@ export default function Header() {
             </div>
           </div> 
           <div className="header__cart__icon__lable">
-              <p className="header__cart__icon__lable__total">0đ</p>
+              <p className="header__cart__icon__lable__total">
+                {/* {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(cartTotalPrice)} */}
+              </p>
               <p className="header__cart__icon__lable__cart">Giỏ hàng</p>
           </div>
         </div>

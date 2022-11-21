@@ -4,6 +4,7 @@ import authReducer from "./authSlice";
 import cateReducer from "./user/cateSlice";
 import cartReducer from "./user/cartSlice";
 import cartListReducer from "./user/cartListSlice";
+import cartTotalPriceReducer from "./user/cartTotalPriceSlice";
 import loginReducer from "./user/loginSlice";
 import breadcrumbReducer from "./user/breadcrumbSlice";
 import { persistStore, persistReducer } from 'redux-persist';
@@ -21,7 +22,8 @@ const persistConfig = {
         breadcrumb: breadcrumbReducer,
         login: loginReducer,
         cart: cartReducer,
-        cartList: cartListReducer
+        cartList: cartListReducer,
+        cartTotalPrice: cartTotalPriceReducer
     })
 
     const persistedReducer = persistReducer(persistConfig, rootReducer)
