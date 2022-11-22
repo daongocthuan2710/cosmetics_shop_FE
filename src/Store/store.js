@@ -8,8 +8,17 @@ import cartListReducer from "./user/cartListSlice";
 import cartTotalPriceReducer from "./user/cartTotalPriceSlice";
 import loginReducer from "./user/loginSlice";
 import breadcrumbReducer from "./user/breadcrumbSlice";
-import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
+import { 
+    persistStore, 
+    persistReducer,
+    FLUSH,
+    REHYDRATE,
+    PAUSE,
+    PERSIST,
+    PURGE,
+    REGISTER, 
+} from 'redux-persist';
 
 const persistConfig = {
     key: 'root',
@@ -33,6 +42,12 @@ const persistConfig = {
     const store = configureStore({
         // reducer: rootReducer,
         reducer: persistedReducer,
+        middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware({
+          serializableCheck: {
+            ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+          },
+        }),
     });
 
     export const persistor = persistStore(store);
