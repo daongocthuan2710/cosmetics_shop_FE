@@ -9,6 +9,7 @@ import './App.css';
 
 function App() {
   const auth = useSelector(state => state.auths);
+  const adminAuth = useSelector(state => state.adminAuth);
 
   return (   
     <Suspense fallback={
@@ -21,7 +22,7 @@ function App() {
     {Loading.remove()}   
       <BrowserRouter>
           <Routes>  
-              <Route path="/admin/*" element={<Admin_Routes auth={auth}/>}></Route>
+              <Route path="/admin/*" element={<Admin_Routes auth={adminAuth}/>}></Route>
               <Route path="/*" element={<User_Routes auth={auth}/>}></Route>
           </Routes> 
       </BrowserRouter>

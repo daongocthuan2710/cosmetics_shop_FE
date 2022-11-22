@@ -1,0 +1,18 @@
+.product-admin-table{
+    margin: 20px;
+    width: 95%;
+}
+.product-admin-table th{
+    text-align: center;
+    padding: 1vh 1vw;
+}
+.product-admin-table td{
+    padding: 2vh 1vw;
+
+}
+
+.filter-product-item{
+    width: 10vw;
+    margin: 3vh 2vw;
+    padding: 1vh 1vw;
+}

@@ -5,6 +5,8 @@ import authApi from "../../../api/authApi";
 import { loginAction } from "../../../Store/authSlice";
 import avatar from "../../../assets/images/datas/avatars";
 import "./index.scss";
+import { useNavigate } from "react-router-dom";
+import { loginAdminAction } from "../../../Store/admin/adminAuthSlice";
 
 function Admin_Login() {
   const [loading, setLoading] = useState(false);
@@ -14,6 +16,7 @@ function Admin_Login() {
   const [disableSubmit, setDisableSubmit] = useState(true);
   const dispatch = useDispatch();
 
+  const navigate = useNavigate();
   const fetchLogin =  async (body) => {
     setLoading(true);
     try{
@@ -25,8 +28,9 @@ function Admin_Login() {
         }
         else{
           localStorage.setItem("token", response.data.token);
-          const action = loginAction(response.data);
+          const action = loginAdminAction(response.data);
           dispatch(action);
+          navigate("/admin");
         }
       }
 

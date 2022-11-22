@@ -7,15 +7,18 @@ function Admin_Routes({auth}){
     const navigate = useNavigate();
 
     React.useEffect(() =>{
-        if(auth.token == undefined || auth.roles == "admin"){
+        // console.log(typeof(auth.token));
+        if(auth.token == undefined){
             navigate("/admin/login");
+        }else{
+            navigate("/admin");
         }
       }, []); 
         return (
             <>
                 <Routes>
-                    <Route path="/" element={<Admin_Home/>}></Route>
-                    <Route path="login" element={<Admin_Login/>}></Route>
+                    <Route path="/login" element={<Admin_Login/>}></Route>
+                    <Route path="/*" element={<Admin_Home/>}></Route>
                 </Routes> 
             </>
         );

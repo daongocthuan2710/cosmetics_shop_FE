@@ -2,6 +2,7 @@ import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import productReducer from "./user/homeSlice";
 import authReducer from "./authSlice";
 import cateReducer from "./user/cateSlice";
+import adminAuthReducer from "./admin/adminAuthSlice";
 import cartReducer from "./user/cartSlice";
 import cartListReducer from "./user/cartListSlice";
 import cartTotalPriceReducer from "./user/cartTotalPriceSlice";
@@ -23,7 +24,8 @@ const persistConfig = {
         login: loginReducer,
         cart: cartReducer,
         cartList: cartListReducer,
-        cartTotalPrice: cartTotalPriceReducer
+        cartTotalPrice: cartTotalPriceReducer,
+        adminAuth: adminAuthReducer
     })
 
     const persistedReducer = persistReducer(persistConfig, rootReducer)
