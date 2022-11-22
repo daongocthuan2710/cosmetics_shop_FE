@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import SideNav from "./components/SideNav/index.js";
 import { GoSearch } from 'react-icons/go';
 import {FaBars} from 'react-icons/fa';
