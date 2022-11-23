@@ -16,8 +16,6 @@ const userApi = {
     },
 
     getUserById: ({token = undefined, id = null} = {}) => {
-        console.log("token", token, );
-        console.log("id", id, );
         const header = {
             headers: {
                 Authorization: `Bearer ${token}`,
@@ -26,6 +24,17 @@ const userApi = {
 
         const url = `${prefix}?accountId=${id}`;
         return axiosClient.get(url, header);
+    },
+
+    UpdateUser: ({token, id, ...rest}) => {
+        const header = {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        };
+        console.log('body', rest);
+        const url = `${prefix}?accountId=${id}`;
+        return axiosClient.put(url, rest, header);
     },
 };
 

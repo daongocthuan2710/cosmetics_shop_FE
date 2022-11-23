@@ -1,5 +1,0 @@
-Routers are used to link to components through paths.
-
-- Admin_Router is used to link to components that are authorized by admin.
-
-- User_Router is used to link to components that are authorized by user.

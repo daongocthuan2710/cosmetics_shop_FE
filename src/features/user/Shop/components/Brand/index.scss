@@ -1,22 +1,47 @@
-.origin-check{
-    padding: 5px 15px !important;
+.origin-list{
+    max-height: 300px;
+    overflow: scroll;
+    overflow-x: hidden;
+    /* width */
+    &::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  /* Track */
+  &::-webkit-scrollbar-track {
+    background: rgb(247, 235, 214);
+  }
+  
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    background: rgb(201, 191, 173);
+  }
+  
+  /* Handle on hover */
+  &::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+
+    .origin-check{
+        padding: 5px 15px !important;
     
-    .form-check{
-        
-        input{
-            cursor: pointer;
+        .form-check{
             
-            &:checked{
-                $color: #f1c572;
-                background-color: $color;
-                border-color: $color;
+            input{
+                cursor: pointer;
+                
+                &:checked{
+                    $color: #f1c572;
+                    background-color: $color;
+                    border-color: $color;
+                }
             }
+    
+            label{
+                cursor: pointer;
+            }
+    
+              
         }
-
-        label{
-            cursor: pointer;
-        }
-
-          
     }
 }

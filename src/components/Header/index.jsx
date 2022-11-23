@@ -18,6 +18,7 @@ import { loginNavigateAction } from "../../Store/user/loginSlice.js";
 import './index.scss';
 import { cartTotalAction } from "../../Store/user/cartSlice.js";
 import { cartListAction } from "../../Store/user/cartListSlice.js";
+import { searchAction } from "../../Store/user/searchSlice.js";
 
 export default function Header() {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -41,6 +42,11 @@ export default function Header() {
         left: 0,
         behavior: "smooth"
       });
+  }
+
+  const handleFilterSearch = (value) => {
+    const action = searchAction([value]);
+    dispatch(action);
   }
 
   const handleLoginForm = () => {
@@ -167,7 +173,11 @@ export default function Header() {
             <img src={headers["logo_header.png"]} alt="Cosmetic Shop" />
         </Link>
         <div className="header__search">
-            <input type="text" placeholder="Tìm sản phẩm..."/>
+            <input 
+              type="text" 
+              placeholder="Tìm sản phẩm..."
+              onChange={(e) => {handleFilterSearch(e.target.value)}}
+            />
             <Link to="/shop">
               <GoSearch className="header__search__icon"/>
             </Link>

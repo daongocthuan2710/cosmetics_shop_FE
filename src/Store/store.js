@@ -6,6 +6,7 @@ import adminAuthReducer from "./admin/adminAuthSlice";
 import cartReducer from "./user/cartSlice";
 import cartListReducer from "./user/cartListSlice";
 import cartTotalPriceReducer from "./user/cartTotalPriceSlice";
+import searchReducer from "./user/searchSlice";
 import loginReducer from "./user/loginSlice";
 import breadcrumbReducer from "./user/breadcrumbSlice";
 import storage from 'redux-persist/lib/storage';
@@ -34,7 +35,8 @@ const persistConfig = {
         cart: cartReducer,
         cartList: cartListReducer,
         cartTotalPrice: cartTotalPriceReducer,
-        adminAuth: adminAuthReducer
+        adminAuth: adminAuthReducer,
+        search: searchReducer
     })
 
     const persistedReducer = persistReducer(persistConfig, rootReducer)

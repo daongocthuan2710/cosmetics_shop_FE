@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import './index.scss';
 import {Navigation} from 'react-minimal-side-navigation';
 import 'react-minimal-side-navigation/lib/ReactMinimalSideNavigation.css';
@@ -14,6 +14,7 @@ import { breadcrumbList } from "../../../../../Store/user/breadcrumbSlice";
 
 export default function Sidebar(props) {
     const navigate = useNavigate();
+
     const cates = [];
     for (var key in props.categoryList) {
         var item = props.categoryList[key];
@@ -87,7 +88,10 @@ export default function Sidebar(props) {
                 Khoảng giá
             </Col>
             <Col md={12} className="sidebar-wrapper__price__range">
-                <PriceRange/>
+                <PriceRange 
+                    price={props.price}
+                    handlePrice={props.handlePrice}
+                />
             </Col>
         </Row>
         {/* <Row className="sidebar-wrapper__origin">
@@ -111,7 +115,7 @@ export default function Sidebar(props) {
                 Thương hiệu
             </Col>
             <Col md={12} className="sidebar-wrapper__brand__list">
-                <Brand/>
+                <Brand handleFilterByBrand={props.handleFilterByBrand}/>
             </Col>
         </Row>
         <Row className="sidebar-wrapper__rating-star">
@@ -119,7 +123,7 @@ export default function Sidebar(props) {
                 Đánh giá sản phẩm
             </Col>
             <Col md={12}>
-                <RatingStarCheckbox/>
+                <RatingStarCheckbox handleFilterByRating={props.handleFilterByRating}/>
             </Col>
         </Row>
         </Container>

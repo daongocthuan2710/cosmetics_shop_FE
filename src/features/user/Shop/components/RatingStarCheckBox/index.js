@@ -3,7 +3,7 @@ import { Container} from "react-bootstrap";
 import TextRating from "../../../../../components/RatingStar";
 import "./index.scss";
 
-export default function RatingStarCheckbox(props) {
+function RatingStarCheckbox(props) {
     const [value, setValue] = useState(0);
 
     const handleChangeRatingStar = (i,event) => {
@@ -11,14 +11,16 @@ export default function RatingStarCheckbox(props) {
             e.classList.remove("active");
           });
           setValue(i);
+          props.handleFilterByRating(i);
       };
-
+ 
     const ratingStarList = [];
     for (let i = 0; i < 6; i++) {
         ratingStarList.push(       
             <div className="rating-container" key={i}>     
                 <div className={`rating ${i === value ? "active" : ""}`}  
-                    onClick={(e)=>handleChangeRatingStar(i,e)} 
+                    onClick={(e)=>{handleChangeRatingStar(i,e)}
+                    } 
                     key={i}
                 >
                     <TextRating value={i} text={i === 5? "" : "trở lên"}/>
@@ -32,3 +34,5 @@ export default function RatingStarCheckbox(props) {
         </>
     );
 }
+
+export default React.memo(RatingStarCheckbox);

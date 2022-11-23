@@ -4,6 +4,7 @@
 // POST /products
 // PATCH /products/:productId
 // DELETE /products/:productId
+import axios from "axios";
 import axiosClient from "./axiosClient.js";
 
 const prefix = "/product";
@@ -14,9 +15,13 @@ const productApi = {
         perPage = undefined,
         category = undefined,
         author = undefined,
-        ratingStar = undefined,
+        rating = undefined,
+        priceFrom = undefined,
+        priceTo = undefined,
+        brand = [],
         sortKey = "on_sale",
         sortValue = "desc",
+        search = '',
         limit = undefined,
         paginate = false,
     } = {}) => {
@@ -32,19 +37,39 @@ const productApi = {
         }
 
         if (category) {
-            queryStringArray.push(`filter[category]=${category}`);
+            queryStringArray.push(`category=${category}`);
         }
 
         if (author) {
             queryStringArray.push(`filter[author]=${author}`);
         }
+        if (brand.length > 0) {
+            let stringBrand = '';
+            brand.forEach((item) => {
+                stringBrand += `${item}-`;
+            })
+            stringBrand = stringBrand.slice(0, -1 ) ;
+            queryStringArray.push(`brand=${stringBrand}`);
+        }
 
-        if (ratingStar) {
-            queryStringArray.push(`filter[rating_star]=${ratingStar}`);
+        if (rating) {
+            queryStringArray.push(`star=${rating}`);
+        }
+
+        if (priceFrom) {
+            queryStringArray.push(`priceFrom=${priceFrom}`);
+        }
+
+        // if(search != ''){
+        //     queryStringArray.push(`name=${search}`);
+        // }
+
+        if (priceTo) {
+            queryStringArray.push(`priceTo=${priceTo}`);
         }
 
         if (sortKey && sortValue) {
-            queryStringArray.push(`sort[${sortKey}]=${sortValue}`);
+            queryStringArray.push(`sort${sortKey}=${sortValue}`);
         }
 
         if (limit) {
@@ -63,7 +88,6 @@ const productApi = {
                         : `&${queryStringArray[index]}`;
             }
         }
-
         return axiosClient.get(url);
     },
     getAll: () => {

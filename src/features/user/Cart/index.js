@@ -14,14 +14,21 @@ import { cartListAction } from "../../../Store/user/cartListSlice";
 import Swal from 'sweetalert2';
 import "./index.scss";
 import { cartTotalPriceAction } from "../../../Store/user/cartTotalPriceSlice";
+import orderApi from "../../../api/orderApi";
 
 
 export default function Cart() {
+  const IMAGE_CLOUD = {
+    CLOUD_NAME: 'dwwuvc6qo',
+    GET_URL: 'https://res.cloudinary.com',
+}
+  const userInfo = useSelector(state => state.auths) || [];
   const cartList = useSelector(state => state.cartList)[0] || [];
-  const dispatch = useDispatch();
   const [totalPrice, setTotalPrice] = useState(0);
+  const [disableBtn, setDisableBtn] = useState(true);
   const [totalCheckbox, setTotalCheckbox] = useState(false);
   const [totalItem, setTotalItem] = useState(0);
+  const dispatch = useDispatch();
   const handleBreadcrumb = (breadcrumb) => {
     const action = breadcrumbList(breadcrumb);
     dispatch(action);
@@ -46,6 +53,12 @@ export default function Cart() {
           checkAll = false;
         }    
       });
+      if(sum > 0){
+        setDisableBtn(false);
+      }else{
+        setDisableBtn(true);
+      }
+      
       setTotalCheckbox(checkAll);
       setTotalItem(quantity);
     }
@@ -99,12 +112,10 @@ const handleRemoveAll = () => {
         cancelButtonText: 'Hủy'
       }).then((result) => {
         if (result.isConfirmed) {
-          tmp.forEach((item) => {
-            if(item.checked)
-            {
-              handleRemove(item);
-            } 
-          });
+          const cartList = cartListAction([]);
+          dispatch(cartList);  
+          localStorage.setItem('cart', JSON.stringify([]));
+
           Swal.fire(
             'Xóa thành công!',
             'Giỏ hàng đang trống.',
@@ -156,6 +167,58 @@ const handleCheckbox = (e) => {
       dispatch(action);  
       localStorage.setItem('cart', JSON.stringify(tmp));
     } 
+  }
+}
+
+const handleOrder = async () => {
+  try{
+    let cartList = JSON.parse(localStorage.getItem('cart')) || [];
+    let newCartList = [];
+    cartList.forEach((item) =>{
+      if(item.checked){
+        newCartList.push({
+          productId: item.id,
+          quantity: item.quantity,
+          price: item.price * ( 1 - item.discount/100)
+        })
+      }
+    });
+    const body = {
+      token: userInfo.token,
+      accountId: userInfo.id,
+      data: newCartList,
+      total: totalPrice,
+      id_delivery: 2,
+      id_voucher: 0,
+      id_status: 1,
+      paid_status: false
+    }
+    const response = await orderApi. createOrder(body);
+    if(response.status == 200){
+      newCartList.forEach((item) =>{
+        handleRemove(item);
+      });
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        text: 'Thanh toán thành công',
+        width: '300px',
+        height:'300px',
+        showConfirmButton: false,
+        timer: 1500
+      })
+    }
+  } catch(error) {
+    console.log("Fail to order", error);
+    Swal.fire({
+      position: 'center',
+      icon: 'error',
+      text: error.response.data.message || error.message,
+      width: '300px',
+      height:'300px',
+      showConfirmButton: false,
+      timer: 1500
+    })
   }
 }
 
@@ -218,7 +281,7 @@ const handleCheckbox = (e) => {
                         >
                           <NavLink to={`/product/${item.id}`}>
                             <img
-                              src={products['mask1.png']}
+                              src={`${IMAGE_CLOUD.GET_URL}/${IMAGE_CLOUD.CLOUD_NAME}/image/upload/${item.image}`}
                               onError={() =>(errors['no_image.jpg'])}
                               className="img-fluid rounded-top"
                               alt={item.name}
@@ -324,7 +387,10 @@ const handleCheckbox = (e) => {
                 </span>
               </Col>
               <Col md={4} className="cart-pay-btn">
-                <Button>
+                <Button 
+                  onClick={() => {handleOrder()}}
+                  disabled={disableBtn}
+                >
                   Mua hàng
                 </Button>
               </Col>

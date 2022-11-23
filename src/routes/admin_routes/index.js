@@ -7,7 +7,6 @@ function Admin_Routes({auth}){
     const navigate = useNavigate();
 
     React.useEffect(() =>{
-        // console.log(typeof(auth.token));
         if(auth.token == undefined){
             navigate("/admin/login");
         }else{

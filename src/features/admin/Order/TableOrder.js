@@ -13,7 +13,6 @@ export default function TableOrder() {
     const fetchorders =  async () => {
         try{
           const response = await orderApi.getAll();
-          console.log(response.data);
           setorderList(response.data.content);
         } catch(error) {
           console.log("Fail to fetch orders", error);
@@ -77,7 +76,6 @@ export default function TableOrder() {
       }
       setTable(tb);
     }
-    console.log(orderList)
   },[orderList])
   //pagination
   let active = 2;

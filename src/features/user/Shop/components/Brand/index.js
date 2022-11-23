@@ -1,22 +1,24 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Col, Row } from "react-bootstrap";
+import brandApi from "../../../../../api/brandApi";
 import "./index.scss";
 
-export default function Brand(props) {
-    const brands = [
-        {
-            id:"1", 
-            name:"HIN NAIL", 
-        },
-        {
-            id:"2", 
-            name:"Some By Mi", 
-        },
-        {
-            id:"3", 
-            name:"Goodal", 
+function Brand(props) {
+    const [brands, setBrands] = useState([]);
+
+    const fetchBrands =  async () => {
+        try{
+          const response = await brandApi.getAll();
+          setBrands(response.data);
+          
+        } catch(error) {
+          console.log("Fail to fetch brands", error);
         }
-    ];
+      }
+
+      useEffect(() =>{
+        fetchBrands();
+      }, []);
 
     return (
         <>
@@ -30,7 +32,7 @@ export default function Brand(props) {
                                     type="checkbox"
                                     value={item.id}
                                     id={item.id}
-                                    // onChange = {props.onChangeCategory}
+                                    onChange = {(e) => props.handleFilterByBrand(e.target.checked, item.id)}
                                 />
                                 <label className="form-check-label" htmlFor={item.id}>
                                     {item.name}
@@ -43,3 +45,5 @@ export default function Brand(props) {
         </>
     );
 }
+
+export default React.memo(Brand);

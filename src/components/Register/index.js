@@ -24,12 +24,42 @@ export default function Register(props) {
                 />
               </div>
               <div className="form-group">
+                <label>Họ và tên <font color="red">*</font></label>
+                <input
+                  type="text"
+                  className="form-control inputText"
+                  id="UserNameRegister"
+                  name="TextInput"
+                  aria-describedby="usernameHelp"
+                  
+                />
+              </div>
+              <div className="form-group">
+                <label>Số điện thoại <font color="red">*</font></label>
+                <input
+                  type="number"
+                  className="form-control inputText"
+                  id="PhoneRegister"
+                  name="TextInput"
+                  aria-describedby="usernameHelp"
+                  
+                />
+              </div>
+              <div className="form-group">
                 <label>Mật khẩu <font color="red">*</font></label>
                 <input
                   type="password"
                   className="form-control inputText"
-                  id="exampleInputPasswordRegister"
+                  id="PasswordRegister"
                   
+                />
+              </div>
+              <div className="form-group">
+                <label>Xác nhận mật khẩu <font color="red">*</font></label>
+                <input
+                  type="password"
+                  className="form-control inputText"
+                  id="ConfirmPasswordRegister"
                 />
               </div>
               <p className="err-msg"></p>
@@ -39,9 +69,6 @@ export default function Register(props) {
             </form>
             <div id="btn-login-wrapper">
               <h3>Login</h3>
-              <div>Đăng ký cho trang web này cho phép bạn truy cập trạng thái và lịch sử đơn đặt hàng của mình. 
-                Chỉ cần điền vào các trường bên dưới và chúng tôi sẽ sớm thiết lập tài khoản mới cho bạn. 
-                Chúng tôi sẽ chỉ yêu cầu bạn cung cấp thông tin cần thiết để thực hiện quy trình mua hàng nhanh hơn và dễ dàng hơn.</div>
               <button type="button" id="btn-login" onClick={() => {props.closeRegisterForm(); props.handleLoginForm()}}>Đăng nhập</button>
             </div>
         </div>

@@ -72,7 +72,6 @@ export default function TableProduct() {
       }
       setTable(tb);
     }
-    console.log(productList)
   },[productList])
   //pagination
   let active = 2;

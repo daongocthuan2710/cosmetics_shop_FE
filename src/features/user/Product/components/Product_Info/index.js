@@ -12,7 +12,7 @@ import Swal from 'sweetalert2';
 import "./index.scss";
 
 function ProductInfo(props) {
-    const IMAGE_CLOUD = {
+    const IMAGE_CLOUD = { 
         CLOUD_NAME: 'dwwuvc6qo',
         GET_URL: 'https://res.cloudinary.com',
     }

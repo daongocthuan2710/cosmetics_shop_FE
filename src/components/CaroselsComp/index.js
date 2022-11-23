@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Navigation, Pagination, Autoplay } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import CardItem from "../Card_item";
@@ -12,12 +12,34 @@ import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import "swiper/css/autoplay";
 import "./index.scss";
+import productApi from "../../api/productApi";
+import { Loading } from "notiflix";
 
 function ProductCarousel(props) {
+    const [productList, setProductList] = useState(props.productList || []);
+    const fetchProducts =  async () => {
+        Loading.hourglass({
+          clickToClose: true,
+          svgSize: "50px",
+          svgColor: "rgb(223, 139, 42)",
+          backgroundColor: "rgb(255, 255, 255)"
+          })
+        try{
+          const response = await productApi.getProducts({category:props.cateId});
+          setProductList(response.data.content);
+        } catch(error) {
+          console.log("Fail to fetch products", error);
+        }
+        Loading.remove();
+      }
+
+      useEffect(() => {
+        fetchProducts();
+      }, []);
 
     return (
         <>
-        {props.productList.length > 0
+        {productList.length > 0
          ?  <div className="suntory-recent-products">
                 <Container fluid>
                 <Row>
@@ -54,7 +76,8 @@ function ProductCarousel(props) {
                     >
                         <Row>
                             <Col md={12}>
-                            {props.productList.map((item) => (
+                            {productList
+                            .map((item) => (
                                 <SwiperSlide
                                     key={item.id}
                                     className="swiper-slide"
