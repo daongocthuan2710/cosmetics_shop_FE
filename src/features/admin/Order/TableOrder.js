@@ -5,6 +5,7 @@ import orderApi from '../../../api/orderApi';
 import Spinner from 'react-bootstrap/Spinner';
 import { Button } from 'bootstrap';
 import { Message } from '@mui/icons-material';
+import Swal from 'sweetalert2';
 
 export default function TableOrder() {
   const [page,setPage] = useState({
@@ -32,7 +33,14 @@ export default function TableOrder() {
       useEffect(() =>{
         fetchorders();
       }, [isloading]);
-      
+      const updateOrder = async (id) => {
+        await orderApi.confirmOrder(id);
+        Swal.fire(
+          'Duyệt thành công!',
+          'success'
+        )
+        setIsloading(!isloading);
+    }
   useEffect(() => {
     if(orderList.length != 0){
       let active = page.currentpage;
@@ -56,7 +64,12 @@ export default function TableOrder() {
                   <td>{element.paid_status ? "Đã thanh toán" : "Chưa thanh toán"}</td>
                   <td>{element.total}</td>
                   <td>{element.status}</td>
-                  <td><button onClick={() => {updateOrder(element.id)}} style={{padding: "4px", color: "white",backgroundColor: "green",border: "none", borderRadius: "5px"}}>Duyệt</button></td>
+                  <td>{element.status == "Chưa xác nhận" ?
+                    <button onClick={() => {updateOrder(element.id)}} 
+                    style={{padding: "4px", color: "white",backgroundColor: "red",border: "none", borderRadius: "5px"}}>
+                      Duyệt</button>: <button style={{padding: "4px", color: "white",backgroundColor: "green",border: "none", borderRadius: "5px"}}>Đã duyệt</button>}
+                      </td>
+                    
                 </tr>
               )
               i+=1;
@@ -64,12 +77,11 @@ export default function TableOrder() {
         return (
           <>
           <div style={{float: "right"}}>
-        <input placeholder='Tên sản phẩm' className='filter-product-item'></input>
         <select className='filter-product-item'>
-          <option value="" selected>Thương hiệu</option>
+          <option value="" selected>Tình trạng</option>
         </select>
         <select className='filter-product-item'>
-          <option value="" selected>Loại</option>
+          <option value="" selected>Trạng thái</option>
         </select>
       </div>
           <Table striped bordered hover size="sm" className='product-admin-table'>
@@ -96,13 +108,7 @@ export default function TableOrder() {
     }
   },[orderList])
   //pagination
-  const updateOrder = (id) => {
-      const rs = orderApi.confirmOrder(id);
-    if(rs.status == 200){
-      Message("Cập nhật thành công");
-      setIsloading(!isloading);
-    }
-  }
+  
   return (
     <div>
       {table}
