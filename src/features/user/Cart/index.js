@@ -100,7 +100,7 @@ const handleRemoveAll = () => {
     if(tmp.length > 0)
     {
       Swal.fire({
-        title: 'Bạn chắn chứ?',
+        title: 'Bạn chắc chắn chứ?',
         text: "Bạn sẽ không thể khôi phục sản phẩm đã xóa!",
         icon: 'warning',
         width: "350px",

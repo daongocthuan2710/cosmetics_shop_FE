@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from 'react'
-import { Pagination, Table } from 'react-bootstrap';
+import { Button, Pagination, Table } from 'react-bootstrap';
 import productApi from '../../../api/productApi';
-import { FaEdit,FaTrash  } from "react-icons/fa";
+import { FaEdit,FaTrash,FaPlus  } from "react-icons/fa";
 import Spinner from 'react-bootstrap/Spinner';
 
 export default function TableProduct() {
+    const [page,setPage] = useState({
+      currentpage: 1,
+      totalpage: 1
+    });
     const [productList,setProductList] = useState([]);
     const [filter,setFilter] = useState({
 
@@ -14,6 +18,10 @@ export default function TableProduct() {
         try{
           const response = await productApi.getAll();
           setProductList(response.data.content);
+          setPage({
+            currentpage: response.data.number + 1 ,
+            totalpage: response.data.totalPages
+          })
         } catch(error) {
           console.log("Fail to fetch products", error);
         }
@@ -24,6 +32,16 @@ export default function TableProduct() {
       }, []);
   useEffect(() => {
     if(productList.length != 0){
+      let active = page.currentpage;
+  let items = [];
+  for (let number = 1; number <= page.totalpage; number++) {
+    items.push(
+      <Pagination.Item key={number} active={number === active}>
+        {number}
+      </Pagination.Item>,
+    );
+  }
+  console.log(page);
       const tb = () => {
         let arr = [];
         let i = 1;
@@ -42,7 +60,7 @@ export default function TableProduct() {
         });
         return (
           <>
-          <div style={{float: "right"}}>
+          <div style={{}}>
         <input placeholder='Tên sản phẩm' className='filter-product-item'></input>
         <select className='filter-product-item'>
           <option value="" selected>Thương hiệu</option>
@@ -50,6 +68,7 @@ export default function TableProduct() {
         <select className='filter-product-item'>
           <option value="" selected>Loại</option>
         </select>
+        <Button style={{float: "right", margin: "2vh 3vw"}}><FaPlus />Thêm</Button>
       </div>
           <Table striped bordered hover size="sm" className='product-admin-table'>
             <thead>
@@ -74,15 +93,7 @@ export default function TableProduct() {
     }
   },[productList])
   //pagination
-  let active = 2;
-  let items = [];
-  for (let number = 1; number <= 5; number++) {
-    items.push(
-      <Pagination.Item key={number} active={number === active}>
-        {number}
-      </Pagination.Item>,
-    );
-  }
+  
   return (
     <div>
       {/* <div style={{float: "right"}}>
