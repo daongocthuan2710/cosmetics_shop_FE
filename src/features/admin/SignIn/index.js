@@ -27,7 +27,8 @@ function Admin_Login() {
           setMessError("Đây không phải tài khoản của quản trị viên");
         }
         else{
-          localStorage.setItem("token", response.data.token);
+          localStorage.setItem("admintoken", response.data.token);
+          localStorage.setItem("adminid", response.data.id);
           const action = loginAdminAction(response.data);
           dispatch(action);
           navigate("/admin");
