@@ -4,7 +4,7 @@ const prefix = "/auth";
 
 const authApi = {
     register: (body) => {
-        const url = `${prefix}/register`;
+        const url = `${prefix}/signup`;
         return axiosClient.post(url, body);
     }, 
 

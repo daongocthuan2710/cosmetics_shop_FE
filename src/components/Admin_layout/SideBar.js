@@ -15,28 +15,30 @@ const Sidebar = () => {
       <CDBSidebar textColor="#fff" backgroundColor="#333">
         <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large"></i>}>
           <a href="/" className="text-decoration-none" style={{ color: 'inherit' }}>
-            Sidebar
+            Cosmetics_admin
           </a>
         </CDBSidebarHeader>
 
         <CDBSidebarContent className="sidebar-content">
           <CDBSidebarMenu>
-            <NavLink exact to="/admin/product" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="table">Product</CDBSidebarMenuItem>
+            
+          <NavLink exact to="/admin/" activeClassName="activeClicked">
+              <CDBSidebarMenuItem icon="table">Đơn hàng</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/admin/" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="table">Order</CDBSidebarMenuItem>
+            <NavLink exact to="/admin/product" activeClassName="activeClicked">
+              <CDBSidebarMenuItem icon="table">Sản phẩm</CDBSidebarMenuItem>
             </NavLink>
             <NavLink exact to="/admin/account" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="user">Account</CDBSidebarMenuItem>
+              <CDBSidebarMenuItem icon="user">Tài khoản</CDBSidebarMenuItem>
+            </NavLink>
+            <NavLink exact to="/admin/hero404" target="_blank" activeClassName="activeClicked">
+              <CDBSidebarMenuItem icon="table">Danh mục</CDBSidebarMenuItem>
             </NavLink>
             <NavLink exact to="/admin/analytics" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="chart-line">Analytics</CDBSidebarMenuItem>
+              <CDBSidebarMenuItem icon="chart-line">Thống kê</CDBSidebarMenuItem>
             </NavLink>
 
-            <NavLink exact to="/admin/hero404" target="_blank" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="exclamation-circle">404 page</CDBSidebarMenuItem>
-            </NavLink>
+            
           </CDBSidebarMenu>
         </CDBSidebarContent>
 
@@ -46,7 +48,7 @@ const Sidebar = () => {
               padding: '20px 5px',
             }}
           >
-            Sidebar Footer
+            Đăng xuất
           </div>
         </CDBSidebarFooter>
       </CDBSidebar>
