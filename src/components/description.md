@@ -1,1 +1,0 @@
-## Components that are used by both admin's Page and user's Page.

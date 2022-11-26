@@ -41,8 +41,7 @@ export default function Register(props) {
                   className="form-control inputText"
                   id="UserNameRegister"
                   name="TextInput"
-                  aria-describedby="usernameHelp"
-                  
+                  aria-describedby="usernameHelp"    
                 />
               </div>
               <div className="form-group">
