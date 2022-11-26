@@ -3,6 +3,7 @@ import productReducer from "./user/homeSlice";
 import authReducer from "./authSlice";
 import cateReducer from "./user/cateSlice";
 import adminAuthReducer from "./admin/adminAuthSlice";
+import shipperAuthReducer from "./shipper/shipperAuthSlice";
 import cartReducer from "./user/cartSlice";
 import cartListReducer from "./user/cartListSlice";
 import cartTotalPriceReducer from "./user/cartTotalPriceSlice";
@@ -36,7 +37,8 @@ const persistConfig = {
         cartList: cartListReducer,
         cartTotalPrice: cartTotalPriceReducer,
         adminAuth: adminAuthReducer,
-        search: searchReducer
+        search: searchReducer,
+        shipperAuth: shipperAuthReducer
     })
 
     const persistedReducer = persistReducer(persistConfig, rootReducer)
