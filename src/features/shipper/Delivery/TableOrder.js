@@ -19,8 +19,7 @@ export default function TableOrder() {
     const [table,setTable] = useState(<><Spinner animation="border" style={{margin: "20vh 30vw", fontSize: "20vw"}} variant='dark'/></>);
     const fetchorders =  async () => {
         try{
-          const response = await orderApi.getAll();
-          console.log(response);
+          const response = await orderApi.getAllOrderShipper();
           setorderList(response.data.content);
           setPage({
             currentpage: response.data.number + 1 ,
@@ -34,13 +33,23 @@ export default function TableOrder() {
       useEffect(() =>{
         fetchorders();
       }, [isloading]);
-      const updateOrder = async (id) => {
-        await orderApi.confirmOrder(id);
+      const deliveryOrder = async (id) => {
+        await orderApi.updateOrders(id,4);
         Swal.fire(
-          'Duyệt thành công!',
+          'Đang giao hàng!',
           'success'
         )
         setIsloading(!isloading);
+        
+    }
+    const deliveriedOrder = async (id) => {
+        await orderApi.updateOrders(id,5);
+        Swal.fire(
+          'Giao hàng thành công!',
+          'success'
+        )
+        setIsloading(!isloading);
+        
     }
   useEffect(() => {
     if(orderList.length != 0){
@@ -65,10 +74,14 @@ export default function TableOrder() {
                   <td>{element.paid_status ? "Đã thanh toán" : "Chưa thanh toán"}</td>
                   <td>{element.total}</td>
                   <td>{element.status}</td>
-                  <td>{element.status == "Chưa xác nhận" ?
-                    <button onClick={() => {updateOrder(element.id)}} 
-                    style={{padding: "4px", color: "white",backgroundColor: "red",border: "none", borderRadius: "5px"}}>
-                      Duyệt</button>: <button style={{padding: "4px", color: "white",backgroundColor: "green",border: "none", borderRadius: "5px"}}>Đã duyệt</button>}
+                  <td>{element.deliveryInformation}</td>
+                  <td>{element.status == "Đã nhận đơn" ?
+                    <button onClick={() => {deliveryOrder(element.id)}} 
+                    style={{padding: "4px", color: "white",backgroundColor: "rgb(230, 230, 0)",border: "none", borderRadius: "5px"}}>
+                      Đang giao</button>: element.status == "Đang giao" ?
+                      <button onClick={() => {deliveriedOrder(element.id)}} style={{padding: "4px", color: "white",backgroundColor: "rgb(172, 230, 0)",border: "none", borderRadius: "5px"}}>
+                        Đã giao</button> : <button disabled style={{padding: "4px", color: "white",backgroundColor: "green",border: "none", borderRadius: "5px"}}>
+                        Giao thành công</button>}
                       </td>
                     
                 </tr>
@@ -93,6 +106,7 @@ export default function TableOrder() {
               <th>Tình trạng</th>
               <th>Tổng</th>
               <th>Trạng thái</th>
+              <th>Địa chỉ giao hàng</th>
               <th>Duyệt</th>
             </thead>
             <tbody>
