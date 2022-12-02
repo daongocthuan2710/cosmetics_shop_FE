@@ -19,8 +19,7 @@ export default function TableOrder() {
     const [table,setTable] = useState(<><Spinner animation="border" style={{margin: "20vh 30vw", fontSize: "20vw"}} variant='dark'/></>);
     const fetchorders =  async () => {
         try{
-          const response = await orderApi.getAll();
-          console.log(response);
+          const response = await orderApi.getAllNoShipper();
           setorderList(response.data.content);
           setPage({
             currentpage: response.data.number + 1 ,
@@ -35,7 +34,7 @@ export default function TableOrder() {
         fetchorders();
       }, [isloading]);
       const updateOrder = async (id) => {
-        await orderApi.confirmOrder(id);
+        await orderApi.updateOrders(id,3);
         Swal.fire(
           'Duyệt thành công!',
           'success'
@@ -65,10 +64,11 @@ export default function TableOrder() {
                   <td>{element.paid_status ? "Đã thanh toán" : "Chưa thanh toán"}</td>
                   <td>{element.total}</td>
                   <td>{element.status}</td>
-                  <td>{element.status == "Chưa xác nhận" ?
+                  <td>{element.deliveryInformation}</td>
+                  <td>
                     <button onClick={() => {updateOrder(element.id)}} 
-                    style={{padding: "4px", color: "white",backgroundColor: "red",border: "none", borderRadius: "5px"}}>
-                      Duyệt</button>: <button style={{padding: "4px", color: "white",backgroundColor: "green",border: "none", borderRadius: "5px"}}>Đã duyệt</button>}
+                    style={{padding: "4px", color: "white",backgroundColor: "rgb(0, 64, 255)",border: "none", borderRadius: "5px"}}>
+                      Nhận đơn</button>
                       </td>
                     
                 </tr>
@@ -93,6 +93,7 @@ export default function TableOrder() {
               <th>Tình trạng</th>
               <th>Tổng</th>
               <th>Trạng thái</th>
+              <th>Địa chỉ giao hàng</th>
               <th>Duyệt</th>
             </thead>
             <tbody>

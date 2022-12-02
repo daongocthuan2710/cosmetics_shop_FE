@@ -57,7 +57,45 @@ const orderApi = {
         };
         const url = `${prefix}/`+ id;
         return axiosClient.put(url,body,header);
-    }
+    },
+    getAllNoShipper: () => {
+        const token = localStorage.getItem("shippertoken");
+
+        const header = {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        };
+        const url = `${prefix}?status=2`;
+        return axiosClient.get(url,header);
+    },
+    getAllOrderShipper: () => {
+        const token = localStorage.getItem("shippertoken");
+        const accountid = localStorage.getItem("shipperid");
+
+        const header = {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        };
+        const url = `${prefix}?accountId=`+accountid;
+        return axiosClient.get(url,header);
+    },
+    updateOrders: (id,status) => {
+        const token = localStorage.getItem("shippertoken");
+        const accountid = localStorage.getItem("shipperid");
+        const body = {
+            id_account: accountid,
+            id_status: status
+        }
+        const header = {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        };
+        const url = `${prefix}/`+ id;
+        return axiosClient.put(url,body,header);
+    },
 };
 
 export default orderApi;

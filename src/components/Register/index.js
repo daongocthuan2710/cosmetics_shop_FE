@@ -24,7 +24,18 @@ export default function Register(props) {
                 />
               </div>
               <div className="form-group">
-                <label>Họ và tên <font color="red">*</font></label>
+                <label>Họ <font color="red">*</font></label>
+                <input
+                  type="text"
+                  className="form-control inputText"
+                  id="UserNameRegister"
+                  name="TextInput"
+                  aria-describedby="usernameHelp"
+                  
+                />
+              </div>
+              <div className="form-group">
+                <label>Tên <font color="red">*</font></label>
                 <input
                   type="text"
                   className="form-control inputText"
@@ -62,7 +73,7 @@ export default function Register(props) {
                 />
               </div>
               <p className="err-msg"></p>
-              <button type="submit" className="btn-submit">
+              <button type="submit" className="btn-submit" onClick={() => {props.closeRegisterForm(); props.handleLoginForm()}}>
                 ĐĂNG KÝ
               </button>
             </form>
