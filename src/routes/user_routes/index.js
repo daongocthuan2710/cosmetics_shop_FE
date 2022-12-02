@@ -40,12 +40,14 @@ function User_Routes({auth}){
                                 <Route path="account/profile" element={<UserProfile/>}></Route>
                                 <Route path="account/password" element={<ChangePassword/>}></Route>
                                 <Route path="purchase" element={<UserPurchase/>}>
-                                    <Route path="type=1" element={<AllType/>}></Route>
-                                    <Route path="type=2" element={<WaitForConfirmation/>}></Route>
-                                    <Route path="type=3" element={<WaitingForTaking/>}></Route>
-                                    <Route path="type=4" element={<Delivering/>}></Route>
-                                    <Route path="type=5" element={<Delivered/>}></Route>
-                                    <Route path="type=6" element={<Cancelled/>}></Route>
+                                    <Route path="type=1" element={<AllType type={"Tất cả"}/>}></Route>
+                                    <Route path="type=2" element={<AllType type={"Chưa xác nhận"}/>}></Route>
+                                    <Route path="type=3" element={<AllType type={"Đã xác nhận"}/>}></Route>
+                                    <Route path="type=4" element={<AllType type={"Đã nhận đơn"}/>}></Route>
+                                    <Route path="type=5" element={<AllType type={"Đang giao"}/>}></Route>
+                                    <Route path="type=6" element={<AllType type={"Đã giao"}/>}></Route>
+                                    <Route path="type=7" element={<AllType type={"Đã nhận hàng"}/>}></Route>
+                                    <Route path="type=8" element={<AllType type={"Đã hủy"}/>}></Route>
                                 </Route>
                             </Route> 
                         </>

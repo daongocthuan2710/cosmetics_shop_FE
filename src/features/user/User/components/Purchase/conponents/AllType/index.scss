@@ -1,11 +1,97 @@
 .all_type{
     padding: 0 !important;
+
     .all_type_order{
         padding: 10px !important;
+        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+        margin-bottom: 50px !important;
 
         .all_type_order_detail{
             line-height: 100%;
         }
 
+    }
+}
+
+.order-status{
+    display: flex;
+    justify-content: space-between;
+    width: fit-content;
+    float: right;
+
+    &_1{
+        color: #26aa99;
+        border-right: .3px rgb(152, 150, 150) solid;
+        padding-right: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &_2{
+        text-transform: uppercase;
+        padding-left: 15px;
+        color: rgb(222, 119, 41);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+.order-detail-list{
+    border-top: .2px rgb(219, 216, 216) solid;
+    border-bottom: .2px rgb(219, 216, 216) solid;
+    padding: 10px;
+    margin: 15px 0 !important;
+    
+    .order-detail-item{
+        padding: 10px 0 !important;
+
+        .order-detail-item-price{
+            float: right;
+            font-size: 14px;
+        }
+    }
+}
+
+.order-total{
+    margin: 15px 0;
+    float: right;
+    width: fit-content;
+
+    .order-total-text{
+
+    }
+
+    .order-total-price{
+        font-size: 20px;
+        color: rgb(236, 100, 51);
+    }
+}
+
+.order-handle{
+    float: right;
+    width: fit-content;
+    margin-bottom: 15px;
+
+    button{
+        border: none;
+        padding: 10px 40px;
+        margin-left: 20px;
+
+        &:hover{
+            opacity: 0.8;
+        }
+    }
+
+    .order-handle-rating{
+        color: white;
+        background-color: orangered;
+    }
+    
+    .order-handle-buy{
+        color: rgb(45, 40, 40);
+        border: .3px rgb(190, 185, 185) solid;
+        background-color: white;
     }
 }

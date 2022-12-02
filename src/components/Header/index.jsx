@@ -85,7 +85,7 @@ export default function Header() {
   }
 
   const handlePurchase = () => {
-    if(auth.token != undefined && auth.roles == "member") navigate("/user/purchase");
+    if(auth.token != undefined && auth.roles == "member") navigate("/user/purchase/type=1");
   }
   
   const fetchCategory =  async () => {

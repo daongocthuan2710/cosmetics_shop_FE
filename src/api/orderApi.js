@@ -13,8 +13,7 @@ const orderApi = {
         const url = prefix;
         return axiosClient.post(url, rest, header);
     },
-    getAll: () => {
-        const token = localStorage.getItem("admintoken");
+    getAll: ({token = undefined}) => {
 
         const header = {
             headers: {
@@ -22,6 +21,26 @@ const orderApi = {
             },
         };
         const url = `${prefix}`;
+        return axiosClient.get(url,header);
+    },
+    getOrderDetail: ({token = undefined, orderId = undefined}) => {
+
+        const header = {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        };
+        const url = `${prefix}/${orderId}/detail`;
+        return axiosClient.get(url,header);
+    },
+    getOrdersByAccount: ({token = undefined, id = undefined}) => {
+
+        const header = {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        };
+        const url = `${prefix}?accountId=${id}`;
         return axiosClient.get(url,header);
     },
     confirmOrder: (id) => {

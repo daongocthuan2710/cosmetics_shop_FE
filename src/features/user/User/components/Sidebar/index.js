@@ -65,7 +65,7 @@ function UserSidebar() {
                         },
                         {
                             title: 'Đơn mua',
-                            itemId: `${match}/purchase`,
+                            itemId: `${match}/purchase/type=1`,
                             elemBefore: () => <TbNotes />,
                         },
                         {
