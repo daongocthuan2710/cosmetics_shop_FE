@@ -11,10 +11,10 @@ import PriceRange from "../Price_Range";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { breadcrumbList } from "../../../../../Store/user/breadcrumbSlice";
+import { typeProductAction } from "../../../../../Store/user/typeProductSlice";
 
 export default function Sidebar(props) {
     const navigate = useNavigate();
-
     const cates = [];
     for (var key in props.categoryList) {
         var item = props.categoryList[key];
@@ -22,12 +22,12 @@ export default function Sidebar(props) {
         item.types.forEach((item_subNav) => {
             subNavTmp.push({
                 title: item_subNav.name,
-                itemId: `/danh-muc/${item.name}/${item_subNav.name}`,
+                itemId: `/danh-muc/${item.name}=${item.id}/${item_subNav.name}=${item_subNav.id}`,
             })
         }); 
         cates.push({
             title: item.name,
-            itemId: `/danh-muc/${item.name}`,
+            itemId: `/danh-muc/${item.name}=${item.id}`,
             subNav: subNavTmp,
         })
      }
@@ -66,7 +66,10 @@ export default function Sidebar(props) {
   <>
     <div id="sidebar" className="sidebar">
         <Container style={{padding: "0"}} fluid className="sidebar-wrapper">
-        <Row className="sidebar-wrapper__title"> 
+        <Row 
+            className="sidebar-wrapper__title"
+            onClick={() => {props.handleAllProduct()}}
+        > 
             <Col>
                 Danh Mục
             </Col>
@@ -76,7 +79,18 @@ export default function Sidebar(props) {
             activeItemId="/thuong-hieu"
             onSelect={({itemId}) => {
                 let url = removeAccents(itemId).split(" ").join("-");
-                let breadcrumbList = itemId.split("/").slice(2);
+                let stringList = itemId.split("/").slice(2);
+                let breadcrumbList = [];
+                let idList = [];
+                stringList.forEach((item) =>{
+                    let tempItem = item.split("=");
+                    breadcrumbList.push(tempItem[0]);
+                    idList.push(tempItem[1]);
+                })
+                if(idList.length > 1){
+                    const action = typeProductAction(idList[1]);
+                    dispatch(action);
+                }
                 handleBreadcrumb(breadcrumbList);
                 navigate(url);
             }}

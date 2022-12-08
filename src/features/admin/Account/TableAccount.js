@@ -5,6 +5,11 @@ import accountApi from '../../../api/accountApi';
 import Spinner from 'react-bootstrap/Spinner';
 
 export default function TableAccount() {
+
+  const handleBlockAccount = (accountId) =>{
+    console.log('accountId', accountId);
+  }
+
     const [page,setPage] = useState({
         currentpage: 1,
         totalpage: 1
@@ -17,7 +22,6 @@ export default function TableAccount() {
         const fetchaccounts =  async () => {
             try{
               const response = await accountApi.getAllAccounts();
-              console.log(response);
               setaccountList(response.data.content);
               setPage({
                 currentpage: response.data.number + 1 ,
@@ -26,7 +30,6 @@ export default function TableAccount() {
             } catch(error) {
               console.log("Fail to fetch accounts", error);
             }
-            console.log("");
           }
         
     useEffect(() =>{
@@ -48,13 +51,16 @@ export default function TableAccount() {
             let i = 1;
             accountList.forEach(element => {
                   arr.push(
-                    <tr>
+                    <tr key={element.id}>
                       <td>{element.id}</td>
                       <td>{element.username}</td>
                       <td>{element.role == 1 ? "admin" : (element.role == 2 ? "member" : "shipper")}</td>
                       <td>{element.status ? "Đang hoạt động" : "Đã khóa"}</td>
                       <td><FaEdit /></td>
-                      <td><FaTrash /></td>
+                      <td
+                        style={{cursor: 'pointer'}}
+                        onClick={() => {handleBlockAccount(element.id)}}
+                      ><FaTrash /></td>
                     </tr>
                   )
                   i+=1;
@@ -63,21 +69,23 @@ export default function TableAccount() {
               <>
               <div style={{float: "right"}}>
             <input placeholder='Tên sản phẩm' className='filter-product-item'></input>
-            <select className='filter-product-item'>
-              <option value="" selected>Thương hiệu</option>
+            <select className='filter-product-item' defaultValue='1'>
+              <option value="1">Thương hiệu</option>
             </select>
-            <select className='filter-product-item'>
-              <option value="" selected>Loại</option>
+            <select className='filter-product-item' defaultValue='1'>
+              <option value="1">Loại</option>
             </select>
           </div>
               <Table striped bordered hover size="sm" className='product-admin-table'>
                 <thead>
-                  <th>ID</th>
-                  <th>Tên tài khoản</th>
-                  <th>Loại tài khoản</th>
-                  <th>Tình trạng</th>
-                  <th>Sửa</th>
-                  <th>Xóa</th>
+                  <tr>
+                    <th>ID</th>
+                    <th>Tên tài khoản</th>
+                    <th>Loại tài khoản</th>
+                    <th>Tình trạng</th>
+                    <th>Sửa</th>
+                    <th>Khóa</th>
+                  </tr>
                 </thead>
                 <tbody>
                   {arr}
@@ -91,7 +99,6 @@ export default function TableAccount() {
           }
           setTable(tb);
         }
-        console.log(accountList)
       },[accountList])
     //   pagination
       

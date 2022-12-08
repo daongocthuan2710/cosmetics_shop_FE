@@ -14,6 +14,7 @@ export default function TableOrder() {
   });
   const [orderList,setorderList] = useState([]);
   const [isloading,setIsloading] = useState(false);
+
     const [filter,setFilter] = useState({
     });
     const [table,setTable] = useState(<><Spinner animation="border" style={{margin: "20vh 30vw", fontSize: "20vw"}} variant='dark'/></>);
@@ -34,7 +35,7 @@ export default function TableOrder() {
         fetchorders();
       }, [isloading]);
       const updateOrder = async (id) => {
-        await orderApi.updateOrders(id,3);
+        await orderApi.updateOrdersShipper(id,3);
         Swal.fire(
           'Duyệt thành công!',
           'success'

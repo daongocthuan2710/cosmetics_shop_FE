@@ -1,4 +1,4 @@
-import React, { useEffect, useState }  from "react";
+import React, { useCallback, useEffect, useState }  from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import HeaderWrapper from "./components/Header__Wrapper";
 import ProductList from "./components/Product_List";
@@ -8,6 +8,8 @@ import Breadcrumb from "../../../components/Breadcrumb";
 import productApi from "../../../api/productApi";
 import { Loading } from "notiflix";
 import { useSelector } from "react-redux";
+import debounce from 'lodash.debounce';
+import { useNavigate } from "react-router-dom";
 import "./index.scss";
 
 export default function Shop() {
@@ -21,11 +23,13 @@ export default function Shop() {
   const [filterBrand, setFilterBrand] = useState([]);
   const categoryList = useSelector(state => state.cates);
   const [price, setPrice] = useState([0, 100]);
+  const typeProduct  = useSelector(state => state.typeProduct);
   const search = Object.values(useSelector(state => state.search))[0] || '';
+  const navigate = useNavigate();
+  // const debouncePrice = useCallback(debounce((nextValue) => setPrice(nextValue), 1000), [])
   const handleNav = () => {
     setIsExpanded(!isExpanded);
   }
-
   const handlePrice = (price) => {
     setPrice(price);
 }
@@ -63,40 +67,45 @@ export default function Shop() {
   useEffect(() =>{
     const body ={
       rating : rating,
-      priceFrom: price[0] * 10000,
-      priceTo: price[1] * 10000,
+      priceFrom: price[0] * 50000,
+      priceTo: price[1] * 50000,
       sortKey: 'Type',
       sortValue: priceSort,
       brand: filterBrand,
-      search: removeAccents(search)
+      search: search,
+      type: typeProduct
     }
     fetchProducts(body);
-  }, [rating, price, priceSort, filterBrand, search]);
+  }, [rating, price, priceSort, filterBrand, search, typeProduct]);
 
-  function removeAccents(str) {
-    var AccentsMap = [
-      "aàảãáạăằẳẵắặâầẩẫấậ",
-      "AÀẢÃÁẠĂẰẲẴẮẶÂẦẨẪẤẬ",
-      "dđ", "DĐ",
-      "eèẻẽéẹêềểễếệ",
-      "EÈẺẼÉẸÊỀỂỄẾỆ",
-      "iìỉĩíị",
-      "IÌỈĨÍỊ",
-      "oòỏõóọôồổỗốộơờởỡớợ",
-      "OÒỎÕÓỌÔỒỔỖỐỘƠỜỞỠỚỢ",
-      "uùủũúụưừửữứự",
-      "UÙỦŨÚỤƯỪỬỮỨỰ",
-      "yỳỷỹýỵ",
-      "YỲỶỸÝỴ"    
-    ];
-    for (var i=0; i<AccentsMap.length; i++) {
-      var re = new RegExp('[' + AccentsMap[i].substr(1) + ']', 'g');
-      var char = AccentsMap[i][0];
-      str = str.replace(re, char);
-    }
-    return str;
+  // function removeAccents(str) {
+  //   var AccentsMap = [
+  //     "aàảãáạăằẳẵắặâầẩẫấậ",
+  //     "AÀẢÃÁẠĂẰẲẴẮẶÂẦẨẪẤẬ",
+  //     "dđ", "DĐ",
+  //     "eèẻẽéẹêềểễếệ",
+  //     "EÈẺẼÉẸÊỀỂỄẾỆ",
+  //     "iìỉĩíị",
+  //     "IÌỈĨÍỊ",
+  //     "oòỏõóọôồổỗốộơờởỡớợ",
+  //     "OÒỎÕÓỌÔỒỔỖỐỘƠỜỞỠỚỢ",
+  //     "uùủũúụưừửữứự",
+  //     "UÙỦŨÚỤƯỪỬỮỨỰ",
+  //     "yỳỷỹýỵ",
+  //     "YỲỶỸÝỴ"    
+  //   ];
+  //   for (var i=0; i<AccentsMap.length; i++) {
+  //     var re = new RegExp('[' + AccentsMap[i].substr(1) + ']', 'g');
+  //     var char = AccentsMap[i][0];
+  //     str = str.replace(re, char);
+  //   }
+  //   return str;
+  // }
+
+  const handleAllProduct = () =>{
+    fetchProducts();
   }
-
+  
     return (
       <>
         <Container className="shop">
@@ -108,6 +117,7 @@ export default function Shop() {
                 categoryList={categoryList}
                 handleFilterByBrand={handleFilterByBrand}
                 handleFilterByRating={handleFilterByRating}
+                handleAllProduct={handleAllProduct}
               />
             </Col>
             <Col md={9} className="shop__wrapper">

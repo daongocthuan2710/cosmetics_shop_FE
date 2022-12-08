@@ -81,7 +81,7 @@ const orderApi = {
         const url = `${prefix}?accountId=`+accountid;
         return axiosClient.get(url,header);
     },
-    updateOrders: (id,status) => {
+    updateOrdersShipper: (id,status) => {
         const token = localStorage.getItem("shippertoken");
         const accountid = localStorage.getItem("shipperid");
         const body = {
@@ -94,6 +94,22 @@ const orderApi = {
             },
         };
         const url = `${prefix}/`+ id;
+        return axiosClient.put(url,body,header);
+    },
+    updateOrders: ({orderId = undefined,
+                    status = undefined,
+                    accountid = undefined,
+                    token = undefined} = {}) => {
+        const body = {
+            id_account: accountid,
+            id_status: status
+        }
+        const header = {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        };
+        const url = `${prefix}/`+ orderId;
         return axiosClient.put(url,body,header);
     },
 };

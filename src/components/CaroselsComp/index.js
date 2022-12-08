@@ -16,30 +16,31 @@ import productApi from "../../api/productApi";
 import { Loading } from "notiflix";
 
 function ProductCarousel(props) {
-    const [productList, setProductList] = useState(props.productList || []);
-    const fetchProducts =  async () => {
-        Loading.hourglass({
-          clickToClose: true,
-          svgSize: "50px",
-          svgColor: "rgb(223, 139, 42)",
-          backgroundColor: "rgb(255, 255, 255)"
-          })
-        try{
-          const response = await productApi.getProducts({category:props.cateId});
-          setProductList(response.data.content);
-        } catch(error) {
-          console.log("Fail to fetch products", error);
-        }
-        Loading.remove();
-      }
+    // const [productList, setProductList] = useState(props.productList || []);
 
-      useEffect(() => {
-        fetchProducts();
-      }, []);
+    // const fetchProducts =  async () => {
+    //     Loading.hourglass({
+    //       clickToClose: true,
+    //       svgSize: "50px",
+    //       svgColor: "rgb(223, 139, 42)",
+    //       backgroundColor: "rgb(255, 255, 255)"
+    //       })
+    //     try{ 
+    //       const response = await productApi.getProducts({category:props.cateId});
+    //       setProductList(response.data.content);
+    //     } catch(error) {
+    //       console.log("Fail to fetch products", error);
+    //     }
+    //     Loading.remove();
+    //   }
+
+    //   useEffect(() => {
+    //     fetchProducts();
+    //   }, []);
 
     return (
         <>
-        {productList.length > 0
+        {props.productList.length > 0
          ?  <div className="suntory-recent-products">
                 <Container fluid>
                 <Row>
@@ -76,7 +77,7 @@ function ProductCarousel(props) {
                     >
                         <Row>
                             <Col md={12}>
-                            {productList
+                            {props.productList
                             .map((item) => (
                                 <SwiperSlide
                                     key={item.id}

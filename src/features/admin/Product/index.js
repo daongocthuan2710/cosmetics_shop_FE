@@ -1,6 +1,6 @@
 import React from 'react'
-import TableProduct from './TableProduct'
 import './style.css'
+import TableProduct from './TableProduct/TableProduct'
 
 export default function Product() {
   return (

@@ -12,6 +12,17 @@ export default function Register(props) {
         <div className="row d-flex justify-content-center">
             <div className="title"><h3>ĐĂNG KÝ</h3></div>
             <form id="registerform">
+            <div className="form-group">
+                <label>Tên tài khoản <font color="red">*</font></label>
+                <input
+                  type="text"
+                  className="form-control inputText"
+                  id="userNameRegister"
+                  name="TextInput"
+                  aria-describedby="usernameHelp"
+                  
+                />
+              </div>
               <div className="form-group">
                 <label>Địa chỉ email <font color="red">*</font></label>
                 <input
@@ -23,12 +34,12 @@ export default function Register(props) {
                   
                 />
               </div>
-              <div className="form-group">
+              {/* <div className="form-group">
                 <label>Họ <font color="red">*</font></label>
                 <input
                   type="text"
                   className="form-control inputText"
-                  id="UserNameRegister"
+                  id="LastNameRegister"
                   name="TextInput"
                   aria-describedby="usernameHelp"
                   
@@ -39,11 +50,11 @@ export default function Register(props) {
                 <input
                   type="text"
                   className="form-control inputText"
-                  id="UserNameRegister"
+                  id="FirstNameRegister"
                   name="TextInput"
                   aria-describedby="usernameHelp"    
                 />
-              </div>
+              </div> */}
               <div className="form-group">
                 <label>Số điện thoại <font color="red">*</font></label>
                 <input

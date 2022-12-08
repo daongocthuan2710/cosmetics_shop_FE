@@ -16,14 +16,15 @@ function ProductInfo(props) {
         CLOUD_NAME: 'dwwuvc6qo',
         GET_URL: 'https://res.cloudinary.com',
     }
-
-    const imgSrc = `${IMAGE_CLOUD.GET_URL}/${IMAGE_CLOUD.CLOUD_NAME}/image/upload/${props.productInfo != undefined ? props.productInfo.image: ''}`;
+    const productInfo = props.productInfo || [];
+    const imgSrc = `${IMAGE_CLOUD.GET_URL}/${IMAGE_CLOUD.CLOUD_NAME}/image/upload/${productInfo != undefined ? productInfo.image: ''}`;
     const [quantity, setQuantity] = useState(1);
     const auth = useSelector(state => state.auths); 
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const handleAddToCart = (item) => {
+        console.log('item',item);
         if(auth.token == undefined || auth.roles != "member"){
             const action = loginNavigateAction([true]);
             dispatch(action);
@@ -34,10 +35,10 @@ function ProductInfo(props) {
             let cartTmp = JSON.parse(localStorage.getItem('cart')) || [];
             const getId = cartTmp.findIndex(isSelect);
             if(getId >= 0){
-                cartTmp[getId].quantity += quantity;
+                cartTmp[getId].cart_quantity += quantity;
             }
             else{
-                const newItem = {...item, quantity: quantity};
+                const newItem = {...item, cart_quantity: quantity};
                 cartTmp = [...cartTmp,newItem];
                 const action = cartTotalAction([cartTmp.length]);
                 dispatch(action);      
@@ -51,7 +52,6 @@ function ProductInfo(props) {
                 icon: 'success',
                 text: 'Thêm vào giỏ hàng thành công',
                 width: '200px',
-                height:'200px',
                 showConfirmButton: false,
                 timer: 1000
               })
@@ -66,6 +66,14 @@ function ProductInfo(props) {
             navigate("/");
         }
     }
+
+    const handleCheckQuantity = (quantity) => {
+        if(quantity == 0 || quantity > productInfo.quantity){
+            return true;
+        }
+        return false;
+    }
+
     return ( 
         <div className="card">
             <div 
@@ -76,46 +84,37 @@ function ProductInfo(props) {
                         src={imgSrc != '' ? imgSrc : errors['no_image.jpg']} 
                         // onError={() => (setImgSrc(errors['no_image.jpg']))}
                         className="img-fluid rounded-start"
-                        alt={props.productInfo.name}
+                        alt={productInfo.name}
                     />
-                    {props.productInfo.discount > 0
+                    {productInfo.discount > 0 
                     ?
                     <div className="promotion">
-                        {props.productInfo != undefined ? props.productInfo.discount : 0}%
+                        {productInfo != undefined ? productInfo.discount : 0}%
                     </div>
                     :''}
                 </div>
                 <div className="col-md-6 col-xs-12 card__body">
                     <div className="card-body basel-scroll-content card__body__info">
                         <h1 className="product-title">
-                            {props.productInfo.name}
+                            {productInfo.name}
                         </h1>
                         <p className="price">
-                            {props.productInfo.discount > 0
+                            {productInfo.discount > 0
                             ?
                                 <>
                                     <span className="origin-price">
-                                        {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(props.productInfo.price)}
+                                        {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(productInfo.price)}
                                     </span>
                                     <span className="promotion-price text-danger">
-                                        &nbsp; {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(props.productInfo.price*(1-props.productInfo.discount/100))} &nbsp;                
+                                        &nbsp; {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(productInfo.price*(1-productInfo.discount/100))} &nbsp;                
                                     </span>
                                     <span className="label-deal">Hot deal</span>
                                 </>
                             : <span className="promotion-price text-danger">
-                                &nbsp; {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(props.productInfo.price)} &nbsp;                
+                                &nbsp; {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(productInfo.price)} &nbsp;                
                               </span>
                         }
-
                         </p>
-                        {/* <div className="value">
-                            <select id="pa_tone-mau" defaultValue="0" className="attribute_pa_tone-mau" aria-label="Default select example">
-                                <option value="0">Chọn một tùy chọn</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select>   
-                        </div> */}
                         <Container className="card__body__info__cart" style={{padding:'0'}}>
                             <Row style={{margin:'0'}}>
                                 <Col md={4} xs={4} className="quantity">
@@ -123,7 +122,7 @@ function ProductInfo(props) {
                                         editable={true}
                                         type={"real"}
                                         precision={2}  
-                                        max={10}
+                                        // max={10}
                                         min={0}
                                         step={1}
                                         value={1}
@@ -133,15 +132,15 @@ function ProductInfo(props) {
                                     />
                                 </Col>
                                 <Col md={8} xs={8} className="inventory">
-                                    <div> Còn lại 112 sản phẩm</div>
+                                    <div> Còn lại {productInfo.quantity || 0} sản phẩm</div>
                                 </Col>
                             </Row>
                             <Row className="mt-3"> 
                                 <Col md={7} xs={7}>
                                     <Button 
                                     className="add-to-cart"
-                                        disabled = {quantity == 0 ? true : false}
-                                        onClick={() => {handleAddToCart(props.productInfo)}}
+                                        disabled = {handleCheckQuantity(quantity)}
+                                        onClick={() => {handleAddToCart(productInfo)}}
                                     >
                                         Thêm Vào Giỏ Hàng
                                     </Button>
@@ -149,8 +148,8 @@ function ProductInfo(props) {
                                 <Col md={5} xs={5}>
                                     <Button 
                                         className="buy-now" 
-                                        disabled = {quantity == 0 ? true : false}
-                                        onClick={() => {handleByNow(props.productInfo)}}
+                                        disabled = {handleCheckQuantity(quantity)}
+                                        onClick={() => {handleByNow(productInfo)}}
                                     >
                                         Mua Ngay
                                     </Button>
@@ -173,4 +172,4 @@ function ProductInfo(props) {
     );
 }   
 
-export default ProductInfo;
+export default React.memo(ProductInfo);

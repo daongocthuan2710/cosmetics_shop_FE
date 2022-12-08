@@ -30,6 +30,12 @@ function CardItem(props) {
                             onError={() => (setImgSrc(errors['no_image.jpg']))}
                             alt={props.productInfo.name}
                         />
+                        {props.productInfo.discount > 0
+                        ?
+                        <div className="promotion">
+                            {props.productInfo != undefined ? props.productInfo.discount : 0}%
+                        </div>
+                        :''}
                     </Link>
                 : <Skeleton 
                     variant="rectangular" 

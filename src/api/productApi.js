@@ -1,10 +1,3 @@
-// GET /products
-// GET /products?categoryId=123&page=1
-// GET /products/:productId
-// POST /products
-// PATCH /products/:productId
-// DELETE /products/:productId
-import axios from "axios";
 import axiosClient from "./axiosClient.js";
 
 const prefix = "/product";
@@ -24,6 +17,7 @@ const productApi = {
         search = '',
         limit = undefined,
         paginate = false,
+        type = ''
     } = {}) => {
         let url = prefix;
         const queryStringArray = [];
@@ -34,6 +28,10 @@ const productApi = {
 
         if (perPage) {
             queryStringArray.push(`per_page=${perPage}`);
+        }
+
+        if (type) {
+            queryStringArray.push(`type=${type}`);
         }
 
         if (category) {
@@ -60,9 +58,9 @@ const productApi = {
             queryStringArray.push(`priceFrom=${priceFrom}`);
         }
 
-        // if(search != ''){
-        //     queryStringArray.push(`name=${search}`);
-        // }
+        if(search != ''){
+            queryStringArray.push(`name=${search}`);
+        }
 
         if (priceTo) {
             queryStringArray.push(`priceTo=${priceTo}`);
@@ -97,6 +95,17 @@ const productApi = {
     getProductById: (id) => {
         const url = `${prefix}/${id}`;
         return axiosClient.get(url);
+    },
+
+    createProduct: (body) => {
+        const token = localStorage.getItem("admintoken");
+        const header = { 
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        };
+        const url = `${prefix}`;
+        return axiosClient.post(url,body,header);
     },
 };
 

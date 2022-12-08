@@ -32,7 +32,6 @@ const userApi = {
                 Authorization: `Bearer ${token}`,
             },
         };
-        console.log('body', rest);
         const url = `${prefix}?accountId=${id}`;
         return axiosClient.put(url, rest, header);
     },

@@ -9,24 +9,58 @@ import {RiGift2Line} from "react-icons/ri";
 import {Navigation} from 'react-minimal-side-navigation';
 import {avatars} from "../../../../../assets/images/datas/avatars";
 import "./index.scss";
+import { useState } from "react";
+import userApi from "../../../../../api/userApi";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
 
 function UserSidebar() {
+    const IMAGE_CLOUD = { 
+        CLOUD_NAME: 'djjcdcmxz',
+        UPLOAD_PRESET: 'oisbbubp',
+        API_URL:'https://api.cloudinary.com/v1_1',
+        GET_URL: 'https://res.cloudinary.com'
+    }
     const navigate = useNavigate();
     const match = '/user';
+    const auth = useSelector(state => state.auths);
+    const [userInfo, setUserInfo] = useState(auth || []);
+    const fileName = userInfo.image != undefined ? `${IMAGE_CLOUD.GET_URL}/${IMAGE_CLOUD.CLOUD_NAME}/image/upload/${userInfo.image}` : '';
     
+    const fetchUserInfo =  async () => {
+        try{
+          const body = {
+            token : auth.token, 
+            id : auth.id
+          };
+          const response = await userApi.getUserById(body);
+          const user = response.data;
+          setUserInfo({...user, ...auth});
+        } catch(error) {
+          console.log("Fail to fetch userInfo", error);
+        }
+      }
+
+      useEffect(() =>{
+        fetchUserInfo();
+      }, [auth]);
+
     return (
       <>
         <div id="userSidebar" className="userSidebar">
             <Container fluid className="userSidebar-wrapper">
                 <Row className="userSidebar-wrapper__info"> 
                     <Col md={4} className="userSidebar-wrapper__info__avatar">
-                        <img src={avatars["man_avt.png"]} alt="Thuận Đào"/>                       
+                        <img 
+                            src={fileName != '' ? fileName : avatars["default-avatar.png"]}
+                            alt={userInfo.firstName ? userInfo.firstName : ''}            
+                        />  
                     </Col>
                     <Col md={8} className="userSidebar-wrapper__info__content">
                         <Row>
                             <Col md={12} className="userSidebar-wrapper__info__content__userName">
-                                daothuan2710
+                                {userInfo.firstName ? userInfo.firstName : ''}   
                             </Col>
                             <Col md={12} className="userSidebar-wrapper__info__content__editProfile">
                                 <Link to="/user/account/profile">

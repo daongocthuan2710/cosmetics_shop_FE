@@ -9,8 +9,14 @@ import './index.scss';
 function Home() {
   const [productList, setProductList] = useState([]);
   const [cateList, setCateList] = useState([]);
+  const [promotionProduct, setPromotionProduct] = useState([]);
+  const [cate1Product, setcate1Product] = useState([]); // Trang điểm
+  const [cate2Product, setcate2Product] = useState([]); // Chăm sóc da mặt
+  const [cate3Product, setcate3Product] = useState([]); // Chăm sóc da mặt
+  const [cate4Product, setcate4Product] = useState([]); // Chăm sóc cơ thể
+
   const fetchProducts =  async () => {
-    Loading.hourglass({
+    Loading.hourglass({ 
       clickToClose: true,
       svgSize: "50px",
       svgColor: "rgb(223, 139, 42)",
@@ -18,7 +24,16 @@ function Home() {
       })
     try{
       const response = await productApi.getAll();
-      setProductList(response.data.content);
+      const products = response.data.content;
+      setProductList(products);
+
+      let tempPromotionProduct = [];
+      products.forEach((item) => {
+          if(item.discount > 0){
+            tempPromotionProduct.push(item);
+          }
+      });
+      setPromotionProduct(tempPromotionProduct);
     } catch(error) {
       console.log("Fail to fetch products", error);
     }
@@ -34,7 +49,8 @@ function Home() {
       })
     try{
       const response = await cateApi.getAll();
-      setCateList(response.data);
+      const cates = response.data;
+      setCateList(cates);
     } catch(error) {
       console.log("Fail to fetch cates", error);
     }
@@ -52,7 +68,7 @@ function Home() {
         <ProductCarousel 
           name={"Khuyến mãi"}
           delay={4000}
-          productList={productList}
+          productList={promotionProduct}
         />
         <ProductCarousel 
           name={"Trang điểm"}
@@ -69,17 +85,20 @@ function Home() {
           delay={4000}
           productList={productList}
         />
-        {cateList.length > 0
+        {/* {cateList.length > 0
         ?
         cateList.map((cate) =>{
-          <ProductCarousel 
-          name={cate.name}
-          delay={8000}
-          cateId={cate.id}
-        />
-        })
+          return(
+          <div key={cate.id} style={{marginTop:"-30px"}}>
+            <ProductCarousel 
+            name={cate.name}
+            delay={4000}
+            productList={productList}
+          />;
+        </div>
+        )})
         : ''
-        }
+        } */}
     </>
   );
 }

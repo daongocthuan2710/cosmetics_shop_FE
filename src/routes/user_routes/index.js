@@ -14,11 +14,13 @@ import UserProfile from "../../features/user/User/components/Profile/index.js";
 import ChangePassword from "../../features/user/User/components/Profile/components/Change_Password/index.js";
 import UserPurchase from "../../features/user/User/components/Purchase/index.js";
 import AllType from "../../features/user/User/components/Purchase/conponents/AllType/index.js";
-import WaitForConfirmation from "../../features/user/User/components/Purchase/conponents/WaitForConfirmation/index.js";
-import WaitingForTaking from "../../features/user/User/components/Purchase/conponents/WaitingForTaking/index.js";
 import Delivering from "../../features/user/User/components/Purchase/conponents/Delivering/index.js";
 import Delivered from "../../features/user/User/components/Purchase/conponents/Delivered/index.js";
 import Cancelled from "../../features/user/User/components/Purchase/conponents/Cancelled/index.js";
+import OrderReceive from "../../features/user/User/components/Purchase/conponents/OrderReceive/index.js";
+import OrderConfirmed from "../../features/user/User/components/Purchase/conponents/OrderConfirmed/index.js";
+import OrderTaken from "../../features/user/User/components/Purchase/conponents/OrderTaken/index.js";
+import OrderWaiting from "../../features/user/User/components/Purchase/conponents/OrderWaiting/index.js";
 // Lazy load - Code splitting 
 const Home = React.lazy(() => import('../../features/user/Home/index.jsx'));
 
@@ -41,14 +43,14 @@ function User_Routes({auth}){
                                 <Route path="account/password" element={<ChangePassword/>}></Route>
                                 <Route path="purchase" element={<UserPurchase/>}>
                                     <Route path="type=1" element={<AllType type={"Tất cả"}/>}></Route>
-                                    <Route path="type=2" element={<AllType type={"Chưa xác nhận"}/>}></Route>
-                                    <Route path="type=3" element={<AllType type={"Đã xác nhận"}/>}></Route>
-                                    <Route path="type=4" element={<AllType type={"Đã nhận đơn"}/>}></Route>
-                                    <Route path="type=5" element={<AllType type={"Đang giao"}/>}></Route>
-                                    <Route path="type=6" element={<AllType type={"Đã giao"}/>}></Route>
-                                    <Route path="type=7" element={<AllType type={"Đã nhận hàng"}/>}></Route>
-                                    <Route path="type=8" element={<AllType type={"Đã hủy"}/>}></Route>
-                                </Route>
+                                    <Route path="type=2" element={<OrderWaiting type={"Chưa xác nhận"}/>}></Route>
+                                    <Route path="type=3" element={<OrderConfirmed type={"Đã xác nhận"}/>}></Route>
+                                    <Route path="type=4" element={<OrderTaken type={"Đã nhận đơn"}/>}></Route>
+                                    <Route path="type=5" element={<Delivering type={"Đang giao"}/>}></Route>
+                                    <Route path="type=6" element={<Delivered type={"Đã giao"}/>}></Route>
+                                    <Route path="type=7" element={<OrderReceive type={"Đã nhận hàng"}/>}></Route>
+                                    <Route path="type=8" element={<Cancelled/>}></Route>
+                                </Route> 
                             </Route> 
                         </>
                             : <Route path="*" element={<NotFound/>}></Route>

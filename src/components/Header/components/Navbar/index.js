@@ -4,6 +4,7 @@ import { breadcrumbList } from "../../../../Store/user/breadcrumbSlice.js";
 import { Nav, NavLink } from './styledNav.js';
 import { useNavigate } from "react-router-dom";
 import './index.scss';
+import { typeProductAction } from "../../../../Store/user/typeProductSlice.js";
 
 function Navbar(props){
     const dispatch = useDispatch();
@@ -66,8 +67,10 @@ function Navbar(props){
                                         <li key={item.types[key].id}>
                                             <NavLink
                                                 to={`/danh-muc/${removeAccents(item.name).split(" ").join("-")}/${removeAccents(item.types[key].name).split(" ").join("-")}`}
-                                                onClick={() => {
+                                                onClick={() => { 
                                                     handleBreadcrumb(`/danh-muc/${item.name}/${item.types[key].name}`);
+                                                    const action = typeProductAction(item.types[key].id);
+                                                    dispatch(action);
                                                 }}
                                             >
                                                 {item.types[key].name}

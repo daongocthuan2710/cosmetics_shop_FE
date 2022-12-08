@@ -1,49 +1,77 @@
-import React from "react";
-import { Col, Row, NavLink } from 'react-bootstrap';
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import orderApi from "../../../../../../../api/orderApi";
+import PusrchaseItem from "../Purchase_Item";
 import "./index.scss";
 
 export default function Cancelled() {
+    const userInfo = useSelector(state => state.auths) || [];
+    const [loading, setLoading] = useState(false);
+    const [orders, setOrders] = useState([]);
+
+    const fetchOrders =  async (userInfo) => {
+        setLoading(true);
+        try{
+            const body = {
+                token: userInfo.token,
+                id: userInfo.id
+            }
+          const response = await orderApi.getOrdersByAccount(body);
+          const data = response.data.content;
+          if(response.status == 200)
+          {
+            if(data.length > 0){
+                let orderList = [];
+                let orderCancelList = [];
+                data.forEach(async(item) => {
+                    if(item.status == "Đã hủy")
+                    {
+                        orderCancelList.push(item);
+                    }
+                }) 
+                orderCancelList.forEach(async(item, index) => {
+                    if(item.status == "Đã hủy")
+                    {
+                        const response = await fetchOrderDetails(userInfo.token,item.id);
+                        if(response.status == 200){
+                            let order_detail = {...item,detail:response.data};
+                            orderList.push(order_detail);
+
+                            if(index == orderCancelList.length - 1){
+                                setOrders(orderList); 
+                            }
+                        }
+                    }
+                }) 
+            }
+          }
+        } catch(error) {
+          console.log("Fail to fetch orders", error);
+        }
+        setLoading(false);
+    }
+
+    const fetchOrderDetails =  async (token, orderId) => {
+        try{
+            const body = {
+                token: token,
+                orderId: orderId
+            }
+            const response = await orderApi.getOrderDetail(body);
+            return response;
+        } catch(error) {
+          console.log("Fail to fetch order detail", error);
+        }
+    }
+
+    useEffect(() =>{
+        fetchOrders(userInfo);   
+        }, []);
 
     return (
-      <>
-        <Col md={12} className="all_type">
-            <Row className="sidenav__matches__autocomplete-suggestion">
-                <Col
-                    xs={3}
-                    sm={3}
-                    className="sidenav__matches__autocomplete-suggestion__suggestion-thumb"
-                >
-                    <NavLink to="/about">
-                        <img
-                        src="/assets/images/header/logo_header.png"
-                        className="img-fluid rounded-top"
-                        alt="lipstick_1"
-                        />
-                    </NavLink>
-                </Col>
-                <Col xs={9} sm={9}>
-                <Col
-                    xs={12}
-                    sm={12}
-                    className="sidenav__matches__autocomplete-suggestion__suggestion-title"
-                >
-                    <NavLink to="/about">
-                    Nước Hoa Hồng Neutrogena Oil-Free Acne Stress Control
-                    Triple-Action Toner
-                    </NavLink>
-                </Col>
-                <Col
-                    xs={12}
-                    sm={12}
-                    className="sidenav__matches__autocomplete-suggestion__suggestion-price"
-                >
-                    <span className="sidenav__matches__autocomplete-suggestion__suggestion-price__woocommerce-Price-amount"> 
-                    {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(270000)}
-                    </span>
-                </Col>
-                </Col>
-            </Row>
-        </Col>
-      </>
+        <PusrchaseItem 
+            orders = {orders}
+            loading = {loading}
+        />
     );
   }  

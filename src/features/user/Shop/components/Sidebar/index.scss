@@ -10,6 +10,7 @@
     .sidebar-wrapper{
     
         &__title{
+            cursor: pointer;
             margin: 0 !important;
             background-color: #BE8C63;
             color: white;
@@ -17,6 +18,10 @@
             font-size: 18px;
             text-transform: uppercase;
             padding: 10px 0;
+
+            &:hover{
+                opacity: 0.8;
+            }
         }
     
         &__navigation{
@@ -34,12 +39,17 @@
             border: .1px rgb(233, 227, 227) solid;
 
             &__title{
+                cursor: pointer;
                 margin: 0 !important;
                 background-color: rgb(247, 235, 214);
                 color: black;
                 text-align: center;
                 font-size: 16px;
                 padding: 10px 0;
+
+                &:hover{
+                    opacity: 0.8;
+                }
             }
         }
 

@@ -4,9 +4,12 @@ import "./index.scss";
 
 export default function PriceRange(props) {
     const minDistance = 10;
-
+    const formatPrice = (price) =>{
+        const value = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(price);
+        return value;
+    }
     function valuetext(value) {
-        value = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(value * 10000);
+        value = formatPrice(value * 10000);
         return `${value}°C`;
     } 
 
@@ -26,9 +29,9 @@ export default function PriceRange(props) {
             <div className="price_range">
                 <Box sx={{ width: 250 }}>
                 <Typography id="input-slider" gutterBottom>
-                    {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(props.price[0] * 50000)}
+                    {formatPrice(props.price[0] * 50000)}
                     &ensp; &emsp;
-                    {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(props.price[1] * 50000)}
+                    {formatPrice(props.price[1] * 50000)}
                 </Typography>
                     <Slider
                         getAriaLabel={() => 'Minimum distance'}

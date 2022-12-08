@@ -29,6 +29,7 @@ export default function Cart() {
   const [totalCheckbox, setTotalCheckbox] = useState(false);
   const [totalItem, setTotalItem] = useState(0);
   const dispatch = useDispatch();
+
   const handleBreadcrumb = (breadcrumb) => {
     const action = breadcrumbList(breadcrumb);
     dispatch(action);
@@ -45,7 +46,7 @@ export default function Cart() {
       tmp.forEach((item) => {
         if(item.checked)
         {
-          sum += item.quantity * (item.discount > 0 ? item.price * (1 - item.discount/100) : item.price);
+          sum += item.cart_quantity * (item.discount > 0 ? item.price * (1 - item.discount/100) : item.price);
           setTotalCheckbox(true);
           quantity += 1;
         }
@@ -72,7 +73,7 @@ export default function Cart() {
     const isSelect = (element) => element.id == item.id;
     let tmp = JSON.parse(localStorage.getItem('cart')) || [];
     const getId = tmp.findIndex(isSelect);
-    tmp[getId].quantity = quantity;
+    tmp[getId].cart_quantity = quantity;
     const cartList = cartListAction([tmp]);
     dispatch(cartList);  
     localStorage.setItem('cart', JSON.stringify(tmp));
@@ -80,147 +81,160 @@ export default function Cart() {
     if(quantity == 0){
         handleRemove(item);
     }
-}
-
-const handleRemove = (item) => {
-    let tmp = JSON.parse(localStorage.getItem('cart')) || [];
-    const isRemoved = (element) => element.id == item.id;
-    const getId = tmp.findIndex(isRemoved);
-    tmp.splice( getId, 1); 
-    const cartTotal= cartTotalAction([tmp.length]);
-    dispatch(cartTotal);      
-
-    const cartList = cartListAction([tmp]);
-    dispatch(cartList);  
-    localStorage.setItem('cart', JSON.stringify(tmp));
-}
-const handleRemoveAll = () => {
-    let tmp = JSON.parse(localStorage.getItem('cart')) || [];
-
-    if(tmp.length > 0)
-    {
-      Swal.fire({
-        title: 'Bạn chắc chắn chứ?',
-        text: "Bạn sẽ không thể khôi phục sản phẩm đã xóa!",
-        icon: 'warning',
-        width: "350px",
-        height: "300px",
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Chắc chắn!',
-        cancelButtonText: 'Hủy'
-      }).then((result) => {
-        if (result.isConfirmed) {
-          const cartList = cartListAction([]);
-          dispatch(cartList);  
-          localStorage.setItem('cart', JSON.stringify([]));
-
-          Swal.fire(
-            'Xóa thành công!',
-            'Giỏ hàng đang trống.',
-            'success'
-          )
-        }
-      })
-    }
-    else{
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Giỏ hàng đang trống',
-      })
-    }
-}
-
-const handleCheckboxChild  = (e) => {
-  const id = e.target.value;
-  let tmp = JSON.parse(localStorage.getItem('cart')) || [];
-  tmp.forEach(item => {
-    if(item.id == id){
-      item.checked = e.target.checked;
-    } 
-  })
-  const action = cartListAction([tmp]);
-  dispatch(action);  
-  localStorage.setItem('cart', JSON.stringify(tmp));
-}
-
-const handleCheckbox = (e) => {
-  setTotalCheckbox(e.target.checked);
-  if(e.target.value == 'all'){
-    if(e.target.checked){
-      let tmp = JSON.parse(localStorage.getItem('cart'));
-      tmp.forEach((item) => {
-        item.checked = true;
-      });
-      const action = cartListAction([tmp]);
-      dispatch(action);  
-      localStorage.setItem('cart', JSON.stringify(tmp));
-    }
-    else{
-      let tmp = JSON.parse(localStorage.getItem('cart'));
-      tmp.forEach((item) => {
-        item.checked = false;
-      });
-      const action = cartListAction([tmp]);
-      dispatch(action);  
-      localStorage.setItem('cart', JSON.stringify(tmp));
-    } 
   }
-}
 
-const handleOrder = async () => {
-  try{
-    let cartList = JSON.parse(localStorage.getItem('cart')) || [];
-    let newCartList = [];
-    cartList.forEach((item) =>{
-      if(item.checked){
-        newCartList.push({
-          productId: item.id,
-          quantity: item.quantity,
-          price: item.price * ( 1 - item.discount/100)
+  const handleRemove = (item) => {
+      let tmp = JSON.parse(localStorage.getItem('cart')) || [];
+      const isRemoved = (element) => element.id == item.id;
+      const getId = tmp.findIndex(isRemoved);
+      tmp.splice( getId, 1); 
+      const cartTotal= cartTotalAction([tmp.length]);
+      dispatch(cartTotal);      
+
+      const cartList = cartListAction([tmp]);
+      dispatch(cartList);  
+      localStorage.setItem('cart', JSON.stringify(tmp));
+  }
+
+  const handleRemoveAll = () => {
+      let tmp = JSON.parse(localStorage.getItem('cart')) || [];
+
+      if(tmp.length > 0)
+      {
+        Swal.fire({
+          title: 'Bạn chắc chắn chứ?',
+          text: "Bạn sẽ không thể khôi phục sản phẩm đã xóa!",
+          icon: 'warning',
+          width: "350px",
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Chắc chắn!',
+          cancelButtonText: 'Hủy'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            const cartList = cartListAction([]);
+            dispatch(cartList);  
+            localStorage.setItem('cart', JSON.stringify([]));
+
+            Swal.fire(
+              'Xóa thành công!',
+              'Giỏ hàng đang trống.',
+              'success'
+            )
+          }
         })
       }
-    });
-    const body = {
-      token: userInfo.token,
-      accountId: userInfo.id,
-      data: newCartList,
-      total: totalPrice,
-      id_delivery: 2,
-      id_voucher: 0,
-      id_status: 1,
-      paid_status: false
-    }
-    const response = await orderApi. createOrder(body);
-    if(response.status == 200){
-      newCartList.forEach((item) =>{
-        handleRemove(item);
-      });
-      Swal.fire({
-        position: 'center',
-        icon: 'success',
-        text: 'Thanh toán thành công',
-        width: '300px',
-        height:'300px',
-        showConfirmButton: false,
-        timer: 1500
-      })
-    }
-  } catch(error) {
-    console.log("Fail to order", error);
-    Swal.fire({
-      position: 'center',
-      icon: 'error',
-      text: error.response.data.message || error.message,
-      width: '300px',
-      height:'300px',
-      showConfirmButton: false,
-      timer: 1500
-    })
+      else{
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Giỏ hàng đang trống',
+        })
+      }
   }
-}
+
+  const handleCheckboxChild  = (e) => {
+    const id = e.target.value;
+    let tmp = JSON.parse(localStorage.getItem('cart')) || [];
+    tmp.forEach(item => {
+      if(item.id == id){
+        item.checked = e.target.checked;
+      } 
+    })
+    const action = cartListAction([tmp]);
+    dispatch(action);  
+    localStorage.setItem('cart', JSON.stringify(tmp));
+  }
+
+  const handleCheckbox = (e) => {
+    setTotalCheckbox(e.target.checked);
+    if(e.target.value == 'all'){
+      if(e.target.checked){
+        let tmp = JSON.parse(localStorage.getItem('cart'));
+        tmp.forEach((item) => {
+          item.checked = true;
+        });
+        const action = cartListAction([tmp]);
+        dispatch(action);  
+        localStorage.setItem('cart', JSON.stringify(tmp));
+      }
+      else{
+        let tmp = JSON.parse(localStorage.getItem('cart'));
+        tmp.forEach((item) => {
+          item.checked = false;
+        });
+        const action = cartListAction([tmp]);
+        dispatch(action);  
+        localStorage.setItem('cart', JSON.stringify(tmp));
+      } 
+    }
+  }
+
+  const handleOrder = async () => {
+      let cartList = JSON.parse(localStorage.getItem('cart')) || [];
+      let newCartList = [];
+      let checkQuantity = [];
+      cartList.forEach((item) =>{
+        if(item.checked){
+          newCartList.push({
+            productId: item.id,
+            quantity: item.cart_quantity,
+            price: item.price * ( 1 - item.discount/100)
+          })
+        }
+
+        if(item.cart_quantity > item.quantity){
+          checkQuantity = item;
+          return Swal.fire({
+            position: 'center',
+            icon: 'info',
+            text: `Sản phẩm ${item.name} không đủ số lượng`,
+            width: '300px',
+            showConfirmButton: false,
+            timer: 2000
+          })
+        }
+      });
+      if(checkQuantity.length == 0){
+        try{
+          const body = {
+            token: userInfo.token,
+            accountId: userInfo.id,
+            data: newCartList,
+            total: totalPrice,
+            id_delivery: 2,
+            id_voucher: 0,
+            id_status: 1,
+            paid_status: false
+          }
+          const response = await orderApi. createOrder(body);
+          if(response.status == 200){
+            newCartList.forEach((item) =>{
+              handleRemove(item);
+            });
+            Swal.fire({
+              position: 'center',
+              icon: 'success',
+              text: 'Thanh toán thành công',
+              width: '300px',
+              showConfirmButton: false,
+              timer: 1500
+            })
+          }
+        } catch(error) {
+          console.log("Fail to order", error);
+          Swal.fire({
+            position: 'center',
+            icon: 'error',
+            text: error.response.data.message || error.message,
+            width: '300px',
+            showConfirmButton: false,
+            timer: 1500
+          })
+        }
+      }
+  }
 
   return (
     <>
@@ -332,7 +346,7 @@ const handleOrder = async () => {
                         // max={10}
                         min={0}
                         step={1}
-                        value={item.quantity}
+                        value={item.cart_quantity}
                         onChange={(quantity) => handleCheckQuatity(quantity,item)}
                         variant={"secondary"}
                         size=""
@@ -341,7 +355,7 @@ const handleOrder = async () => {
                     <Col className="cart-item-total-price">
                       <span className="text-danger fw-bold">
                         {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(
-                          item.quantity * (item.discount > 0 ? item.price * (1 - item.discount/100) : item.price
+                          item.cart_quantity * (item.discount > 0 ? item.price * (1 - item.discount/100) : item.price
                           ))}
                       </span>
                     </Col>

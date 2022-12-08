@@ -14,6 +14,7 @@ export default function TableOrder() {
   });
   const [orderList,setorderList] = useState([]);
   const [isloading,setIsloading] = useState(false);
+
     const [filter,setFilter] = useState({
     });
     const [table,setTable] = useState(<><Spinner animation="border" style={{margin: "20vh 30vw", fontSize: "20vw"}} variant='dark'/></>);
@@ -34,7 +35,7 @@ export default function TableOrder() {
         fetchorders();
       }, [isloading]);
       const deliveryOrder = async (id) => {
-        await orderApi.updateOrders(id,4);
+        await orderApi.updateOrdersShipper(id,4);
         Swal.fire(
           'Đang giao hàng!',
           'success'
@@ -43,7 +44,7 @@ export default function TableOrder() {
         
     }
     const deliveriedOrder = async (id) => {
-        await orderApi.updateOrders(id,5);
+        await orderApi.updateOrdersShipper(id,5);
         Swal.fire(
           'Giao hàng thành công!',
           'success'

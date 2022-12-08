@@ -65,7 +65,7 @@ function Shipper_Login() {
   };
 
     return (
-      <div className="admin-login-wrapper">
+      <div className="shipper-login-wrapper">
             <Card className="text-center">
                 {/* <Card.Header>
                     <img src={NikeIcon} alt="Nike" className="card-header__logo"/>

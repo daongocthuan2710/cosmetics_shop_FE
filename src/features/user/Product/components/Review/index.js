@@ -32,7 +32,7 @@ export default function Review(props) {
           <Col md={12} sm={12} xs={12} className="review__head__average-rating">
             <Row>
               <Col xl={2} md={4} sm={4} xs={5} className="review__head__average-rating__text" >
-                <span>0</span> /5 Star
+                <span>4.5</span> /5 Star
               </Col>
               <Col xl={10} md={8} sm={8} xs={7} className="review__head__average-rating__star">
                 <TextRating value={4.5} />

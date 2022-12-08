@@ -9,6 +9,7 @@ import cartListReducer from "./user/cartListSlice";
 import cartTotalPriceReducer from "./user/cartTotalPriceSlice";
 import searchReducer from "./user/searchSlice";
 import loginReducer from "./user/loginSlice";
+import typeProductReducer from "./user/typeProductSlice";
 import breadcrumbReducer from "./user/breadcrumbSlice";
 import storage from 'redux-persist/lib/storage';
 import { 
@@ -38,7 +39,8 @@ const persistConfig = {
         cartTotalPrice: cartTotalPriceReducer,
         adminAuth: adminAuthReducer,
         search: searchReducer,
-        shipperAuth: shipperAuthReducer
+        shipperAuth: shipperAuthReducer,
+        typeProduct: typeProductReducer
     })
 
     const persistedReducer = persistReducer(persistConfig, rootReducer)

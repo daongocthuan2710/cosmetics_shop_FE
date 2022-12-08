@@ -19,8 +19,10 @@ export default function TableOrder() {
     const [table,setTable] = useState(<><Spinner animation="border" style={{margin: "20vh 30vw", fontSize: "20vw"}} variant='dark'/></>);
     const fetchorders =  async () => {
         try{
-          const response = await orderApi.getAll();
-          console.log(response);
+          const body = {
+            token: localStorage.getItem("admintoken")
+          }
+          const response = await orderApi.getAll(body);
           setorderList(response.data.content);
           setPage({
             currentpage: response.data.number + 1 ,
@@ -58,7 +60,7 @@ export default function TableOrder() {
         let i = 1;
         orderList.forEach(element => {
               arr.push(
-                <tr>
+                <tr key={element.id}>
                   <td>{element.id}</td>
                   <td>{element.created_date}</td>
                   <td>{element.updated_date}</td>
@@ -78,22 +80,24 @@ export default function TableOrder() {
         return (
           <>
           <div style={{float: "right"}}>
-        <select className='filter-product-item'>
-          <option value="" selected>Tình trạng</option>
+        <select className='filter-product-item' defaultValue="1">
+          <option value="1">Tình trạng</option>
         </select>
-        <select className='filter-product-item'>
-          <option value="" selected>Trạng thái</option>
+        <select className='filter-product-item' defaultValue="1">
+          <option value="1">Trạng thái</option>
         </select>
       </div>
           <Table striped bordered hover size="sm" className='product-admin-table'>
             <thead>
-              <th>ID</th>
-              <th>Ngày đặt</th>
-              <th>Ngày cập nhật</th>
-              <th>Tình trạng</th>
-              <th>Tổng</th>
-              <th>Trạng thái</th>
-              <th>Duyệt</th>
+              <tr>
+                <th>ID</th>
+                <th>Ngày đặt</th>
+                <th>Ngày cập nhật</th>
+                <th>Tình trạng</th>
+                <th>Tổng</th>
+                <th>Trạng thái</th>
+                <th>Duyệt</th>
+              </tr>
             </thead>
             <tbody>
               {arr}

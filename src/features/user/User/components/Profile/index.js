@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Col, Row, Container } from 'react-bootstrap';
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Avatar from "./components/Avatar";
 import ProfileEditForm from "./components/ProfileEditForm";
 import { Loading } from "notiflix";
@@ -8,6 +8,7 @@ import userApi from "../../../../../api/userApi";
 import "./index.scss";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { loginAction } from "../../../../../Store/authSlice";
 
 export default function UserProfile() {
   const IMAGE_CLOUD = { 
@@ -16,7 +17,7 @@ export default function UserProfile() {
     API_URL:'https://api.cloudinary.com/v1_1',
     GET_URL: 'https://res.cloudinary.com'
   }
-
+  const dispatch = useDispatch();
   const userLogin = useSelector(state => state.auths);
   const [dateOfBirth, setDateOfBirth] = useState(null);
   const [dateOfBirthError, setDateOfBirthError] = useState({error: false, message: ""});
@@ -30,8 +31,7 @@ export default function UserProfile() {
   const [image, setImage] = useState('');
   const [picture, setPicture] = useState([]);
   const [pictureDataURL, setPictureDataURL] = useState('');
-  const [fileName, setFileName] = useState(`${IMAGE_CLOUD.GET_URL}/${IMAGE_CLOUD.CLOUD_NAME}/image/upload/${image}` || '');
-
+  const [fileName, setFileName] = useState('');
   const fetchUserInfo =  async () => {
     Loading.hourglass({
       clickToClose: true,
@@ -53,7 +53,6 @@ export default function UserProfile() {
       setImage(userInfo.image);
       setAddress(userInfo.address);
       setDateOfBirth(userInfo.birthday);
-
     } catch(error) {
       console.log("Fail to fetch userInfo", error);
     }
@@ -119,33 +118,44 @@ export default function UserProfile() {
     setFileName(file);
   }
 
-  const handleUpdateUserInfo = async () =>{
-    try{
-    const body = {
-      address: address,
-      birthday: dateOfBirth,
-      email: email,
-      firstName: username,
-      gender: gender,
-      image: image,
-      lastName: 'thuan',
-      phoneNumber: phoneNumber,
-      token: userLogin.token,
-      id: userLogin.id
-    }  
+  const handleUpdateUserInfo = () =>{
+    if(pictureDataURL != ''){
+      handleUpdateAvatar();
+    }else{
+      UpdateUserInfo();
+    }
+  }
 
+  const UpdateUserInfo = async (tempFile) =>{
+    try{
+      const body = {
+        address: address,
+        birthday: dateOfBirth,
+        email: email,
+        firstName: username,
+        gender: gender,
+        image: tempFile ? tempFile : image,
+        lastName: ' ',
+        phoneNumber: phoneNumber,
+        token: userLogin.token,
+        id: userLogin.id
+      }  
       const response = await userApi.UpdateUser(body);
+      
       if(response.status == 200){
-        handleUpdateAvatar();
         Swal.fire({
           position: 'center',
           icon: 'success',
           text: 'Cập nhập ảnh đại diện thành công',
           width: '300px',
-          height:'300px',
           showConfirmButton: false,
           timer: 1500
         })
+
+        const userInfo = response.data;
+        const user = {...userLogin,...userInfo};
+        const action = loginAction(user);
+        dispatch(action);
       }
       
     } catch(error) {
@@ -157,11 +167,14 @@ export default function UserProfile() {
     var formData = new FormData();
 		formData.append('file', picture[0]);
 		formData.append('upload_preset', IMAGE_CLOUD.UPLOAD_PRESET);
-
     axios.post(`${IMAGE_CLOUD.API_URL}/${IMAGE_CLOUD.CLOUD_NAME}/image/upload`,formData)
       .then((response) => {
-        if(response.data.public_id){
+        if(response.data.public_id && response.data.format){
+          const tempFile = `${response.data.public_id}.${response.data.format}`;
+          setImage(tempFile);
           setPictureDataURL('');      
+          setFileName(`${IMAGE_CLOUD.GET_URL}/${IMAGE_CLOUD.CLOUD_NAME}/image/upload/${tempFile}`);
+          UpdateUserInfo(tempFile);
         }
         else{
         }
@@ -200,7 +213,6 @@ export default function UserProfile() {
                 <Col md={4} className="edit-profile__form__avatar">
                   <Avatar 
                     image={image}
-                    username={username}
                     picture={picture}
                     handleOnChangeAvatar={handleOnChangeAvatar}
                     handleDropImage={handleDropImage}
